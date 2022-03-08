@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_welcome_screen">
+
+    <fragment
+        android:id="@+id/nav_welcome_screen"
+        android:name="com.example.Szaman.ui.welcomeScreen.WelcomeScreen"
+        android:label="@string/menu_welcome_screen"
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_nav_welcome_screen_to_nav_login"
+            app:destination="@id/nav_login" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_restaurants"
+        android:name="com.example.Szaman.ui.restaurants.RestaurantsFragment"
+        android:label="@string/menu_restaurant"
+        tools:layout="@layout/fragment_restaurants" >
+        <action
+            android:id="@+id/action_nav_restaurants_to_meal_list"
+            app:destination="@id/meal_list" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.Szaman.ui.login.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_nav_login_to_nav_register"
+            app:destination="@id/nav_register" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.example.Szaman.ui.register.RegisterFragment"
+        android:label="@string/menu_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/nav_summary"
+        android:name="com.example.Szaman.ui.summary.Summary"
+        android:label="@string/menu_summary"
+        tools:layout="@layout/summary_fragment" >
+        <action
+            android:id="@+id/action_nav_summary_to_nav_restaurants"
+            app:destination="@id/nav_restaurants" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.Szaman.ui.settings.settings"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/settings_fragment" >
+        <action
+            android:id="@+id/action_nav_settings_to_personalData"
+            app:destination="@id/personalData" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dish"
+        android:name="com.example.Szaman.ui.dish.dish"
+        android:label="@string/menu_dish"
+        tools:layout="@layout/dish_fragment" />
+
+    <fragment
+        android:id="@+id/meal_list"
+        android:name="com.example.Szaman.ui.mealList.meal_list_fragment"
+        android:label="@string/menu_meal_list"
+        tools:layout="@layout/meal_list_fragment" >
+        <action
+            android:id="@+id/action_meal_list_to_dish"
+            app:destination="@id/dish" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/items"
+        android:name="com.example.Szaman.ui.items.items"
+        android:label="@string/menu_item"
+        tools:layout="@layout/items_fragment" >
+        <action
+            android:id="@+id/action_items_to_dish"
+            app:destination="@id/dish" />
+        <action
+            android:id="@+id/action_items_to_nav_summary"
+            app:destination="@id/nav_summary" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalData"
+        android:name="com.example.Szaman.ui.personalDataSettings.PersonalDataSetting"
+        android:label="@string/menu_PersonalData"
+        tools:layout="@layout/personal_data_setting_fragment"/>
+
+
+</navigation>
