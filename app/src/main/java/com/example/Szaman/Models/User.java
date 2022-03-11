@@ -9,7 +9,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", login='" + login + '\'' +
+                ", dishName='" + login + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

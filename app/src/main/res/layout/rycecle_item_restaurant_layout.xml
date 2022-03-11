@@ -37,7 +37,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/restaurantRating"
+                android:id="@+id/dishPriceLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Rating" />
