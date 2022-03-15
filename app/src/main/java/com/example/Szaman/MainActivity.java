@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 
 import com.example.Szaman.Models.Dish;
+import com.example.Szaman.Models.Restaurant;
+import com.example.Szaman.Models.User;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +23,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Szaman.databinding.ActivityMainBinding;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,14 +54,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         //DataBase Connection Test
-        Dish dish = new Dish();
-        dish.setName("Pizza");
-        dish.setPrice(25.00);
-        dish.setRestaurantId(1);
 
         DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
+        List<Restaurant> restaurants = databaseConnector.getRestaurants();
 
-        boolean success = databaseConnector.addDish(dish);
+
     }
 
     @Override

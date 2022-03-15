@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import com.example.Szaman.Models.Dish;
+import com.example.Szaman.Models.Restaurant;
+import com.example.Szaman.Models.User;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,17 +26,25 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.ProviderMismatchException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class DatabaseConnector extends SQLiteOpenHelper {
+    public static final String USER_TABLE = "Users";
+    public static final String COLUMN_PASSWORD = "Password";
+    public static final String COLUMN_LOGIN = "Login";
+    public static final String RESTAURANT_TABLE = "Restaurants";
     public static final String DISH_TABLE = "Dishes";
     public static final String COLUMN_DISH_ID = "DishId";
     public static final String COLUMN_NAME = "Name";
     public static final String COLUMN_PRICE = "Price";
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
+    public static final String COLUMN_DESCRIPTION = "Description";
+    public static final String COLUMN_IMAGE_URL = "ImageUrl";
     private SQLiteDatabase vDatabase;
     private Context vContext;
-    private static String DB_NAME = "data.db";//nazwa bazy danych znajdujaca sie w assets
+    private static String DB_NAME = "data.db"; //nazwa bazy danych znajdujaca sie w assets
 
     public DatabaseConnector(@Nullable Context context) {
 
@@ -72,6 +83,21 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
     }
 
+    public boolean addUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(COLUMN_LOGIN, user.getLogin());
+        cv.put(COLUMN_PASSWORD, user.getPassword());
+
+        long insert = db.insert(USER_TABLE, null, cv);
+        if (insert == -1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public boolean addDish(Dish dish){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -106,16 +132,47 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
-//    public void connectToDataBase(PackageManager packageManager,
-//                                  String packageName) throws PackageManager.NameNotFoundException {
-//        PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 0);
-//        packageName = packageInfo.applicationInfo.dataDir;
-//        String jdbcUrl = "jdbc:sqlite:"+packageName;
-//        conn = DriverManager.getConnection(url);
-//
-//        System.out.println("Connection to SQLite has been established.");
-//
-//        } catch (SQLException e) {
-//        System.out.println(e.getMessage());
-//    }
+
+    public List<Restaurant> getRestaurants(){
+        List<Restaurant> restaurants = new ArrayList<>();
+        String queryString = "SELECT * FROM " + RESTAURANT_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int restaurantId = cursor.getInt(0);
+                String restaurantName = cursor.getString(1);
+                Restaurant restaurant = new Restaurant(restaurantId, restaurantName);
+                restaurants.add(restaurant);
+            } while (cursor.moveToNext());
+        } else
+        {
+
+        }
+        cursor.close();
+        db.close();
+        return restaurants;
+    }
+
+    public List<User> getUsers(){
+        List<User> users = new ArrayList<>();
+        String queryString = "SELECT * FROM " + USER_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int userId = cursor.getInt(0);
+                String login = cursor.getString(1);
+                String password = cursor.getString(2);
+                User user = new User(userId, login, password);
+                users.add(user);
+            } while (cursor.moveToNext());
+        } else
+        {
+
+        }
+        cursor.close();
+        db.close();
+        return users;
+    }
 }
