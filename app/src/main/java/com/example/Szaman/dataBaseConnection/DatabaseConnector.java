@@ -175,4 +175,29 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         db.close();
         return users;
     }
+
+    public List<Dish> getDishes(){
+        List<Dish> dishes = new ArrayList<>();
+        String queryString = "SELECT * FROM " + DISH_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int dishId = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                Double price = cursor.getDouble(3);
+                int restaurantId = cursor.getInt(4);
+                String imageUrl = cursor.getString(5);
+                Dish dish = new Dish(dishId, name, description, price, restaurantId, imageUrl);
+                dishes.add(dish);
+            } while (cursor.moveToNext());
+        } else
+        {
+
+        }
+        cursor.close();
+        db.close();
+        return dishes;
+    }
 }

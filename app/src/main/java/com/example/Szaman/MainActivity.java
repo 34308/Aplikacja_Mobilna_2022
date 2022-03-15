@@ -56,8 +56,11 @@ public class MainActivity extends AppCompatActivity {
         //DataBase Connection Test
 
         DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
-        List<Restaurant> restaurants = databaseConnector.getRestaurants();
 
+        //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
+        List<Restaurant> restaurants = databaseConnector.getRestaurants();
+        List<User> users = databaseConnector.getUsers();
+        List<Dish> dishes = databaseConnector.getDishes();
 
     }
 

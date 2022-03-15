@@ -9,6 +9,15 @@ public class Dish {
     private Restaurant restaurant;
     private String imageUrl;
 
+    public Dish(int dishId, String name, String description, Double price, int restaurantId, String imageUrl) {
+        DishId = dishId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.restaurantId = restaurantId;
+        this.imageUrl = imageUrl;
+    }
+
     @Override
     public String toString() {
         return "Dish{" +
