@@ -18,7 +18,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/dishNameLabel"
+                android:id="@+id/busketDishNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="TextView" />
@@ -37,7 +37,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/dishPriceLabel"
+                android:id="@+id/restaurantRating"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="CENA" />
