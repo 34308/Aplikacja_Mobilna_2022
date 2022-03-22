@@ -1,4 +1,4 @@
-package com.example.Szaman.Models;
+package com.example.Szaman.model;
 
 import java.util.List;
 

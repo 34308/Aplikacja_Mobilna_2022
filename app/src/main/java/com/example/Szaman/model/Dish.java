@@ -1,4 +1,4 @@
-package com.example.Szaman.Models;
+package com.example.Szaman.model;
 
 public class Dish {
     private int DishId;

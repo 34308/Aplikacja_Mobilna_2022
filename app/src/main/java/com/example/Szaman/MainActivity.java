@@ -1,16 +1,13 @@
 package com.example.Szaman;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
-import com.example.Szaman.Models.Dish;
-import com.example.Szaman.Models.Restaurant;
-import com.example.Szaman.Models.User;
+import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.Restaurant;
+import com.example.Szaman.model.User;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.google.android.material.navigation.NavigationView;
 

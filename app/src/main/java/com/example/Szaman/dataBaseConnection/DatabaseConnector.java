@@ -2,8 +2,6 @@ package com.example.Szaman.dataBaseConnection;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -14,18 +12,15 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.example.Szaman.Models.Dish;
-import com.example.Szaman.Models.Restaurant;
-import com.example.Szaman.Models.User;
+import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.Restaurant;
+import com.example.Szaman.model.User;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.ProviderMismatchException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +29,18 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String USER_TABLE = "Users";
     public static final String COLUMN_PASSWORD = "Password";
     public static final String COLUMN_LOGIN = "Login";
+    public static final String COLUMN_NAME = "Name";
+    public static final String COLUMN_SURNAME = "Surname";
+    public static final String COLUMN_ADDRESS = "Address";
+    public static final String COLUMN_DEBIT_CARD_NUMBER = "debitCardNumber";
+    public static final String COLUMN_EXPIRE_DATE = "expireDate";
+    public static final String COLUMN_CVV = "cvv";
+
+
+
     public static final String RESTAURANT_TABLE = "Restaurants";
     public static final String DISH_TABLE = "Dishes";
     public static final String COLUMN_DISH_ID = "DishId";
-    public static final String COLUMN_NAME = "Name";
     public static final String COLUMN_PRICE = "Price";
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
     public static final String COLUMN_DESCRIPTION = "Description";
@@ -89,6 +92,12 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
         cv.put(COLUMN_LOGIN, user.getLogin());
         cv.put(COLUMN_PASSWORD, user.getPassword());
+        cv.put(COLUMN_NAME, user.getName());
+        cv.put(COLUMN_SURNAME, user.getSurname());
+        cv.put(COLUMN_ADDRESS, user.getAddress());
+        cv.put(COLUMN_DEBIT_CARD_NUMBER, user.getDebitCardNumber());
+        cv.put(COLUMN_EXPIRE_DATE, user.getExpireDate());
+        cv.put(COLUMN_CVV, user.getCvv());
 
         long insert = db.insert(USER_TABLE, null, cv);
         if (insert == -1){
@@ -164,7 +173,15 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 int userId = cursor.getInt(0);
                 String login = cursor.getString(1);
                 String password = cursor.getString(2);
-                User user = new User(userId, login, password);
+                String name = cursor.getString(3);
+                String surname = cursor.getString(4);
+                String address = cursor.getString(5);
+                String debitCardNumber = cursor.getString(6);
+                String expireDate = cursor.getString(7);
+                String cvv = cursor.getString(8);
+                User user = new User(userId, login, password,
+                        name, surname, address, debitCardNumber,
+                        expireDate, cvv);
                 users.add(user);
             } while (cursor.moveToNext());
         } else
