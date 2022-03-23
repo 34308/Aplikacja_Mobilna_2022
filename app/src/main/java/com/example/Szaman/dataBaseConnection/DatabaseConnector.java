@@ -26,6 +26,7 @@ import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class DatabaseConnector extends SQLiteOpenHelper {
+    public static final String COLUMN_USER_ID = "UserId";
     public static final String USER_TABLE = "Users";
     public static final String COLUMN_PASSWORD = "Password";
     public static final String COLUMN_LOGIN = "Login";
@@ -35,7 +36,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_DEBIT_CARD_NUMBER = "debitCardNumber";
     public static final String COLUMN_EXPIRE_DATE = "expireDate";
     public static final String COLUMN_CVV = "cvv";
-
 
 
     public static final String RESTAURANT_TABLE = "Restaurants";
@@ -120,6 +120,17 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             return false;
         } else {
             return true;
+        }
+    }
+    public boolean deleteUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + USER_TABLE + " WHERE " + COLUMN_USER_ID + " = " + user.getUserId();
+        Cursor cursor = db.rawQuery(queryString,null);
+        if(cursor.moveToFirst()){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
