@@ -54,8 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
 
+        User user = new User("login123", "hasło123", "Filip",
+                 "Broniek", "Różana 20", "1234567890",
+                "12/25", "111");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
+        //databaseConnector.addUser(user);
         List<User> users = databaseConnector.getUsers();
         List<Dish> dishes = databaseConnector.getDishes();
 

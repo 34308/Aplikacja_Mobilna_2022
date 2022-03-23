@@ -122,6 +122,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             return true;
         }
     }
+
     public void copyDB() throws SQLiteException {
         try {
             InputStream myInput = vContext.getAssets().open(DB_NAME);
