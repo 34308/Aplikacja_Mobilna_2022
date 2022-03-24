@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 "12/25", "111");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
-        //databaseConnector.addUser(user);
-        boolean success = databaseConnector.deleteUser(user1);
+        boolean addSuccess = databaseConnector.addUser(user);
+        //boolean success = databaseConnector.deleteUser(user1);
         List<User> users = databaseConnector.getUsers();
         List<Dish> dishes = databaseConnector.getDishes();
 
