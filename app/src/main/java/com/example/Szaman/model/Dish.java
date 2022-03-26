@@ -1,21 +1,50 @@
-package com.example.Szaman.Models;
+package com.example.Szaman.model;
 
 public class Dish {
     private int DishId;
     private String name;
+    private String description;
     private Double price;
     private int restaurantId;
     private Restaurant restaurant;
+    private String imageUrl;
+
+    public Dish(int dishId, String name, String description, Double price, int restaurantId, String imageUrl) {
+        DishId = dishId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.restaurantId = restaurantId;
+        this.imageUrl = imageUrl;
+    }
 
     @Override
     public String toString() {
         return "Dish{" +
                 "DishId=" + DishId +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", price=" + price +
                 ", restaurantId=" + restaurantId +
                 ", restaurant=" + restaurant +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getDishId() {

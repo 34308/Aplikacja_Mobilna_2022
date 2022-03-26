@@ -1,33 +1,32 @@
-package com.example.Szaman.Models;
+package com.example.Szaman.model;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Restaurant {
-    private int RestaurantId;
+    private int restaurantId;
     private String name;
     private List<Dish> dishes;
+
+    public Restaurant(int restaurantId, String name) {
+        this.restaurantId = restaurantId;
+        this.name = name;
+    }
 
     @Override
     public String toString() {
         return "Restaurant{" +
-                "RestaurantId=" + RestaurantId +
+                "RestaurantId=" + restaurantId +
                 ", name='" + name + '\'' +
                 ", dishes=" + dishes +
                 '}';
     }
 
     public int getRestaurantId() {
-        return RestaurantId;
+        return restaurantId;
     }
 
     public void setRestaurantId(int restaurantId) {
-        RestaurantId = restaurantId;
+        this.restaurantId = restaurantId;
     }
 
     public String getName() {

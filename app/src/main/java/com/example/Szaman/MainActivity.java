@@ -1,14 +1,13 @@
 package com.example.Szaman;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
-import com.example.Szaman.Models.Dish;
+import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.Restaurant;
+import com.example.Szaman.model.User;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +20,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Szaman.databinding.ActivityMainBinding;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,14 +51,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         //DataBase Connection Test
-        Dish dish = new Dish();
-        dish.setName("Pizza");
-        dish.setPrice(25.00);
-        dish.setRestaurantId(1);
 
         DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
 
-        boolean success = databaseConnector.addDish(dish);
+        User user = new User("login123", "hasło123", "Filip",
+                 "Broniek", "Różana 20", "1234567890",
+                "12/25", "111");
+        User user1 = new User(1,"login123", "hasło123", "Filip",
+                "Broniek", "Różana 20", "1234567890",
+                "12/25", "111");
+        //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
+        List<Restaurant> restaurants = databaseConnector.getRestaurants();
+        boolean addSuccess = databaseConnector.addUser(user);
+        //boolean success = databaseConnector.deleteUser(user1);
+        List<User> users = databaseConnector.getUsers();
+        List<Dish> dishes = databaseConnector.getDishes();
+
     }
 
     @Override
