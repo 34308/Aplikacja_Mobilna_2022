@@ -1,6 +1,11 @@
 package com.example.Szaman.model;
 
-public class Dish {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class Dish implements Parcelable {
     private int DishId;
     private String name;
     private String description;
@@ -17,6 +22,31 @@ public class Dish {
         this.restaurantId = restaurantId;
         this.imageUrl = imageUrl;
     }
+
+    protected Dish(Parcel in) {
+        DishId = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+        restaurantId = in.readInt();
+        imageUrl = in.readString();
+    }
+
+    public static final Creator<Dish> CREATOR = new Creator<Dish>() {
+        @Override
+        public Dish createFromParcel(Parcel in) {
+            return new Dish(in);
+        }
+
+        @Override
+        public Dish[] newArray(int size) {
+            return new Dish[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -85,5 +115,25 @@ public class Dish {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(DishId);
+        dest.writeString(name);
+        dest.writeString(description);
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(price);
+        }
+        dest.writeInt(restaurantId);
+        dest.writeString(imageUrl);
     }
 }

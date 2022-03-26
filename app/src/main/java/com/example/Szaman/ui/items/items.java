@@ -16,16 +16,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.Szaman.Adapters.DishAdapter;
-import com.example.Szaman.Models.Dish;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
+import com.example.Szaman.model.Dish;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class items extends Fragment {
     private RecyclerView.Adapter adapter;
     private OnClickInterface onClickInterface;
-    private ArrayList<Dish> dataBank;
+    private List<Dish> dataBank;
     private ItemsViewModel mViewModel;
 
     public static items newInstance() {

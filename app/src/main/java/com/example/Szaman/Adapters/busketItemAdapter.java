@@ -9,9 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Szaman.Models.Dish;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
+import com.example.Szaman.model.Dish;
 
 import java.util.ArrayList;
 import java.util.List;

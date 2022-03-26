@@ -7,7 +7,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-
+    <string name="ForgottenPassword">Click here if you forgotten your password</string>
+    <string name="email">EMAIL</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sendResetingEmail">Send Email To Reset Password</string>
 
     <string name="housenumber_text">House number</string>
     <string name="Street_text">Street</string>
@@ -43,16 +46,17 @@
     <string name="order">Order</string>
 
     <string name="addTo">Add to busket</string>
-
+    <string name="MealHint">Meals</string>
     <string name="personalDataEditing">Personal Data</string>
     <string name="aplicationColors">Change Theme</string>
     <string name="logOut">Log Out</string>
     <string name="deleteAccount">Delete Account</string>
 
+    <string name="repeatPassword">Repeat password</string>
     <string name="save">Save</string>
     <string name="thankyou">Thank You For Purchase</string>
     <string name="printReceipt">Print Receipt</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="goBck">Go back to shopping</string>
+    <string name="default_value">0000</string>
+    default_value
 </resources>

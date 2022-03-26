@@ -8,10 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.Szaman.Models.Dish;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
+import com.example.Szaman.model.Dish;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +18,13 @@ import java.util.List;
 //Adapter klasy uzywany do recycler view umozliwia wlasciwe zaprezentowanie klasy.
 public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder> {
     //lista przechowujaca zawartosc pobrana ze strony
-    public ArrayList<Dish> mdish;
+    public List<Dish> mdish;
     //interfejs uzywany do nasluchiwania klikniecia na recycler view
     public OnClickInterface onClickInterface;
 
     //konstruktor
     public DishAdapter(List<Dish> dish, OnClickInterface onClickInterface) {
-        mdish = (ArrayList<Dish>) dish;
+        mdish = (List<Dish>) dish;
         this.onClickInterface = onClickInterface;
     }
     ///konstruktor 2
@@ -66,12 +65,20 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         });
 
     }
+    public void filterList(List<Dish> filterList) {
+        // below line is to add our filtered
+        // list in our course array list.
+        mdish= filterList;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
+    }
     //funkcja podajaca konkretny item z listy recycler view
     public Dish getSpecificData(int position){
      return mdish.get(position);
     }
     //funkcja podajaca cala zawartosc recycle viewer
-    public ArrayList<Dish> getData(){
+    public List<Dish> getData(){
         return mdish;
     }
     @Override

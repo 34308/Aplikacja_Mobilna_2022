@@ -87,6 +87,23 @@
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/registerPasswordAgainLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repeatPassword" />
+
+            <EditText
+                android:id="@+id/registerPasswordAgainWindow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
                 android:id="@+id/registerCardNumberLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -142,6 +159,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/adress_text" />
+
+            <EditText
+                android:id="@+id/registerAdressWindow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/registerCityLabel"
@@ -211,7 +239,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/RegisterRegisterButton"
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"

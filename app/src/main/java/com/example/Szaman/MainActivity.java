@@ -2,6 +2,7 @@ package com.example.Szaman;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 
@@ -62,9 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 "12/25", "111");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
-        boolean addSuccess = databaseConnector.addUser(user);
+        databaseConnector.addUser(user);
         //boolean success = databaseConnector.deleteUser(user1);
         List<User> users = databaseConnector.getUsers();
+        Log.w("test",users.get(0).getAddress().toString());
         List<Dish> dishes = databaseConnector.getDishes();
 
     }
