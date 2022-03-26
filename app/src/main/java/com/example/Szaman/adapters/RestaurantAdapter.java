@@ -1,4 +1,4 @@
-package com.example.Szaman.Adapters;
+package com.example.Szaman.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,8 +83,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public ImageView RestaurantImage;
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
-            restaurantName =itemView.findViewById(R.id.RestaurantNameLabel);
-            restaurantRating =itemView.findViewById(R.id.restaurantRating);
+            restaurantName =itemView.findViewById(R.id.rItemRestaurantNameLabel);
+            restaurantRating =itemView.findViewById(R.id.ritemRestaurantRating);
             RestaurantImage =itemView.findViewById(R.id.restaurantItemImage);
         }
 

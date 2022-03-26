@@ -18,13 +18,13 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/busketDishNameLabel"
+                android:id="@+id/ritemDishNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="TextView" />
 
             <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                android:id="@+id/dishQuantityButton"
+                android:id="@+id/rItemDishQuantityButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center" />
@@ -37,13 +37,13 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/RestaurantNameLabel"
+                android:id="@+id/rItemRestaurantNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/restaurantRating"
+                android:id="@+id/ritemRestaurantRating"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="CENA" />

@@ -1,4 +1,4 @@
-package com.example.Szaman.Adapters;
+package com.example.Szaman.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,10 +87,10 @@ public class busketItemAdapter extends RecyclerView.Adapter<busketItemAdapter.Di
         public Button addbutton;
         public DishViewHolder(@NonNull View itemView) {
             super(itemView);
-            dishName =itemView.findViewById(R.id.busketDishNameLabel);
-            dishPriceLabel =itemView.findViewById(R.id.restaurantRating);
-            quantityButton=itemView.findViewById(R.id.dishQuantityButton);
-            addbutton=itemView.findViewById(R.id.dishItemAddButton);
+            dishName =itemView.findViewById(R.id.ritemDishNameLabel);
+            dishPriceLabel =itemView.findViewById(R.id.ritemRestaurantRating);
+            quantityButton=itemView.findViewById(R.id.rItemDishQuantityButton);
+            addbutton=itemView.findViewById(R.id.rdishItemAddButton);
         }
 
     }

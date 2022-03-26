@@ -38,7 +38,7 @@ public class LoginFragment extends Fragment {
         View root = binding.getRoot();
         Button refreshButton=root.getRootView().findViewById(R.id.refresherButton);
         Button loginButton= root.getRootView().findViewById(R.id.loginButton);
-        Button registerButton=root.getRootView().findViewById(R.id.registerButton);
+        Button registerButton=root.getRootView().findViewById(R.id.loginRegisterButton);
         TextView forgotten=root.getRootView().findViewById(R.id.loginForgottenPassword);
         forgotten.setOnClickListener(new View.OnClickListener() {
             @Override

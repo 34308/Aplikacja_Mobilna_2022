@@ -7,7 +7,7 @@
     tools:context=".ui.dish.dish">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/dishImageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -16,13 +16,13 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/busketDishNameLabel"
+        android:id="@+id/ritemDishNameLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/dishImageView" />
 
     <TextView
         android:id="@+id/dishDiscriptionLabel"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/busketDishNameLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/ritemDishNameLabel" />
 
     <Button
         android:id="@+id/button"

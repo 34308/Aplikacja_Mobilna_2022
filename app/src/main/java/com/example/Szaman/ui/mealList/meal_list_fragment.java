@@ -2,7 +2,6 @@ package com.example.Szaman.ui.mealList;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,27 +13,21 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.Szaman.Adapters.DishAdapter;
-import com.example.Szaman.Adapters.RestaurantAdapter;
+import com.example.Szaman.adapters.DishAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
-import com.example.Szaman.databinding.FragmentRestaurantsBinding;
 import com.example.Szaman.databinding.MealListFragmentBinding;
 import com.example.Szaman.model.Dish;
-import com.example.Szaman.model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class meal_list_fragment extends Fragment {
 
@@ -119,7 +112,7 @@ public class meal_list_fragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
             }
         };
-        List<Dish> data=dataBank;
+        List<Dish> dish=dataBank;
         RecyclerView recyclerView = root.getRootView().findViewById(R.id.mealListRecycleViewer);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
@@ -127,8 +120,8 @@ public class meal_list_fragment extends Fragment {
         //uzycie itemtouchhleper do wykrywania
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        //adapter = (RecyclerView.Adapter) new DishAdapter(dish,onClickInterface);
-        recyclerView.setAdapter((RecyclerView.Adapter) adapter);
+        adapter =  new DishAdapter(dish,onClickInterface);
+        recyclerView.setAdapter(adapter);
         adapter =(DishAdapter) recyclerView.getAdapter();
         dataBank= adapter.getData();
 

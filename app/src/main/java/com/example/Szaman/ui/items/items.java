@@ -15,12 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.Szaman.Adapters.DishAdapter;
+import com.example.Szaman.adapters.DishAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
 import com.example.Szaman.model.Dish;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class items extends Fragment {
@@ -58,7 +57,7 @@ public class items extends Fragment {
         };
 
         //ArrayList<Item> item=////tu wstawic pobranie informacji z listy dań
-        RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = getActivity().findViewById(R.id.ItemRecyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
