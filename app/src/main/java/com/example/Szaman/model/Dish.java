@@ -6,7 +6,6 @@ public class Dish {
     private String description;
     private Double price;
     private int restaurantId;
-    private Restaurant restaurant;
     private String imageUrl;
 
     public Dish(int dishId, String name, String description, Double price, int restaurantId, String imageUrl) {
@@ -26,7 +25,6 @@ public class Dish {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", restaurantId=" + restaurantId +
-                ", restaurant=" + restaurant +
                 ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
@@ -79,11 +77,4 @@ public class Dish {
         this.restaurantId = restaurantId;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
 }

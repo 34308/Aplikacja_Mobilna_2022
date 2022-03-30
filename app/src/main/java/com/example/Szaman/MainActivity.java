@@ -7,6 +7,7 @@ import android.view.Menu;
 
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.Restaurant;
+import com.example.Szaman.model.RestaurantUserConnector;
 import com.example.Szaman.model.User;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.google.android.material.navigation.NavigationView;
@@ -62,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 "12/25", "111");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
-        boolean addSuccess = databaseConnector.addUser(user);
+        //boolean addSuccess = databaseConnector.addUser(user);
         //boolean success = databaseConnector.deleteUser(user1);
         List<User> users = databaseConnector.getUsers();
         List<Dish> dishes = databaseConnector.getDishes();
-
+        RestaurantUserConnector.fillRestaurantsWithDishes(restaurants,dishes);
     }
 
     @Override

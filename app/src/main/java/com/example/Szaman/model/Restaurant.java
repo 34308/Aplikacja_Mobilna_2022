@@ -44,4 +44,5 @@ public class Restaurant {
     public void setDishes(List<Dish> dishes) {
         this.dishes = dishes;
     }
+
 }
