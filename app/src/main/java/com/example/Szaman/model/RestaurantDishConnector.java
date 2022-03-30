@@ -3,7 +3,7 @@ package com.example.Szaman.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RestaurantUserConnector {
+public class RestaurantDishConnector {
 
     public static void fillRestaurantWithDishes(Restaurant restaurant, List<Dish> dishes) {
         List<Dish> restaurantDishes = new ArrayList<>();
