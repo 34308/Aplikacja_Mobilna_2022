@@ -1,5 +1,6 @@
 package com.example.Szaman;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
