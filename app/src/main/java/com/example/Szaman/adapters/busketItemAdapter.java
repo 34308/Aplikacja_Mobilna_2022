@@ -88,9 +88,9 @@ public class busketItemAdapter extends RecyclerView.Adapter<busketItemAdapter.Di
         public DishViewHolder(@NonNull View itemView) {
             super(itemView);
             dishName =itemView.findViewById(R.id.ritemDishNameLabel);
-            dishPriceLabel =itemView.findViewById(R.id.ritemRestaurantRating);
+            dishPriceLabel =itemView.findViewById(R.id.ritemPrice);
             quantityButton=itemView.findViewById(R.id.rItemDishQuantityButton);
-            addbutton=itemView.findViewById(R.id.rdishItemAddButton);
+
         }
 
     }

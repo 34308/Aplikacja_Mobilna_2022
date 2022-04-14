@@ -1,7 +1,9 @@
 package com.example.Szaman.ui.mealList;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +26,18 @@ import android.widget.Toast;
 import com.example.Szaman.adapters.DishAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
+import com.example.Szaman.adapters.RestaurantAdapter;
+import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.MealListFragmentBinding;
 import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class meal_list_fragment extends Fragment {
 
-    private MealListFragmentViewModel mViewModel;
     private DishAdapter adapter;
     private MealListFragmentBinding binding;
     private OnClickInterface onClickInterface;
@@ -39,13 +45,17 @@ public class meal_list_fragment extends Fragment {
     public static meal_list_fragment newInstance() {
         return new meal_list_fragment();
     }
-
+    private int bundle;
+    private int ID;
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-
-        dataBank = requireActivity().getIntent().getParcelableArrayListExtra("dishes");
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            ID = bundle.getInt("ID");
+        }
         binding = MealListFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -72,13 +82,14 @@ public class meal_list_fragment extends Fragment {
                 //dodanie listy do bundla z id key
                 bundle.putStringArrayList("key", str);
                 //przejdz do innego fragmentu uzywajac navcontroller
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.dish,bundle);
+
             }
         };
         setMeals(root);
-        return inflater.inflate(R.layout.meal_list_fragment, container, false);
+        return root;
     }
+
+
     private void filter(String text) {
         // creating a new array list to filter our data.
         ArrayList<Dish> filteredList = new ArrayList<>();
@@ -102,6 +113,7 @@ public class meal_list_fragment extends Fragment {
             adapter.filterList(filteredList);
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void setMeals(View root){
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
@@ -110,9 +122,18 @@ public class meal_list_fragment extends Fragment {
             }
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+
             }
         };
-        List<Dish> dish=dataBank;
+        DatabaseConnector databaseConnector =new DatabaseConnector(getContext());
+        List<Dish> d2= databaseConnector.getDishes();
+        List<Dish> dishes= new ArrayList<Dish>();
+        for (Dish dish:d2) {
+           if(dish.getRestaurantId()==ID){
+               dishes.add(dish);
+               Log.w("dishes",""+ ID);
+           }
+        }
         RecyclerView recyclerView = root.getRootView().findViewById(R.id.mealListRecycleViewer);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
@@ -120,16 +141,17 @@ public class meal_list_fragment extends Fragment {
         //uzycie itemtouchhleper do wykrywania
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        adapter =  new DishAdapter(dish,onClickInterface);
-        recyclerView.setAdapter(adapter);
+        adapter =  new DishAdapter(dishes,onClickInterface);
+        recyclerView.setAdapter((DishAdapter) adapter);
         adapter =(DishAdapter) recyclerView.getAdapter();
-        dataBank= adapter.getData();
+        dataBank= ((DishAdapter) adapter).getData();
+
 
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MealListFragmentViewModel.class);
+        MealListFragmentViewModel mViewModel = new ViewModelProvider(this).get(MealListFragmentViewModel.class);
         // TODO: Use the ViewModel
     }
 

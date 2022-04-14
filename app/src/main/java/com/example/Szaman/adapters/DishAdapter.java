@@ -1,5 +1,6 @@
 package com.example.Szaman.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
 import com.example.Szaman.model.Dish;
@@ -31,39 +34,13 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     public void DataAdapter(ArrayList<Dish> data){
         mdish =data;
     }
-
-
     @NonNull
     @Override
-
     public DishViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //stworzenie view zawierajacego layout pojedynczego itemu w liscie
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.rycecle_item_dish_layout,parent,false);
-        DishViewHolder dataViewHolder=new DishViewHolder(view);
-        return dataViewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull DishViewHolder holder, int position) {
-        //wyswitlenie tekstu zapisanego w klasie
-        Dish currentData= mdish.get(position);
-        holder.dishName.setText(currentData.getName());
-        holder.dishPriceLabel.setText(currentData.getPrice().toString());
-
-        holder.quantityButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickInterface.setClick(position);
-            }
-        });
-        //ustawienie listenera dla przycisku
-        holder.addbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickInterface.setClick(position);
-            }
-        });
-
+        DishViewHolder dishViewHolder =new DishViewHolder(view);
+        return dishViewHolder;
     }
     public void filterList(List<Dish> filterList) {
         // below line is to add our filtered
@@ -72,6 +49,27 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
         // below line is to notify our adapter
         // as change in recycler view data.
         notifyDataSetChanged();
+    }
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onBindViewHolder(@NonNull DishViewHolder holder, int position) {
+        //wyswitlenie tekstu zapisanego w klasie
+        Dish currentData= mdish.get(position);
+        holder.dishName.setText(currentData.getName());
+        holder.dishPriceLabel.setText(currentData.getPrice().toString());
+        holder.dishName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickInterface.setClick(position);
+            }
+        });
+        holder.quantityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickInterface.setClick(position);
+            }
+        });
+        //ustawienie listenera dla przycisku
     }
     //funkcja podajaca konkretny item z listy recycler view
     public Dish getSpecificData(int position){
@@ -90,14 +88,14 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
     public static class DishViewHolder extends RecyclerView.ViewHolder{
         public TextView dishName;
         public TextView dishPriceLabel;
-        public Button quantityButton;
-        public Button addbutton;
+        public ElegantNumberButton quantityButton;
+
         public DishViewHolder(@NonNull View itemView) {
             super(itemView);
             dishName =itemView.findViewById(R.id.ritemDishNameLabel);
-            dishPriceLabel =itemView.findViewById(R.id.ritemRestaurantRating);
+            dishPriceLabel =itemView.findViewById(R.id.ritemPrice);
             quantityButton=itemView.findViewById(R.id.rItemDishQuantityButton);
-            addbutton=itemView.findViewById(R.id.rdishItemAddButton);
+
         }
 
     }

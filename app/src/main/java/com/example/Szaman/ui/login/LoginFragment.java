@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,13 +80,18 @@ public class LoginFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Login(View root){
         TextView login=root.getRootView().findViewById(R.id.loginWindow);
-        TextView password=root.getRootView().findViewById(R.id.passwordWindow);
-        String loginText= (String) login.getText();
-        String passwordText= (String) password.getText();
-        if(checkLogin(loginText,passwordText)){
-            savePasses(loginText+"-"+passwordText);
-        }
+        TextView password=root.getRootView().findViewById(R.id.loginPasswordWindow);
+        String loginText=  login.getText().toString();
+        String passwordText= password.getText().toString();
 
+        if(checkLogin(loginText,passwordText)) {
+            savePasses(loginText+"-"+passwordText);
+            goToRestaurants();
+        }
+    }
+    private void goToRestaurants() {
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+        navController.navigate(R.id.action_nav_login_to_nav_restaurants);
     }
     public void register(View root){
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
@@ -112,12 +118,11 @@ public class LoginFragment extends Fragment {
         databaseConnector=new DatabaseConnector(getContext());
         List<User> users=databaseConnector.getUsers();
         for (User u:users) {
-            if(u.getLogin().equals(login)){
-                if(u.getPassword().equals(password)) {
-                    return true;
-                }
+            if(u.getLogin().equals(login) && u.getPassword().equals(password)) {
+                return true;
             }
         }
+
         return false;
     }
 }

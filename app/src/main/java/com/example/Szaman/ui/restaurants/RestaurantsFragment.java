@@ -2,6 +2,7 @@ package com.example.Szaman.ui.restaurants;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import com.example.Szaman.model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RestaurantsFragment extends Fragment {
     private DatabaseConnector databaseConnector;
@@ -56,22 +58,19 @@ public class RestaurantsFragment extends Fragment {
         onClickInterface = new OnClickInterface() {
             @Override
             public void setClick(int pos) {
-
                 //pobierz info z databank majac pozycje kliknieteho elementu
 
-                Dish dish=new Dish(1,"ryba","ryba panierowana kotem",22.00,1,"potrawka22");
-                Dish dish1=new Dish(1,"ryba2","ryba panierowana kotem",22.00,1,"potrawka22");
-                ArrayList<Dish> data =new ArrayList<Dish>();
-                data.add(dish);
-                data.add(dish1);
+                Restaurant r=dataBank.get(pos);
+                Integer s=r.getRestaurantId();
 
                 //stworz bundle dzieki ktoremu bedziesz mogl wyslasc informacje z databank do drugiego fragmentu
+                Fragment fragment = new Fragment();
                 Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("dishes", data);
-
+                bundle.putInt("ID", s);
+                fragment.setArguments(bundle);
                 //przejdz do innego fragmentu uzywajac navcontroller
-                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_nav_restaurants_to_meal_list,bundle);
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+                navController.navigate(R.id.meal_list,bundle);
             }
         };
 
@@ -120,7 +119,8 @@ public class RestaurantsFragment extends Fragment {
             }
         };
         databaseConnector =new DatabaseConnector(getContext());
-        List<Restaurant> restaurant= databaseConnector.getRestaurants();
+        List<Restaurant> restaurants = databaseConnector.getRestaurants();
+
         RecyclerView recyclerView = root.getRootView().findViewById(R.id.restaurantsRecycleViewer);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
@@ -128,7 +128,7 @@ public class RestaurantsFragment extends Fragment {
         //uzycie itemtouchhleper do wykrywania
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        adapter =  new RestaurantAdapter(restaurant,onClickInterface);
+        adapter =  new RestaurantAdapter(restaurants,onClickInterface);
         recyclerView.setAdapter((RecyclerView.Adapter) adapter);
         adapter =(RestaurantAdapter) recyclerView.getAdapter();
         dataBank= ((RestaurantAdapter) adapter).getData();

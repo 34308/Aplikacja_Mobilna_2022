@@ -109,7 +109,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         cv.put(COLUMN_DEBIT_CARD_NUMBER, user.getDebitCardNumber());
         cv.put(COLUMN_EXPIRE_DATE, user.getExpireDate());
         cv.put(COLUMN_CVV, user.getCvv());
-        db = this.getReadableDatabase();
+
         long insert = db.insert(USER_TABLE, null, cv);
         if (insert == -1){
             return false;
@@ -166,13 +166,14 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
+        if(cursor != null && !cursor.isClosed()){
+            cursor.close();
+        }
         db.close();
         return restaurants;
     }
 
     public List<User> getUsers(){
-
         List<User> users = new ArrayList<>();
         String queryString = "SELECT * FROM " + USER_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -197,13 +198,14 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
-        db.close();
+//        if(cursor != null && !cursor.isClosed()){
+//            cursor.close();
+//        }
+//        db.close();
         return users;
     }
 
     public List<Dish> getDishes(){
-
         List<Dish> dishes = new ArrayList<>();
         String queryString = "SELECT * FROM " + DISH_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -223,7 +225,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
+        if(cursor != null && !cursor.isClosed()){
+            cursor.close();
+        }
         db.close();
         return dishes;
     }
@@ -242,8 +246,10 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
-        db.close();
+//        if(cursor != null && !cursor.isClosed()){
+//            cursor.close();
+//        }
+//        db.close();
         return dishIds;
     }
     public boolean addDishId(Integer dishId){

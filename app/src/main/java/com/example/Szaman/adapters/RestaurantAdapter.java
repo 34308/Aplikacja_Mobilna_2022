@@ -32,7 +32,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     public void DataAdapter(ArrayList<Restaurant> data){
         mRestaurant =data;
     }
-
     @NonNull
     @Override
     public RestaurantViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -54,7 +53,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         //wyswitlenie tekstu zapisanego w klasie
         Restaurant currentData= mRestaurant.get(position);
         holder.restaurantName.setText(currentData.getName());
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +82,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
             restaurantName =itemView.findViewById(R.id.rItemRestaurantNameLabel);
-            restaurantRating =itemView.findViewById(R.id.ritemRestaurantRating);
+            restaurantRating =itemView.findViewById(R.id.ritemPrice);
             RestaurantImage =itemView.findViewById(R.id.restaurantItemImage);
         }
 

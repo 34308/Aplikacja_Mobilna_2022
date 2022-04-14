@@ -43,7 +43,7 @@
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/ritemRestaurantRating"
+                android:id="@+id/ritemPrice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="CENA" />

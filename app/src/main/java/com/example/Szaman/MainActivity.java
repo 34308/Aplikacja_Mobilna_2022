@@ -1,33 +1,36 @@
 package com.example.Szaman;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Menu;
+        import android.content.Context;
+        import android.os.Build;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.View;
+        import android.view.Menu;
 
-import com.example.Szaman.model.Dish;
-import com.example.Szaman.model.Restaurant;
-import com.example.Szaman.model.User;
-import com.example.Szaman.dataBaseConnection.DatabaseConnector;
-import com.google.android.material.navigation.NavigationView;
+        import com.example.Szaman.model.Dish;
+        import com.example.Szaman.model.Restaurant;
+        import com.example.Szaman.model.RestaurantDishConnector;
+        import com.example.Szaman.model.User;
+        import com.example.Szaman.dataBaseConnection.DatabaseConnector;
+        import com.google.android.material.navigation.NavigationView;
 
-import androidx.annotation.RequiresApi;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+        import androidx.annotation.RequiresApi;
+        import androidx.navigation.NavController;
+        import androidx.navigation.Navigation;
+        import androidx.navigation.ui.AppBarConfiguration;
+        import androidx.navigation.ui.NavigationUI;
+        import androidx.drawerlayout.widget.DrawerLayout;
+        import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.Szaman.databinding.ActivityMainBinding;
+        import com.example.Szaman.databinding.ActivityMainBinding;
 
-import java.util.List;
+        import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -55,20 +58,19 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
 
-        User user = new User("login123", "hasło123", "Filip",
-                 "Broniek", "Różana 20", "1234567890",
-                "12/25", "111");
-        User user1 = new User(1,"login123", "hasło123", "Filip",
+        User user = new User("login123", "akt123", "Filip",
                 "Broniek", "Różana 20", "1234567890",
                 "12/25", "111");
+        databaseConnector.addUser(user);
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
-        databaseConnector.addUser(user);
-        //boolean success = databaseConnector.deleteUser(user1);
         List<User> users = databaseConnector.getUsers();
-        Log.w("test",users.get(0).getAddress().toString());
         List<Dish> dishes = databaseConnector.getDishes();
-
+        List<Integer> shoppingCart = databaseConnector.getDishIds();
+        RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
+        for (Dish d:dishes) {
+            Log.w("DISH",d.getName());
+        }
     }
 
     @Override
