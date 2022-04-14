@@ -42,6 +42,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
     public static final String RESTAURANT_TABLE = "Restaurants";
     public static final String DISH_TABLE = "Dishes";
+    public static final String SHOPPING_CARD_TABLE = "ShoppingCart";
     public static final String COLUMN_DISH_ID = "DishId";
     public static final String COLUMN_PRICE = "Price";
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
@@ -94,7 +95,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
         UserComparator userComparator = new UserComparator();
         List<User> users = this.getUsers();
-        for (User singleUser: users) {
+        for (User singleUser : users) {
             if (userComparator.compare(user, singleUser) == 0){
                 return false;
             }
@@ -117,21 +118,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
     }
 
-    public boolean addDish(Dish dish){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-
-        cv.put(COLUMN_NAME, dish.getName());
-        cv.put(COLUMN_PRICE, dish.getPrice());
-        cv.put(COLUMN_RESTAURANT_ID, dish.getRestaurantId());
-
-        long insert = db.insert(DISH_TABLE, null, cv);
-        if (insert == -1){
-            return false;
-        } else {
-            return true;
-        }
-    }
     public boolean deleteUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + USER_TABLE + " WHERE " + COLUMN_USER_ID + " = " + user.getUserId();
@@ -240,6 +226,42 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return dishes;
+    }
+
+    public List<Integer> getDishIds(){
+        List<Integer> dishIds = new ArrayList<>();
+        String queryString = "SELECT * FROM " + SHOPPING_CARD_TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int dishId = cursor.getInt(0);
+                dishIds.add(dishId);
+            } while (cursor.moveToNext());
+        } else
+        {
+
+        }
+        cursor.close();
+        db.close();
+        return dishIds;
+    }
+    public boolean addDishId(Integer dishId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        List<Integer> dishIds = this.getDishIds();
+        if (dishIds.contains(dishId) ){
+            return false;
+        }
+        cv.put(COLUMN_DISH_ID, dishId);
+
+        long insert = db.insert(SHOPPING_CARD_TABLE, null, cv);
+        if (insert == -1){
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
