@@ -166,7 +166,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
+        if(cursor != null && !cursor.isClosed()){
+            cursor.close();
+        }
         db.close();
         return restaurants;
     }
@@ -196,8 +198,10 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
-        db.close();
+//        if(cursor != null && !cursor.isClosed()){
+//            cursor.close();
+//        }
+//        db.close();
         return users;
     }
 
@@ -221,7 +225,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
+        if(cursor != null && !cursor.isClosed()){
+            cursor.close();
+        }
         db.close();
         return dishes;
     }
@@ -240,8 +246,10 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        cursor.close();
-        db.close();
+//        if(cursor != null && !cursor.isClosed()){
+//            cursor.close();
+//        }
+//        db.close();
         return dishIds;
     }
     public boolean addDishId(Integer dishId){
