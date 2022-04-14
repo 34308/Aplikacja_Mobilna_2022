@@ -35,9 +35,10 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_NAME = "Name";
     public static final String COLUMN_SURNAME = "Surname";
     public static final String COLUMN_ADDRESS = "Address";
-    public static final String COLUMN_DEBIT_CARD_NUMBER = "debitCardNumber";
-    public static final String COLUMN_EXPIRE_DATE = "expireDate";
-    public static final String COLUMN_CVV = "cvv";
+    public static final String COLUMN_DEBIT_CARD_NUMBER = "DebitCardNumber";
+    public static final String COLUMN_EXPIRE_DATE = "ExpireDate";
+    public static final String COLUMN_CVV = "Cvv";
+    public static final String COLUMN_EMAIL = "Email";
 
 
     public static final String RESTAURANT_TABLE = "Restaurants";
@@ -109,6 +110,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         cv.put(COLUMN_DEBIT_CARD_NUMBER, user.getDebitCardNumber());
         cv.put(COLUMN_EXPIRE_DATE, user.getExpireDate());
         cv.put(COLUMN_CVV, user.getCvv());
+        cv.put(COLUMN_EMAIL, user.getEmail());
 
         long insert = db.insert(USER_TABLE, null, cv);
         if (insert == -1){
@@ -189,9 +191,10 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 String debitCardNumber = cursor.getString(6);
                 String expireDate = cursor.getString(7);
                 String cvv = cursor.getString(8);
+                String email = cursor.getString(9);
                 User user = new User(userId, login, password,
                         name, surname, address, debitCardNumber,
-                        expireDate, cvv);
+                        expireDate, cvv, email);
                 users.add(user);
             } while (cursor.moveToNext());
         } else

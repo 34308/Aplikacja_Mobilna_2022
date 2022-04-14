@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
         User user = new User("login123", "hasło123", "Filip",
                  "Broniek", "Różana 20", "1234567890",
-                "12/25", "111");
+                "12/25", "111", "filip@pwsz.com");
         User user1 = new User(1,"login123", "hasło123", "Filip",
                 "Broniek", "Różana 20", "1234567890",
-                "12/25", "111");
+                "12/25", "111", "filip@pwsz.com");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
         List<User> users = databaseConnector.getUsers();
