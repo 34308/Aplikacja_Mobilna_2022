@@ -265,9 +265,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     }
 
     //usuwanie produktów z koszyka za pomocą obiektu
-    public boolean deleteCartItem(int cartItemId){
+    public boolean deleteCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + SHOPPING_CARD_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = " + cartItemId;
+        String queryString = "DELETE FROM " + SHOPPING_CARD_TABLE + " WHERE " + COLUMN_DISH_ID + " = " + cartItem.getDishId();
         Cursor cursor = db.rawQuery(queryString,null);
         if(cursor.moveToFirst()){
             return true;

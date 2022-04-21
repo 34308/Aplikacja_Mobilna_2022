@@ -71,9 +71,8 @@ public class MainActivity extends AppCompatActivity {
         CartItem cartItem = new CartItem(1,2);
         List<CartItem> shoppingCart = databaseConnector.getCartItems();
         boolean successAdd = databaseConnector.addCartItem(cartItem);
-        boolean successAdd1 = databaseConnector.addCartItem(cartItem);
         List<CartItem> shoppingCart1 = databaseConnector.getCartItems();
-        boolean successDel = databaseConnector.deleteCartItem(1);
+        boolean successDel = databaseConnector.deleteCartItem(cartItem);
         List<CartItem> shoppingCart2 = databaseConnector.getCartItems();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
     }
