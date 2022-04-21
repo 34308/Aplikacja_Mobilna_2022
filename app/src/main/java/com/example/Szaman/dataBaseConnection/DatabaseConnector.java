@@ -12,10 +12,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.example.Szaman.MainActivity;
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.Restaurant;
-import com.example.Szaman.model.ShoppingCardDish;
+import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.User;
 import com.example.Szaman.model.UserComparator;
 
@@ -50,7 +49,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
     public static final String COLUMN_DESCRIPTION = "Description";
     public static final String COLUMN_IMAGE_URL = "ImageUrl";
-    private static final String COLUMN_COUNT = "Count";
+
+    private static final String COLUMN_CART_ITEM_ID = "CartItemId";
+
     private SQLiteDatabase vDatabase;
     private Context vContext;
     private static String DB_NAME = "data.db"; //nazwa bazy danych znajdujaca sie w assets
@@ -226,39 +227,34 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     }
 
     //pobieranie listy dishów z koszyka
-    public List<ShoppingCardDish> getShoppingCardDishes(){
-        List<ShoppingCardDish> shoppingCardDishes = new ArrayList<>();
+    public List<CartItem> getCartItems(){
+        List<CartItem> cartItems = new ArrayList<>();
         String queryString = "SELECT * FROM " + SHOPPING_CARD_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()){
             do {
-                int dishId = cursor.getInt(0);
-                int count = cursor.getInt(1);
-                ShoppingCardDish shoppingCardDish = new ShoppingCardDish(dishId, count);
-                shoppingCardDishes.add(shoppingCardDish);
+                int cartItemId = cursor.getInt(0);
+                int userId = cursor.getInt(1);
+                int dishId = cursor.getInt(2);
+                CartItem cartItem = new CartItem(cartItemId, userId, dishId);
+                cartItems.add(cartItem);
             } while (cursor.moveToNext());
         } else
         {
 
         }
 
-        return shoppingCardDishes;
+        return cartItems;
     }
 
     // dodawanie produktu do koszyka
-    public boolean addShoppingCardDish(ShoppingCardDish shoppingCardDish){
+    public boolean addCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        List<ShoppingCardDish> shoppingCardDishes = this.getShoppingCardDishes();
-        for (ShoppingCardDish dish : shoppingCardDishes) {
-            if (dish.getDishId() == shoppingCardDish.getDishId()){
-                return false;
-            }
-        }
-        cv.put(COLUMN_DISH_ID, shoppingCardDish.getDishId());
-        cv.put(COLUMN_COUNT, shoppingCardDish.getCount());
+        cv.put(COLUMN_USER_ID, cartItem.getUserId());
+        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
 
         long insert = db.insert(SHOPPING_CARD_TABLE, null, cv);
         if (insert == -1){
@@ -269,23 +265,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     }
 
     //usuwanie produktów z koszyka za pomocą obiektu
-    public boolean deleteShoppingCardDish(ShoppingCardDish shoppingCardDish){
-        int dishId = shoppingCardDish.getDishId();
+    public boolean deleteCartItem(int cartItemId){
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + SHOPPING_CARD_TABLE + " WHERE " + COLUMN_DISH_ID + " = " + dishId;
-        Cursor cursor = db.rawQuery(queryString,null);
-        if(cursor.moveToFirst()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    //usuwanie produktów z koszyka za pomocą obiektu
-    public boolean deleteShoppingCardDish(int dishId){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + SHOPPING_CARD_TABLE + " WHERE " + COLUMN_DISH_ID + " = " + dishId;
+        String queryString = "DELETE FROM " + SHOPPING_CARD_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = " + cartItemId;
         Cursor cursor = db.rawQuery(queryString,null);
         if(cursor.moveToFirst()){
             return true;

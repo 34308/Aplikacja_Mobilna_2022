@@ -1,6 +1,5 @@
 package com.example.Szaman;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.view.Menu;
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.Restaurant;
 import com.example.Szaman.model.RestaurantDishConnector;
-import com.example.Szaman.model.ShoppingCardDish;
+import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.User;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.google.android.material.navigation.NavigationView;
@@ -69,11 +68,13 @@ public class MainActivity extends AppCompatActivity {
         List<User> users = databaseConnector.getUsers();
         //boolean success = databaseConnector.addUser(user1);
         List<Dish> dishes = databaseConnector.getDishes();
-        ShoppingCardDish shoppingCardDish = new ShoppingCardDish(1,2);
-        List<ShoppingCardDish> shoppingCart = databaseConnector.getShoppingCardDishes();
-        boolean successAdd = databaseConnector.addShoppingCardDish(shoppingCardDish);
-        boolean successDel = databaseConnector.deleteShoppingCardDish(1);
-        List<ShoppingCardDish> shoppingCart2 = databaseConnector.getShoppingCardDishes();
+        CartItem cartItem = new CartItem(1,2);
+        List<CartItem> shoppingCart = databaseConnector.getCartItems();
+        boolean successAdd = databaseConnector.addCartItem(cartItem);
+        boolean successAdd1 = databaseConnector.addCartItem(cartItem);
+        List<CartItem> shoppingCart1 = databaseConnector.getCartItems();
+        boolean successDel = databaseConnector.deleteCartItem(1);
+        List<CartItem> shoppingCart2 = databaseConnector.getCartItems();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
     }
 

@@ -1,7 +1,7 @@
 package com.example.Szaman.model;
 
 public class Dish {
-    private int DishId;
+    private int dishId;
     private String name;
     private String description;
     private Double price;
@@ -9,7 +9,7 @@ public class Dish {
     private String imageUrl;
 
     public Dish(int dishId, String name, String description, Double price, int restaurantId, String imageUrl) {
-        DishId = dishId;
+        this.dishId = dishId;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -20,7 +20,7 @@ public class Dish {
     @Override
     public String toString() {
         return "Dish{" +
-                "DishId=" + DishId +
+                "DishId=" + dishId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
@@ -46,11 +46,11 @@ public class Dish {
     }
 
     public int getDishId() {
-        return DishId;
+        return dishId;
     }
 
     public void setDishId(int dishId) {
-        DishId = dishId;
+        this.dishId = dishId;
     }
 
     public String getName() {
