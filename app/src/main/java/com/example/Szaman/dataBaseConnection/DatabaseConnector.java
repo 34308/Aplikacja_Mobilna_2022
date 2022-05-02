@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.example.Szaman.model.CartItemComparator;
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.Restaurant;
 import com.example.Szaman.model.CartItem;
@@ -287,9 +288,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 "   SET CountOfDish = ? \n" +
                 "   WHERE CartItemId = ?;";
         String[] whereArgs = new String[]{String.valueOf(cartItem.getCartItemId())};
-        String[] selectionArgs = new String[]{String.valueOf(cartItem.getCountOfDish()),String.valueOf(cartItem.getCartItemId())};
+        String[] selectionArgs = new String[]{String.valueOf(cartItem.getCountOfDish()), String.valueOf(cartItem.getCartItemId())};
         Cursor cursor = db.rawQuery(queryString, selectionArgs);
-        if(cursor.getCount()>0) {
+        if (cursor.getCount() > 0) {
             long result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
             if (result == -1) {
                 return false;
@@ -299,5 +300,17 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+    public boolean upsertCartItem(CartItem cartItem){
+        List<CartItem> cartItems = this.getCartItems();
+        CartItemComparator cartItemComparator = new CartItemComparator();
+        for (CartItem item : cartItems) {
+            if(cartItemComparator.compare(item,cartItem) == 0){
+                cartItem.setCartItemId(item.getCartItemId());
+                cartItem.setCountOfDish(item.getCountOfDish() + cartItem.getCountOfDish());
+                return this.updateCartItem(cartItem);
+            }
+        }
+        return this.addCartItem(cartItem);
     }
 }

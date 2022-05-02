@@ -70,10 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
         CartItem cartItem =new CartItem(2,3);
         CartItem cartItem2 =new CartItem(11,1,3);
-        CartItem cartItem3 =new CartItem(1,2,3,10);
-        boolean updateItemSuccess = databaseConnector.updateCartItem(cartItem3);
+        CartItem cartItem3 =new CartItem(18,2,3,10);
         //boolean addItemSuccess = databaseConnector.addCartItem(cartItem);
+        //boolean updateItemSuccess = databaseConnector.updateCartItem(cartItem3);
         //boolean delItemSuccess = databaseConnector.deleteCartItem(cartItem3);
+        boolean delItemSuccess = databaseConnector.upsertCartItem(cartItem3);
         List<CartItem> cartItems = databaseConnector.getCartItems();
         CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
         List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);
