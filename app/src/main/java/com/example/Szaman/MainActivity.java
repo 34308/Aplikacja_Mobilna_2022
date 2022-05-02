@@ -6,13 +6,11 @@ import android.view.View;
 import android.view.Menu;
 
 import com.example.Szaman.model.Dish;
-import com.example.Szaman.model.Restaurant;
-import com.example.Szaman.model.RestaurantDishConnector;
-import com.example.Szaman.model.CartItem;
-import com.example.Szaman.model.User;
+import com.example.Szaman.model.*;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
-import com.google.android.material.navigation.NavigationView;
+import com.example.Szaman.service.*;
 
+import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.RequiresApi;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -65,16 +62,21 @@ public class MainActivity extends AppCompatActivity {
                 "12/25", "111", "filip@pwsz.com");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
+        List<Dish> dishes = databaseConnector.getDishes();
+        RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
+
         List<User> users = databaseConnector.getUsers();
         //boolean success = databaseConnector.addUser(user1);
-        List<Dish> dishes = databaseConnector.getDishes();
-        CartItem cartItem = new CartItem(1,2);
-        List<CartItem> shoppingCart = databaseConnector.getCartItems();
-        boolean successAdd = databaseConnector.addCartItem(cartItem);
-        List<CartItem> shoppingCart1 = databaseConnector.getCartItems();
-        boolean successDel = databaseConnector.deleteCartItem(cartItem);
-        List<CartItem> shoppingCart2 = databaseConnector.getCartItems();
-        RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
+
+        CartItem cartItem =new CartItem(2,3);
+        CartItem cartItem2 =new CartItem(11,1,3);
+        CartItem cartItem3 =new CartItem(1,2,3,10);
+        boolean updateItemSuccess = databaseConnector.updateCartItem(cartItem3);
+        //boolean addItemSuccess = databaseConnector.addCartItem(cartItem);
+        //boolean delItemSuccess = databaseConnector.deleteCartItem(cartItem3);
+        List<CartItem> cartItems = databaseConnector.getCartItems();
+        CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
+        List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);
     }
 
     @Override

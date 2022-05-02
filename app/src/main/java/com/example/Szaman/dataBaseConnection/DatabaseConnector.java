@@ -43,7 +43,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
     public static final String RESTAURANT_TABLE = "Restaurants";
     public static final String DISH_TABLE = "Dishes";
-    public static final String SHOPPING_CARD_TABLE = "ShoppingCart";
+    public static final String SHOPPING_CART_TABLE = "ShoppingCart";
     public static final String COLUMN_DISH_ID = "DishId";
     public static final String COLUMN_PRICE = "Price";
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
@@ -51,6 +51,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_IMAGE_URL = "ImageUrl";
 
     private static final String COLUMN_CART_ITEM_ID = "CartItemId";
+    public static final String COLUMN_COUNT_OF_DISH = "CountOfDish";
 
     private SQLiteDatabase vDatabase;
     private Context vContext;
@@ -229,7 +230,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     //pobieranie listy dishów z koszyka
     public List<CartItem> getCartItems(){
         List<CartItem> cartItems = new ArrayList<>();
-        String queryString = "SELECT * FROM " + SHOPPING_CARD_TABLE;
+        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()){
@@ -237,7 +238,8 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 int cartItemId = cursor.getInt(0);
                 int userId = cursor.getInt(1);
                 int dishId = cursor.getInt(2);
-                CartItem cartItem = new CartItem(cartItemId, userId, dishId);
+                int countOfDish = cursor.getInt(3);
+                CartItem cartItem = new CartItem(cartItemId, userId, dishId, countOfDish);
                 cartItems.add(cartItem);
             } while (cursor.moveToNext());
         } else
@@ -255,8 +257,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
         cv.put(COLUMN_USER_ID, cartItem.getUserId());
         cv.put(COLUMN_DISH_ID, cartItem.getDishId());
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
 
-        long insert = db.insert(SHOPPING_CARD_TABLE, null, cv);
+        long insert = db.insert(SHOPPING_CART_TABLE, null, cv);
         if (insert == -1){
             return false;
         } else {
@@ -267,7 +270,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     //usuwanie produktów z koszyka za pomocą obiektu
     public boolean deleteCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + SHOPPING_CARD_TABLE + " WHERE " + COLUMN_DISH_ID + " = " + cartItem.getDishId();
+        String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = " + cartItem.getCartItemId();
         Cursor cursor = db.rawQuery(queryString,null);
         if(cursor.moveToFirst()){
             return true;
@@ -276,5 +279,25 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             return false;
         }
     }
-
+    public boolean updateCartItem(CartItem cartItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
+        String queryString = "UPDATE " + SHOPPING_CART_TABLE + "\n" +
+                "   SET CountOfDish = ? \n" +
+                "   WHERE CartItemId = ?;";
+        String[] whereArgs = new String[]{String.valueOf(cartItem.getCartItemId())};
+        String[] selectionArgs = new String[]{String.valueOf(cartItem.getCountOfDish()),String.valueOf(cartItem.getCartItemId())};
+        Cursor cursor = db.rawQuery(queryString, selectionArgs);
+        if(cursor.getCount()>0) {
+            long result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
 }
