@@ -12,9 +12,10 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.example.Szaman.MainActivity;
+import com.example.Szaman.model.CartItemComparator;
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.Restaurant;
+import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.User;
 import com.example.Szaman.model.UserComparator;
 
@@ -35,19 +36,24 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_NAME = "Name";
     public static final String COLUMN_SURNAME = "Surname";
     public static final String COLUMN_ADDRESS = "Address";
-    public static final String COLUMN_DEBIT_CARD_NUMBER = "debitCardNumber";
-    public static final String COLUMN_EXPIRE_DATE = "expireDate";
-    public static final String COLUMN_CVV = "cvv";
+    public static final String COLUMN_DEBIT_CARD_NUMBER = "DebitCardNumber";
+    public static final String COLUMN_EXPIRE_DATE = "ExpireDate";
+    public static final String COLUMN_CVV = "Cvv";
+    public static final String COLUMN_EMAIL = "Email";
 
 
     public static final String RESTAURANT_TABLE = "Restaurants";
     public static final String DISH_TABLE = "Dishes";
-    public static final String SHOPPING_CARD_TABLE = "ShoppingCart";
+    public static final String SHOPPING_CART_TABLE = "ShoppingCart";
     public static final String COLUMN_DISH_ID = "DishId";
     public static final String COLUMN_PRICE = "Price";
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
     public static final String COLUMN_DESCRIPTION = "Description";
     public static final String COLUMN_IMAGE_URL = "ImageUrl";
+
+    private static final String COLUMN_CART_ITEM_ID = "CartItemId";
+    public static final String COLUMN_COUNT_OF_DISH = "CountOfDish";
+
     private SQLiteDatabase vDatabase;
     private Context vContext;
     private static String DB_NAME = "data.db"; //nazwa bazy danych znajdujaca sie w assets
@@ -109,6 +115,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         cv.put(COLUMN_DEBIT_CARD_NUMBER, user.getDebitCardNumber());
         cv.put(COLUMN_EXPIRE_DATE, user.getExpireDate());
         cv.put(COLUMN_CVV, user.getCvv());
+        cv.put(COLUMN_EMAIL, user.getEmail());
 
         long insert = db.insert(USER_TABLE, null, cv);
         if (insert == -1){
@@ -166,10 +173,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        if(cursor != null && !cursor.isClosed()){
-            cursor.close();
-        }
-        db.close();
         return restaurants;
     }
 
@@ -189,19 +192,16 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 String debitCardNumber = cursor.getString(6);
                 String expireDate = cursor.getString(7);
                 String cvv = cursor.getString(8);
+                String email = cursor.getString(9);
                 User user = new User(userId, login, password,
                         name, surname, address, debitCardNumber,
-                        expireDate, cvv);
+                        expireDate, cvv, email);
                 users.add(user);
             } while (cursor.moveToNext());
         } else
         {
 
         }
-//        if(cursor != null && !cursor.isClosed()){
-//            cursor.close();
-//        }
-//        db.close();
         return users;
     }
 
@@ -225,44 +225,42 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         {
 
         }
-        if(cursor != null && !cursor.isClosed()){
-            cursor.close();
-        }
-        db.close();
         return dishes;
     }
 
-    public List<Integer> getDishIds(){
-        List<Integer> dishIds = new ArrayList<>();
-        String queryString = "SELECT * FROM " + SHOPPING_CARD_TABLE;
+    //pobieranie listy dishów z koszyka
+    public List<CartItem> getCartItems(){
+        List<CartItem> cartItems = new ArrayList<>();
+        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
         if (cursor.moveToFirst()){
             do {
-                int dishId = cursor.getInt(0);
-                dishIds.add(dishId);
+                int cartItemId = cursor.getInt(0);
+                int userId = cursor.getInt(1);
+                int dishId = cursor.getInt(2);
+                int countOfDish = cursor.getInt(3);
+                CartItem cartItem = new CartItem(cartItemId, userId, dishId, countOfDish);
+                cartItems.add(cartItem);
             } while (cursor.moveToNext());
         } else
         {
 
         }
-//        if(cursor != null && !cursor.isClosed()){
-//            cursor.close();
-//        }
-//        db.close();
-        return dishIds;
+
+        return cartItems;
     }
-    public boolean addDishId(Integer dishId){
+
+    // dodawanie produktu do koszyka
+    public boolean addCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        List<Integer> dishIds = this.getDishIds();
-        if (dishIds.contains(dishId) ){
-            return false;
-        }
-        cv.put(COLUMN_DISH_ID, dishId);
+        cv.put(COLUMN_USER_ID, cartItem.getUserId());
+        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
 
-        long insert = db.insert(SHOPPING_CARD_TABLE, null, cv);
+        long insert = db.insert(SHOPPING_CART_TABLE, null, cv);
         if (insert == -1){
             return false;
         } else {
@@ -270,4 +268,49 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
     }
 
+    //usuwanie produktów z koszyka za pomocą obiektu
+    public boolean deleteCartItem(CartItem cartItem){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = " + cartItem.getCartItemId();
+        Cursor cursor = db.rawQuery(queryString,null);
+        if(cursor.moveToFirst()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public boolean updateCartItem(CartItem cartItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
+        String queryString = "UPDATE " + SHOPPING_CART_TABLE + "\n" +
+                "   SET CountOfDish = ? \n" +
+                "   WHERE CartItemId = ?;";
+        String[] whereArgs = new String[]{String.valueOf(cartItem.getCartItemId())};
+        String[] selectionArgs = new String[]{String.valueOf(cartItem.getCountOfDish()), String.valueOf(cartItem.getCartItemId())};
+        Cursor cursor = db.rawQuery(queryString, selectionArgs);
+        if (cursor.getCount() > 0) {
+            long result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+    public boolean upsertCartItem(CartItem cartItem){
+        List<CartItem> cartItems = this.getCartItems();
+        CartItemComparator cartItemComparator = new CartItemComparator();
+        for (CartItem item : cartItems) {
+            if(cartItemComparator.compare(item,cartItem) == 0){
+                cartItem.setCartItemId(item.getCartItemId());
+                cartItem.setCountOfDish(item.getCountOfDish() + cartItem.getCountOfDish());
+                return this.updateCartItem(cartItem);
+            }
+        }
+        return this.addCartItem(cartItem);
+    }
 }
