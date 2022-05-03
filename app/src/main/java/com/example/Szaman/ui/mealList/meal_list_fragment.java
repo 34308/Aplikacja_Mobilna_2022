@@ -80,12 +80,16 @@ public class meal_list_fragment extends Fragment {
                 Bundle bundle = new Bundle();
                 ArrayList<String> str=new ArrayList<>();
                 str.add(dish.getName());
+                str.add(String.valueOf(dish.getDishId()));
                 str.add(String.valueOf(dish.getPrice()));
                 str.add(String.valueOf(dish.getRestaurantId()));
+                str.add(dish.getImageUrl());
+                str.add(dish.getDescription());
                 //dodanie listy do bundla z id key
-                bundle.putStringArrayList("key", str);
+                bundle.putStringArrayList("Dish", str);
                 //przejdz do innego fragmentu uzywajac navcontroller
-
+                NavController navController= Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                navController.navigate(R.id.action_meal_list_to_dish,bundle);
             }
         };
         setMeals(root);

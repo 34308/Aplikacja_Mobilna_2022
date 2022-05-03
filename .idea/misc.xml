@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/dish_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/rycecle_item_busket_item_layout.xml" value="0.5" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/rycecle_item_dish_layout.xml" value="0.21145833333333333" />
