@@ -102,11 +102,7 @@ public class LoginFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-    public String loadPasses(){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
-        String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
-        return login;
-    }
+
     public void savePasses(String data){
         SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= sharedPreferences.edit();

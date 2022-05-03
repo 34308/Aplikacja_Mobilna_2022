@@ -3,6 +3,7 @@ package com.example.Szaman.ui.mealList;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -23,12 +24,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.adapters.DishAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
 import com.example.Szaman.adapters.RestaurantAdapter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.MealListFragmentBinding;
+import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.Restaurant;
 
@@ -113,8 +116,14 @@ public class meal_list_fragment extends Fragment {
             adapter.filterList(filteredList);
         }
     }
+    public String loadPasses(){
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
+        String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
+        return login;
+    }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setMeals(View root){
+        DatabaseConnector databaseConnector =new DatabaseConnector(getContext());
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -122,10 +131,15 @@ public class meal_list_fragment extends Fragment {
             }
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                Dish dish= dataBank.get(viewHolder.getAdapterPosition());
+                String[] passes=loadPasses().split("-");
+                ElegantNumberButton e=viewHolder.itemView.findViewById(R.id.rItemDishQuantityButton);
+
+                CartItem cartItem=new CartItem(databaseConnector.getUser(passes[0],passes[1]).getUserId(),dish.getDishId(),Integer.parseInt(e.getNumber()));
+                databaseConnector.upsertCartItem(cartItem);
 
             }
         };
-        DatabaseConnector databaseConnector =new DatabaseConnector(getContext());
         List<Dish> d2= databaseConnector.getDishes();
         List<Dish> dishes= new ArrayList<Dish>();
         for (Dish dish:d2) {

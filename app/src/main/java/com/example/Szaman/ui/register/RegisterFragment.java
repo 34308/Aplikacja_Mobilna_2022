@@ -45,6 +45,7 @@ public class RegisterFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addNewUser(View root) {
         databaseConnector= new DatabaseConnector(getContext());
+        EditText email= root.getRootView().findViewById(R.id.emailWindow);
         EditText login= root.getRootView().findViewById(R.id.personalLoginWindow);
         EditText name= root.getRootView().findViewById(R.id.personalNameWindow);
         EditText surname= root.getRootView().findViewById(R.id.personalSurnameWindow);
@@ -62,7 +63,7 @@ public class RegisterFragment extends Fragment {
                 && !DCNumber.getText().toString().isEmpty() && !DCExpires.getText().toString().isEmpty()&& !adress.getText().toString().isEmpty() &&
         !city.getText().toString().isEmpty() && !houseNumber.getText().toString().isEmpty() && !postalCode.getText().toString().isEmpty() ){
             if(password.getText().toString().equals(passwordAgain.getText().toString())){
-                User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress.getText().toString(),DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString());
+                User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress.getText().toString(),DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
                 if(checkLogin(user)){
                     databaseConnector.addUser(user);
                 }

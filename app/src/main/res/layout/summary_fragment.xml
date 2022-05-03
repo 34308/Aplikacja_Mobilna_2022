@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/rItemPriceTag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.summary.Summary">
@@ -10,8 +10,10 @@
     <TextView
         android:id="@+id/summaryThankyou"
         android:layout_width="0dp"
+
         android:layout_height="wrap_content"
         android:text="@string/thankyou"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,30 +23,51 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/summaryReceiptButton"
+        app:layout_constraintBottom_toTopOf="@+id/rBuyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/summaryThankyou" />
 
     <Button
-        android:id="@+id/summaryReceiptButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="@string/printReceipt"
-        app:layout_constraintBottom_toTopOf="@+id/summaryGoBackButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/summaryGoBackButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/goBck"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/rBuyButton"
+        android:layout_width="73dp"
+        android:layout_height="67dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/summaryGoBackButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <CheckBox
+        android:checked="true"
+        android:id="@+id/rItemcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/delivery"
+        app:layout_constraintBottom_toTopOf="@+id/summaryGoBackButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/rItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="32dp"
+        android:text="Price"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/summaryGoBackButton"
+        app:layout_constraintEnd_toStartOf="@+id/rBuyButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
