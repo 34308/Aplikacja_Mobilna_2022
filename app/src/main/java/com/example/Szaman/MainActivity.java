@@ -23,11 +23,11 @@ import com.example.Szaman.databinding.ActivityMainBinding;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DrawerMenuController {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-
+    DrawerLayout drawer;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
-        DrawerLayout drawer = binding.drawerLayout;
+        drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         List<CartItem> cartItems = databaseConnector.getCartItems();
         CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
         List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);
+
     }
 
     @Override
@@ -97,5 +98,15 @@ public class MainActivity extends AppCompatActivity {
     public void registerWindow(View view) {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.nav_register);
+    }
+
+    @Override
+    public void unlockMneu() {
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    @Override
+    public void lockMneu() {
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 }

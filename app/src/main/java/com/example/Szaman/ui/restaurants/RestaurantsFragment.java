@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Szaman.MainActivity;
 import com.example.Szaman.adapters.RestaurantAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
@@ -47,6 +49,10 @@ public class RestaurantsFragment extends Fragment {
         binding = FragmentRestaurantsBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
+
+        ((MainActivity) getActivity()).unlockMneu();
+
+
         ImageButton searchButton =root.getRootView().findViewById(R.id.restaurantSearchButton);
         EditText searchBar =root.getRootView().findViewById(R.id.restaurantsSearchBar);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -133,4 +139,5 @@ public class RestaurantsFragment extends Fragment {
         adapter =(RestaurantAdapter) recyclerView.getAdapter();
         dataBank= ((RestaurantAdapter) adapter).getData();
     }
+
 }

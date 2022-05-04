@@ -42,7 +42,6 @@ public class Summary extends Fragment {
     private CasketItemAdapter adapter;
     private SummaryFragmentBinding binding;
     private SummaryViewModel mViewModel;
-    private int ID;
     private DatabaseConnector databaseConnector ;
 
     List<CartItem> cartItems;

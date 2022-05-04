@@ -13,15 +13,19 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.Szaman.MainActivity;
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentLoginBinding;
 import com.example.Szaman.model.User;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
@@ -33,10 +37,14 @@ public class LoginFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        //mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        ((MainActivity) getActivity()).lockMneu();
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
         Button refreshButton=root.getRootView().findViewById(R.id.refresherButton);
         Button loginButton= root.getRootView().findViewById(R.id.loginButton);
         Button registerButton=root.getRootView().findViewById(R.id.loginRegisterButton);
