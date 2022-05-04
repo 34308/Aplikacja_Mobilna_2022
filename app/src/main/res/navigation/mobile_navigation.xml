@@ -67,7 +67,14 @@
         android:id="@+id/dish"
         android:name="com.example.Szaman.ui.dish.dish"
         android:label="@string/menu_dish"
-        tools:layout="@layout/dish_fragment" />
+        tools:layout="@layout/dish_fragment" >
+        <action
+            android:id="@+id/action_dish_to_meal_list"
+            app:destination="@id/meal_list" />
+        <action
+            android:id="@+id/action_dish_to_nav_summary"
+            app:destination="@id/nav_summary" />
+    </fragment>
 
     <fragment
         android:id="@+id/meal_list"

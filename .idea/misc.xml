@@ -3,17 +3,51 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/activity_main.xml" value="0.2558876811594203" />
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/content_main.xml" value="0.25" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable/side_nav_bar.xml" value="0.2985" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/app_bar_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/content_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/dish_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/fragment_login.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/fragment_welcome_screen.xml" value="0.2" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/menu/main.xml" value="0.3625" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2985" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/fragment_welcome_screen.xml" value="0.1" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable-anydpi/ic_delete.xml" value="0.137" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable-anydpi/ic_restaurant.xml" value="0.2175" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.137" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable/dish_item.xml" value="0.137" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable/ic_launcher_background.xml" value="0.137" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable/restaurant_item.xml" value="0.1935" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable/side_nav_bar.xml" value="0.1935" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/app_bar_main.xml" value="0.22" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/content_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/dish_fragment.xml" value="0.25" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/fragment_register.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/fragment_restaurants.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/fragment_welcome_screen.xml" value="0.22" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/items_fragment.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/meal_list_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/nav_header_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/personal_data_setting_fragment.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/rycecle_item_busket_item_layout.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/rycecle_item_dish_layout.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/settings_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/summary_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/menu/main.xml" value="0.34444444444444444" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.137" />
+        <entry key="..\:/Program Files/Android/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.137" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/dish_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_register.xml" value="0.33" />
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_restaurants.xml" value="0.2558876811594203" />
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/nav_header_main.xml" value="0.25" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/rycecle_item_busket_item_layout.xml" value="0.5" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/rycecle_item_dish_layout.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/summary_fragment.xml" value="0.33" />
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/menu/activity_main_drawer.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Szaman/app/src/main/res/drawable/ic_menu_camera.xml" value="0.3828125" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Szaman/app/src/main/res/layout/fragment_login.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Szaman/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />
@@ -53,6 +87,9 @@
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/p1/app/src/main/res/menu/activity_main_drawer.xml" value="0.67" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/p1/app/src/main/res/menu/main.xml" value="0.25" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/p1/app/src/main/res/xml/root_preferences.xml" value="0.25" />
+        <entry key="..\:/aplikacja/app/src/main/res/drawable-anydpi/ic_checkout.xml" value="0.137" />
+        <entry key="..\:/aplikacja/app/src/main/res/layout/activity_main.xml" value="0.1762917933130699" />
+        <entry key="..\:/aplikacja/app/src/main/res/layout/summary_fragment.xml" value="0.358695652173913" />
       </map>
     </option>
   </component>

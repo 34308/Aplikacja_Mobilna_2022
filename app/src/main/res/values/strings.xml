@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="basket">Basket</string>
 
     <string name="ForgottenPassword">Click here if you forgotten your password</string>
     <string name="email">EMAIL</string>
@@ -27,7 +28,7 @@
     <string name="login_text">Login</string>
     <string name="password_text">Password</string>
     <string name="Register">Register</string>
-
+    <string name="Quantity">Quantity</string>
     <string name="menu_summary">Summary</string>
     <string name="menu_restaurant">Restaurants</string>
     <string name="menu_login">Login</string>
@@ -38,13 +39,14 @@
     <string name="menu_meal_list">Meal List</string>
     <string name="menu_item">Items</string>
     <string name="menu_PersonalData">Personal Data</string>
+    <string name="goToBasket">Go to basket</string>
 
     <string name="priceTotal">Price Total</string>
     <string name="withDelivery">With Delivery</string>
     <string name="withoutDelivery">Without Delivery</string>
     <string name="order">Order</string>
 
-    <string name="addTo">Add to busket</string>
+    <string name="addTo">Add to basket</string>
     <string name="MealHint">Meals</string>
     <string name="personalDataEditing">Personal Data</string>
     <string name="aplicationColors">Change Theme</string>
