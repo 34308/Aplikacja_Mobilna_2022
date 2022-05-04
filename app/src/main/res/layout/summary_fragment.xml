@@ -22,18 +22,23 @@
         android:id="@+id/summaryRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toTopOf="@+id/rBuyButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/summaryThankyou" />
+        app:layout_constraintTop_toBottomOf="@+id/summaryThankyou"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/summaryGoBackButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:text="@string/goBck"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -42,11 +47,12 @@
         android:id="@+id/rBuyButton"
         android:layout_width="73dp"
         android:layout_height="67dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="21dp"
         app:layout_constraintBottom_toTopOf="@+id/summaryGoBackButton"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@tools:sample/avatars" />
+        android:src="@drawable/ic_delete"
+        android:backgroundTint="#d2dae2"/>
 
     <CheckBox
         android:checked="true"

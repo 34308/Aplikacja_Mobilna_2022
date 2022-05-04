@@ -10,6 +10,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,13 +28,16 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.adapters.DishAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
+import com.example.Szaman.adapters.RestaurantAdapter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.MealListFragmentBinding;
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class meal_list_fragment extends Fragment {
 
@@ -40,7 +45,10 @@ public class meal_list_fragment extends Fragment {
     private MealListFragmentBinding binding;
     private OnClickInterface onClickInterface;
     private List<Dish> dataBank;
-
+    public static meal_list_fragment newInstance() {
+        return new meal_list_fragment();
+    }
+    private int bundle;
     private int ID;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -72,12 +80,16 @@ public class meal_list_fragment extends Fragment {
                 Bundle bundle = new Bundle();
                 ArrayList<String> str=new ArrayList<>();
                 str.add(dish.getName());
+                str.add(String.valueOf(dish.getDishId()));
                 str.add(String.valueOf(dish.getPrice()));
                 str.add(String.valueOf(dish.getRestaurantId()));
+                str.add(dish.getImageUrl());
+                str.add(dish.getDescription());
                 //dodanie listy do bundla z id key
-                bundle.putStringArrayList("key", str);
+                bundle.putStringArrayList("Dish", str);
                 //przejdz do innego fragmentu uzywajac navcontroller
-
+                NavController navController= Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                navController.navigate(R.id.action_meal_list_to_dish,bundle);
             }
         };
         setMeals(root);

@@ -9,6 +9,7 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/restaurant_item"
         android:stretchColumns="0,1"
         android:weightSum="2">
 
@@ -21,6 +22,8 @@
                 android:id="@+id/rItemRestaurantNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:text="Nazwa" />
 
         </TableRow>
