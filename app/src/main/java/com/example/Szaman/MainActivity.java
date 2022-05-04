@@ -109,4 +109,14 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
     public void lockMneu() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
+
+    @Override
+    public void hideMneu() {
+        binding.appBarMain.toolbar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showMneu() {
+        binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
+    }
 }

@@ -41,6 +41,7 @@ public class LoginFragment extends Fragment {
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         ((MainActivity) getActivity()).lockMneu();
+        ((MainActivity) getActivity()).hideMneu();
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -107,6 +108,8 @@ public class LoginFragment extends Fragment {
     }
     @Override
     public void onDestroyView() {
+        ((MainActivity) getActivity()).unlockMneu();
+        ((MainActivity) getActivity()).showMneu();
         super.onDestroyView();
         binding = null;
     }

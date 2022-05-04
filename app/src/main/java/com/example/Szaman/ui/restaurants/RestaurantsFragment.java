@@ -50,7 +50,7 @@ public class RestaurantsFragment extends Fragment {
 
         View root = binding.getRoot();
 
-        ((MainActivity) getActivity()).unlockMneu();
+
 
 
         ImageButton searchButton =root.getRootView().findViewById(R.id.restaurantSearchButton);
