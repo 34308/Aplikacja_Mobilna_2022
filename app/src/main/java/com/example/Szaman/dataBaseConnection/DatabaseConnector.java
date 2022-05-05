@@ -184,7 +184,8 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 do {
                     int restaurantId = cursor.getInt(0);
                     String restaurantName = cursor.getString(1);
-                    Restaurant restaurant = new Restaurant(restaurantId, restaurantName);
+                    String imageUrl = cursor.getString(2);
+                    Restaurant restaurant = new Restaurant(restaurantId, restaurantName, imageUrl);
                     restaurants.add(restaurant);
                 } while (cursor.moveToNext());
             }
