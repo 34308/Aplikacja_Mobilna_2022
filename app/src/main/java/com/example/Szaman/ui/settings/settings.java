@@ -86,8 +86,8 @@ public class settings extends Fragment {
     }
 
     public void areYouSure(View view, View popupView){
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int  height= LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int  height= LinearLayout.LayoutParams.MATCH_PARENT;
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         Button delete= popupView.findViewById(R.id.popupDeleteAccount);

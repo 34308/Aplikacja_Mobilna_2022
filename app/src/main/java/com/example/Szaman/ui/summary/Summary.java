@@ -177,6 +177,6 @@ public class Summary extends Fragment {
         if(delivery){
             sum+=deliveryFee;
         }
-        price.setText(sum.toString());
+        price.setText(sum.toString()+" zl");
     }
 }

@@ -108,8 +108,7 @@ public class LoginFragment extends Fragment {
     }
     @Override
     public void onDestroyView() {
-        ((MainActivity) getActivity()).unlockMneu();
-        ((MainActivity) getActivity()).showMneu();
+
         super.onDestroyView();
         binding = null;
     }

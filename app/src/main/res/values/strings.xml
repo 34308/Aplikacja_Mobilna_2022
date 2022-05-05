@@ -34,6 +34,7 @@
     <string name="menu_summary">Summary</string>
     <string name="menu_restaurant">Restaurants</string>
     <string name="menu_login">Login</string>
+    <string name="menu_logout">Logout</string>
     <string name="menu_register">Register</string>
     <string name="menu_welcome_screen">Welcome Screen</string>
     <string name="menu_settings">Settings</string>

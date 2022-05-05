@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.Szaman.MainActivity;
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentRegisterBinding;
@@ -33,6 +34,8 @@ public class RegisterFragment extends Fragment {
 
         binding = FragmentRegisterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        ((MainActivity) getActivity()).lockMneu();
+        ((MainActivity) getActivity()).hideMneu();
         Button registerButton= root.findViewById(R.id.loginRegisterButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -70,13 +73,14 @@ public class RegisterFragment extends Fragment {
                 User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress,DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
                 if(checkLogin(user)){
                     databaseConnector.addUser(user);
+                    goTologin();
                 }
             }
         }
-        gotologin();
+
     }
 
-    private void gotologin() {
+    private void goTologin() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_nav_register_to_nav_login);
     }
@@ -96,6 +100,7 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }
