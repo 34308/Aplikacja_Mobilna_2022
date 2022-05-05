@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
@@ -71,6 +73,12 @@ public class RegisterFragment extends Fragment {
                 }
             }
         }
+        gotologin();
+    }
+
+    private void gotologin() {
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+        navController.navigate(R.id.action_nav_register_to_nav_login);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
