@@ -8,6 +8,8 @@
     <string name="action_settings">Settings</string>
     <string name="basket">Basket</string>
 
+    <string name="deleteAccountM">Are you suer you want to delete your account?</string>
+
     <string name="ForgottenPassword">Click here if you forgotten your password</string>
     <string name="email">EMAIL</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

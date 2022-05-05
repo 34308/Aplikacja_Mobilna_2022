@@ -115,15 +115,6 @@ public class RestaurantsFragment extends Fragment {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void showRestaurants(View root){
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-            }
-        };
         databaseConnector =new DatabaseConnector(getContext());
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
 
@@ -132,8 +123,7 @@ public class RestaurantsFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         //uzycie itemtouchhleper do wykrywania
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         adapter =  new RestaurantAdapter(restaurants,onClickInterface);
         recyclerView.setAdapter((RecyclerView.Adapter) adapter);
         adapter =(RestaurantAdapter) recyclerView.getAdapter();

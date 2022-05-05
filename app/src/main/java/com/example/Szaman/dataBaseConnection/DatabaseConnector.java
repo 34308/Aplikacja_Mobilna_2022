@@ -59,7 +59,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     private static String DB_NAME = "data.db"; //nazwa bazy danych znajdujaca sie w assets
 
     public DatabaseConnector(@Nullable Context context) {
-
         super(context, DB_NAME, null, 1);
         this.vContext = context;
         // Copy the DB if need be when instantiating the DataBaseHelper

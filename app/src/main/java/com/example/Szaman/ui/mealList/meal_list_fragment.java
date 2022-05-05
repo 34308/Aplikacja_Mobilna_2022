@@ -141,6 +141,7 @@ public class meal_list_fragment extends Fragment {
 
                 CartItem cartItem=new CartItem(databaseConnector.getUser(passes[0],passes[1]).getUserId(),dish.getDishId(),Integer.parseInt(e.getNumber()));
                 databaseConnector.upsertCartItem(cartItem);
+                adapter.notifyDataSetChanged();
 
             }
         };
@@ -160,8 +161,10 @@ public class meal_list_fragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
         adapter =  new DishAdapter(dishes,onClickInterface);
+
         recyclerView.setAdapter((DishAdapter) adapter);
         adapter =(DishAdapter) recyclerView.getAdapter();
+
         dataBank= ((DishAdapter) adapter).getData();
 
 

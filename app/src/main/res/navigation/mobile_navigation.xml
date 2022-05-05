@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_nav_settings_to_personalData"
             app:destination="@id/personalData" />
+        <action
+            android:id="@+id/action_nav_settings_to_nav_login"
+            app:destination="@id/nav_login" />
     </fragment>
 
     <fragment
@@ -102,7 +105,14 @@
         android:id="@+id/personalData"
         android:name="com.example.Szaman.ui.personalDataSettings.PersonalDataSetting"
         android:label="@string/menu_PersonalData"
-        tools:layout="@layout/personal_data_setting_fragment"/>
+        tools:layout="@layout/personal_data_setting_fragment">
+        <action
+            android:id="@+id/action_personalData_to_nav_settings"
+            app:destination="@id/nav_settings" />
+        <action
+            android:id="@+id/action_personalData_to_nav_login"
+            app:destination="@id/nav_login" />
+    </fragment>
 
 
 </navigation>

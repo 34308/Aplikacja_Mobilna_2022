@@ -54,16 +54,18 @@ public class RegisterFragment extends Fragment {
         EditText DCNumber= root.getRootView().findViewById(R.id.personalDebitCardNumberWindow);
         EditText DCCVV= root.getRootView().findViewById(R.id.personalDebitCardCVVWindow);
         EditText DCExpires= root.getRootView().findViewById(R.id.personalDebitCardExpiresWindow);
-        EditText adress= root.getRootView().findViewById(R.id.registerAdressWindow);
         EditText city= root.getRootView().findViewById(R.id.personalCityWindow);
         EditText houseNumber= root.getRootView().findViewById(R.id.personalHauseNumberWindow);
         EditText postalCode= root.getRootView().findViewById(R.id.personalPostCodeWindow);
+
+        String adress=city.getText().toString()+","+houseNumber.getText().toString()+","+postalCode.getText().toString();
+
         if(!login.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !name.getText().toString().isEmpty() &&
                 !surname.getText().toString().isEmpty() && !passwordAgain.getText().toString().isEmpty() && !DCCVV.getText().toString().isEmpty()
-                && !DCNumber.getText().toString().isEmpty() && !DCExpires.getText().toString().isEmpty()&& !adress.getText().toString().isEmpty() &&
+                && !DCNumber.getText().toString().isEmpty() && !DCExpires.getText().toString().isEmpty()&&
         !city.getText().toString().isEmpty() && !houseNumber.getText().toString().isEmpty() && !postalCode.getText().toString().isEmpty() ){
             if(password.getText().toString().equals(passwordAgain.getText().toString())){
-                User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress.getText().toString(),DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
+                User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress,DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
                 if(checkLogin(user)){
                     databaseConnector.addUser(user);
                 }

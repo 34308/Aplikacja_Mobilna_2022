@@ -193,24 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp" />
 
-            <TextView
-                android:id="@+id/personalAdressLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/adress_text"
-                android:textColor="@color/colorPrimary" />
 
-            <EditText
-                android:id="@+id/registerAdressWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp" />
 
             <TextView
                 android:id="@+id/personalCityLabel"
