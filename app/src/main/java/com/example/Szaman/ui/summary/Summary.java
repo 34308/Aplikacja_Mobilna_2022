@@ -72,7 +72,6 @@ public class Summary extends Fragment {
                 }
                 cartItems.clear();
                 setItems(root);
-
             }
         });
         CheckBox checkBox= root.findViewById(R.id.rItemcheckBox);
@@ -99,6 +98,8 @@ public class Summary extends Fragment {
             }
         });
         cartItems=getItems();
+        if(cartItems.isEmpty()) rBuyButton.setEnabled(false);
+
         setItems(root);
         priceRecount(root);
         return root;
@@ -176,6 +177,6 @@ public class Summary extends Fragment {
         if(delivery){
             sum+=deliveryFee;
         }
-        price.setText(sum.toString());
+        price.setText(sum.toString()+" zl");
     }
 }

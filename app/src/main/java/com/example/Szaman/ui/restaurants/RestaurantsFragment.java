@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Szaman.MainActivity;
 import com.example.Szaman.adapters.RestaurantAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
@@ -42,16 +44,24 @@ public class RestaurantsFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         homeViewModel =
                 new ViewModelProvider(this).get(RestaurantsViewModel.class);
         binding = FragmentRestaurantsBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
+        //((MainActivity) getActivity()).setToolbarTitle();
+
+        ((MainActivity) getActivity()).unlockMneu();
+        ((MainActivity) getActivity()).showMneu();
+
+
         ImageButton searchButton =root.getRootView().findViewById(R.id.restaurantSearchButton);
         EditText searchBar =root.getRootView().findViewById(R.id.restaurantsSearchBar);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 filter(searchBar.getText().toString());
             }
         });
@@ -105,19 +115,11 @@ public class RestaurantsFragment extends Fragment {
             // at last we are passing that filtered
             // list to our adapter class.
             adapter.filterList(filteredList);
+            dataBank=filteredList;
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void showRestaurants(View root){
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-            }
-        };
         databaseConnector =new DatabaseConnector(getContext());
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
 
@@ -126,11 +128,11 @@ public class RestaurantsFragment extends Fragment {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         //uzycie itemtouchhleper do wykrywania
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         adapter =  new RestaurantAdapter(restaurants,onClickInterface);
         recyclerView.setAdapter((RecyclerView.Adapter) adapter);
         adapter =(RestaurantAdapter) recyclerView.getAdapter();
         dataBank= ((RestaurantAdapter) adapter).getData();
     }
+
 }

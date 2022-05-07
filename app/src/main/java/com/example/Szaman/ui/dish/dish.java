@@ -66,7 +66,6 @@ public class dish extends Fragment {
             }
         }
         System.out.println("filename: "+ dishB);
-
         ImageView dishImage= root.findViewById(R.id.dishImageView);
         Picasso.get().load(dishB.get(4)).into(dishImage);
         TextView name= root.findViewById(R.id.dishNameLabel);
@@ -85,12 +84,15 @@ public class dish extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addToBusket(View root){
         EditText editText= root.findViewById(R.id.dishQuantityET);
-        int q=Integer.parseInt(String.valueOf(editText.getText()));
-        if(q!=0){
-            String[] pases= loadPasses().split("-");
-            CartItem cartItem=new CartItem(databaseConnector.getUser(pases[0],pases[1]).getUserId(),dish.getDishId(),q);
-            databaseConnector.upsertCartItem(cartItem);
+        if(!editText.getText().toString().isEmpty()){
+            int q=Integer.parseInt(String.valueOf(editText.getText()));
+            if(q!=0){
+                String[] pases= loadPasses().split("-");
+                CartItem cartItem=new CartItem(databaseConnector.getUser(pases[0],pases[1]).getUserId(),dish.getDishId(),q);
+                databaseConnector.upsertCartItem(cartItem);
+            }
         }
+
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

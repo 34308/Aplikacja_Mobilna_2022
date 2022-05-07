@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.example.Szaman.MainActivity;
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentRegisterBinding;
@@ -31,6 +34,8 @@ public class RegisterFragment extends Fragment {
 
         binding = FragmentRegisterBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        ((MainActivity) getActivity()).lockMneu();
+        ((MainActivity) getActivity()).hideMneu();
         Button registerButton= root.findViewById(R.id.loginRegisterButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -54,21 +59,30 @@ public class RegisterFragment extends Fragment {
         EditText DCNumber= root.getRootView().findViewById(R.id.personalDebitCardNumberWindow);
         EditText DCCVV= root.getRootView().findViewById(R.id.personalDebitCardCVVWindow);
         EditText DCExpires= root.getRootView().findViewById(R.id.personalDebitCardExpiresWindow);
-        EditText adress= root.getRootView().findViewById(R.id.registerAdressWindow);
         EditText city= root.getRootView().findViewById(R.id.personalCityWindow);
         EditText houseNumber= root.getRootView().findViewById(R.id.personalHauseNumberWindow);
         EditText postalCode= root.getRootView().findViewById(R.id.personalPostCodeWindow);
+
+        String adress=city.getText().toString()+","+houseNumber.getText().toString()+","+postalCode.getText().toString();
+
         if(!login.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !name.getText().toString().isEmpty() &&
                 !surname.getText().toString().isEmpty() && !passwordAgain.getText().toString().isEmpty() && !DCCVV.getText().toString().isEmpty()
-                && !DCNumber.getText().toString().isEmpty() && !DCExpires.getText().toString().isEmpty()&& !adress.getText().toString().isEmpty() &&
+                && !DCNumber.getText().toString().isEmpty() && !DCExpires.getText().toString().isEmpty()&&
         !city.getText().toString().isEmpty() && !houseNumber.getText().toString().isEmpty() && !postalCode.getText().toString().isEmpty() ){
             if(password.getText().toString().equals(passwordAgain.getText().toString())){
-                User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress.getText().toString(),DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
+                User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress,DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
                 if(checkLogin(user)){
                     databaseConnector.addUser(user);
+                    goTologin();
                 }
             }
         }
+
+    }
+
+    private void goTologin() {
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+        navController.navigate(R.id.action_nav_register_to_nav_login);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -86,6 +100,7 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }

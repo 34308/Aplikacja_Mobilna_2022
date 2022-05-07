@@ -77,12 +77,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     //klasa zawierajaca poszczegolne elementy interfejsu
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
         public TextView restaurantName;
-        public TextView restaurantRating;
+
         public ImageView RestaurantImage;
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
             restaurantName =itemView.findViewById(R.id.rItemRestaurantNameLabel);
-            restaurantRating =itemView.findViewById(R.id.ritemPrice);
+
             RestaurantImage =itemView.findViewById(R.id.restaurantItemImage);
         }
 

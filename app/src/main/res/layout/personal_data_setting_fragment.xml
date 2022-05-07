@@ -10,6 +10,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,13 +20,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/personalNameLabel"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="@string/name_text" />
+                android:text="@string/name_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalNameWindow"
@@ -36,13 +41,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalSurnameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Surname_text" />
+                android:text="@string/Surname_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalSurnameWindow"
@@ -53,13 +60,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalLoginLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_text" />
+                android:text="@string/login_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalLoginWindow"
@@ -70,13 +79,34 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/personaEmailLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/email"
+                android:textColor="@color/colorPrimary" />
+
+            <EditText
+                android:id="@+id/personalEmailWindow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalPasswordLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/password_text" />
+                android:text="@string/password_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalPasswordWindow"
@@ -87,13 +117,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalCardNumberLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/debit_card_number_text" />
+                android:text="@string/debit_card_number_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalDebitCardNumberWindow"
@@ -104,13 +136,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalCardEndDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/expiresEnd" />
+                android:text="@string/expiresEnd"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalDebitCardExpiresWindow"
@@ -121,13 +155,15 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalCardCVVLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/cvv_text" />
+                android:text="@string/cvv_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalDebitCardCVVWindow"
@@ -138,84 +174,18 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/personalAdressLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/adress_text" />
+                android:text="@string/adress_text"
+                android:textColor="@color/colorPrimary"/>
 
             <EditText
                 android:id="@+id/personalAdressWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/personalCityLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/City_text" />
-
-            <EditText
-                android:id="@+id/personalCityWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/personalHauseNumberLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/housenumber_text" />
-
-            <EditText
-                android:id="@+id/personalHauseNumberWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/personalSteetLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/Street_text" />
-
-            <EditText
-                android:id="@+id/personalStreetWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/personalPostCodeLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/postCode_text" />
-
-            <EditText
-                android:id="@+id/personalPostCodeWindow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -231,6 +201,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:text="@string/save"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
