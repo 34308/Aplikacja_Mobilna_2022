@@ -44,6 +44,7 @@ public class settings extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = SettingsFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         Button delete=root.findViewById(R.id.settingsDeleteAcount);
         Button logOut=root.findViewById(R.id.settingsLogOutButton);
 

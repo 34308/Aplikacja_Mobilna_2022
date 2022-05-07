@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_login.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/fragment_register.xml" value="0.1" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/meal_list_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/personal_data_setting_fragment.xml" value="0.5" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/popup_delete_layout.xml" value="0.33" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_2022/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.5" />

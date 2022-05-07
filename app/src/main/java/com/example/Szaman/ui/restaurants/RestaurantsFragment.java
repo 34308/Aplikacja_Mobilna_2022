@@ -44,11 +44,13 @@ public class RestaurantsFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         homeViewModel =
                 new ViewModelProvider(this).get(RestaurantsViewModel.class);
         binding = FragmentRestaurantsBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
+        //((MainActivity) getActivity()).setToolbarTitle();
 
         ((MainActivity) getActivity()).unlockMneu();
         ((MainActivity) getActivity()).showMneu();
