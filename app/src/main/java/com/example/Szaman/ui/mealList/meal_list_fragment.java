@@ -45,10 +45,6 @@ public class meal_list_fragment extends Fragment {
     private MealListFragmentBinding binding;
     private OnClickInterface onClickInterface;
     private List<Dish> dataBank;
-    public static meal_list_fragment newInstance() {
-        return new meal_list_fragment();
-    }
-    private int bundle;
     private int ID;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -118,6 +114,7 @@ public class meal_list_fragment extends Fragment {
             // at last we are passing that filtered
             // list to our adapter class.
             adapter.filterList(filteredList);
+            dataBank=filteredList;
         }
     }
     public String loadPasses(){
@@ -164,7 +161,6 @@ public class meal_list_fragment extends Fragment {
 
         recyclerView.setAdapter((DishAdapter) adapter);
         adapter =(DishAdapter) recyclerView.getAdapter();
-
         dataBank= ((DishAdapter) adapter).getData();
 
 

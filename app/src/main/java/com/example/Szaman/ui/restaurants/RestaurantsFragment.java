@@ -59,6 +59,7 @@ public class RestaurantsFragment extends Fragment {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 filter(searchBar.getText().toString());
             }
         });
@@ -112,6 +113,7 @@ public class RestaurantsFragment extends Fragment {
             // at last we are passing that filtered
             // list to our adapter class.
             adapter.filterList(filteredList);
+            dataBank=filteredList;
         }
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
