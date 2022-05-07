@@ -55,8 +55,9 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_COUNT_OF_DISH = "CountOfDish";
 
     private SQLiteDatabase vDatabase;
-    private Context vContext;
+    private static Context vContext;
     private static String DB_NAME = "data.db"; //nazwa bazy danych znajdujaca sie w assets
+    private static DatabaseConnector sInstance;
 
     public DatabaseConnector(@Nullable Context context) {
 
@@ -67,6 +68,13 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             copyDB();
         }
         vDatabase = this.getWritableDatabase();
+    }
+
+    public static synchronized DatabaseConnector getInstance(Context context) {
+        if (sInstance == null) {
+            sInstance = new DatabaseConnector(context.getApplicationContext());
+        }
+        return sInstance;
     }
 
 
@@ -95,33 +103,37 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
     }
 
-    public boolean addUser(User user){
+    public boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         UserComparator userComparator = new UserComparator();
         List<User> users = this.getUsers();
         for (User singleUser : users) {
-            if (userComparator.compare(user, singleUser) == 0){
+            if (userComparator.compare(user, singleUser) == 0) {
                 return false;
             }
         }
+        vDatabase.beginTransaction();
+        try {
+            cv.put(COLUMN_LOGIN, user.getLogin());
+            cv.put(COLUMN_PASSWORD, user.getPassword());
+            cv.put(COLUMN_NAME, user.getName());
+            cv.put(COLUMN_SURNAME, user.getSurname());
+            cv.put(COLUMN_ADDRESS, user.getAddress());
+            cv.put(COLUMN_DEBIT_CARD_NUMBER, user.getDebitCardNumber());
+            cv.put(COLUMN_EXPIRE_DATE, user.getExpireDate());
+            cv.put(COLUMN_CVV, user.getCvv());
+            cv.put(COLUMN_EMAIL, user.getEmail());
 
-        cv.put(COLUMN_LOGIN, user.getLogin());
-        cv.put(COLUMN_PASSWORD, user.getPassword());
-        cv.put(COLUMN_NAME, user.getName());
-        cv.put(COLUMN_SURNAME, user.getSurname());
-        cv.put(COLUMN_ADDRESS, user.getAddress());
-        cv.put(COLUMN_DEBIT_CARD_NUMBER, user.getDebitCardNumber());
-        cv.put(COLUMN_EXPIRE_DATE, user.getExpireDate());
-        cv.put(COLUMN_CVV, user.getCvv());
-        cv.put(COLUMN_EMAIL, user.getEmail());
-
-        long insert = db.insert(USER_TABLE, null, cv);
-        if (insert == -1){
-            return false;
-        } else {
-            return true;
+            long insert = db.insert(USER_TABLE, null, cv);
+            if (insert == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } finally {
+            db.endTransaction();
         }
     }
 
@@ -129,11 +141,16 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + USER_TABLE + " WHERE " + COLUMN_USER_ID + " = " + user.getUserId();
         Cursor cursor = db.rawQuery(queryString,null);
-        if(cursor.moveToFirst()){
-            return true;
-        }
-        else {
-            return false;
+        vDatabase.beginTransaction();
+        try {
+            if(cursor.moveToFirst()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } finally {
+            db.endTransaction();
         }
     }
 
@@ -162,16 +179,20 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         String queryString = "SELECT * FROM " + RESTAURANT_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
-        if (cursor.moveToFirst()){
-            do {
-                int restaurantId = cursor.getInt(0);
-                String restaurantName = cursor.getString(1);
-                Restaurant restaurant = new Restaurant(restaurantId, restaurantName);
-                restaurants.add(restaurant);
-            } while (cursor.moveToNext());
-        } else
-        {
-
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    int restaurantId = cursor.getInt(0);
+                    String restaurantName = cursor.getString(1);
+                    String imageUrl = cursor.getString(2);
+                    Restaurant restaurant = new Restaurant(restaurantId, restaurantName, imageUrl);
+                    restaurants.add(restaurant);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
         }
         return restaurants;
     }
@@ -181,26 +202,29 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         String queryString = "SELECT * FROM " + USER_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
-        if (cursor.moveToFirst()){
-            do {
-                int userId = cursor.getInt(0);
-                String login = cursor.getString(1);
-                String password = cursor.getString(2);
-                String name = cursor.getString(3);
-                String surname = cursor.getString(4);
-                String address = cursor.getString(5);
-                String debitCardNumber = cursor.getString(6);
-                String expireDate = cursor.getString(7);
-                String cvv = cursor.getString(8);
-                String email = cursor.getString(9);
-                User user = new User(userId, login, password,
-                        name, surname, address, debitCardNumber,
-                        expireDate, cvv, email);
-                users.add(user);
-            } while (cursor.moveToNext());
-        } else
-        {
-
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    int userId = cursor.getInt(0);
+                    String login = cursor.getString(1);
+                    String password = cursor.getString(2);
+                    String name = cursor.getString(3);
+                    String surname = cursor.getString(4);
+                    String address = cursor.getString(5);
+                    String debitCardNumber = cursor.getString(6);
+                    String expireDate = cursor.getString(7);
+                    String cvv = cursor.getString(8);
+                    String email = cursor.getString(9);
+                    User user = new User(userId, login, password,
+                            name, surname, address, debitCardNumber,
+                            expireDate, cvv, email);
+                    users.add(user);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
         }
         return users;
     }
@@ -210,20 +234,23 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         String queryString = "SELECT * FROM " + DISH_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
-        if (cursor.moveToFirst()){
-            do {
-                int dishId = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String description = cursor.getString(2);
-                Double price = cursor.getDouble(3);
-                int restaurantId = cursor.getInt(4);
-                String imageUrl = cursor.getString(5);
-                Dish dish = new Dish(dishId, name, description, price, restaurantId, imageUrl);
-                dishes.add(dish);
-            } while (cursor.moveToNext());
-        } else
-        {
-
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    int dishId = cursor.getInt(0);
+                    String name = cursor.getString(1);
+                    String description = cursor.getString(2);
+                    Double price = cursor.getDouble(3);
+                    int restaurantId = cursor.getInt(4);
+                    String imageUrl = cursor.getString(5);
+                    Dish dish = new Dish(dishId, name, description, price, restaurantId, imageUrl);
+                    dishes.add(dish);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
         }
         return dishes;
     }
@@ -234,20 +261,22 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
-        if (cursor.moveToFirst()){
-            do {
-                int cartItemId = cursor.getInt(0);
-                int userId = cursor.getInt(1);
-                int dishId = cursor.getInt(2);
-                int countOfDish = cursor.getInt(3);
-                CartItem cartItem = new CartItem(cartItemId, userId, dishId, countOfDish);
-                cartItems.add(cartItem);
-            } while (cursor.moveToNext());
-        } else
-        {
-
+        try {
+            if (cursor.moveToFirst()){
+                do {
+                    int cartItemId = cursor.getInt(0);
+                    int userId = cursor.getInt(1);
+                    int dishId = cursor.getInt(2);
+                    int countOfDish = cursor.getInt(3);
+                    CartItem cartItem = new CartItem(cartItemId, userId, dishId, countOfDish);
+                    cartItems.add(cartItem);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
         }
-
         return cartItems;
     }
     public User getUser(String l ,String p){
@@ -281,16 +310,20 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public boolean addCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        vDatabase.beginTransaction();
+        try {
+            cv.put(COLUMN_USER_ID, cartItem.getUserId());
+            cv.put(COLUMN_DISH_ID, cartItem.getDishId());
+            cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
 
-        cv.put(COLUMN_USER_ID, cartItem.getUserId());
-        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
-        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
-
-        long insert = db.insert(SHOPPING_CART_TABLE, null, cv);
-        if (insert == -1){
-            return false;
-        } else {
-            return true;
+            long insert = db.insert(SHOPPING_CART_TABLE, null, cv);
+            if (insert == -1){
+                return false;
+            } else {
+                return true;
+            }
+        } finally {
+            db.endTransaction();
         }
     }
     public List<CartItem> getCartItems(int usId){
@@ -318,16 +351,23 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public boolean deleteCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + SHOPPING_CART_TABLE + " WHERE " + COLUMN_CART_ITEM_ID + " = " + cartItem.getCartItemId();
-        Cursor cursor = db.rawQuery(queryString,null);
-        if(cursor.moveToFirst()){
-            return true;
-        }
-        else {
-            return false;
+        vDatabase.beginTransaction();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery(queryString,null);
+        } finally {
+            db.endTransaction();
+            if (cursor.moveToFirst()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
     public boolean updateCartItem(CartItem cartItem) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
         String queryString = "UPDATE " + SHOPPING_CART_TABLE + "\n" +
@@ -337,11 +377,17 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         String[] selectionArgs = new String[]{String.valueOf(cartItem.getCountOfDish()), String.valueOf(cartItem.getCartItemId())};
         Cursor cursor = db.rawQuery(queryString, selectionArgs);
         if (cursor.getCount() > 0) {
-            long result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
+            vDatabase.beginTransaction();
+            long result = -1;
+            try {
+            result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
+            } finally {
+                db.endTransaction();
+                if (result == -1) {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         } else {
             return false;
