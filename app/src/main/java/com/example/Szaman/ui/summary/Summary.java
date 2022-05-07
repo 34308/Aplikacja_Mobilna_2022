@@ -32,6 +32,8 @@ import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.SummaryFragmentBinding;
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.User;
+import com.example.Szaman.receiptWriter.PDFWriter;
 import com.example.Szaman.service.CartItemService;
 
 import java.util.ArrayList;
@@ -65,6 +67,7 @@ public class Summary extends Fragment {
         rBuyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                printReceipt();
                 //wstawic co po kupieniu
                 //czysczenie koszyka
                 for (CartItem item:cartItems) {
@@ -135,7 +138,13 @@ public class Summary extends Fragment {
         String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
         return login;
     }
+    public void printReceipt(){
+        String[] passes= loadPasses().split("-");
+        User user= databaseConnector.getUser(passes[0],passes[1]);
+        PDFWriter pdfWriter=new PDFWriter(getContext());
+        pdfWriter.generatePDF(user,dataBank);
 
+    }
     @RequiresApi(api = Build.VERSION_CODES.O)
 
     public void setItems(View root){
