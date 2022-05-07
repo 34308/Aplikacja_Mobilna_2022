@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
 
         //DataBase Connection Test
 
-        DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
+        DatabaseConnector databaseConnector = new DatabaseConnector(this);
 
         User user = new User("login123", "hasło123", "Filip",
                  "Broniek", "Różana 20", "1234567890",
@@ -89,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
 
         CartItem cartItem =new CartItem(2,3);
         CartItem cartItem2 =new CartItem(11,1,3);
-        CartItem cartItem3 =new CartItem(18,2,3,10);
+        CartItem cartItem3 =new CartItem(17,2,3,10);
         //boolean addItemSuccess = databaseConnector.addCartItem(cartItem);
         //boolean updateItemSuccess = databaseConnector.updateCartItem(cartItem3);
         //boolean delItemSuccess = databaseConnector.deleteCartItem(cartItem3);
-        boolean delItemSuccess = databaseConnector.upsertCartItem(cartItem3);
+        boolean upsertItemSuccess = databaseConnector.upsertCartItem(cartItem);
         List<CartItem> cartItems = databaseConnector.getCartItems();
         CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
         List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);
