@@ -323,7 +323,33 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
         return cartItems;
     }
+    public User getUser(String l ,String p){
+        User user = null;
+        String queryString = "SELECT * FROM " + USER_TABLE + " WHERE Login = '" + l + "';";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int userId = cursor.getInt(0);
+                String login = cursor.getString(1);
+                String password = cursor.getString(2);
+                String name = cursor.getString(3);
+                String surname = cursor.getString(4);
+                String address = cursor.getString(5);
+                String debitCardNumber = cursor.getString(6);
+                String expireDate = cursor.getString(7);
+                String cvv = cursor.getString(8);
+                String email = cursor.getString(9);
+                user = new User(userId, login, password,
+                        name, surname, address, debitCardNumber,
+                        expireDate, cvv, email);
+            } while (cursor.moveToNext());
+        } else
+        {
 
+        }
+        return user;
+    }
     // dodawanie produktu do koszyka
     public boolean addCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -342,7 +368,27 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             return true;
         }
     }
+    public List<CartItem> getCartItems(int usId){
+        List<CartItem> cartItems = new ArrayList<>();
+        String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" WHERE UserId="+usId;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int cartItemId = cursor.getInt(0);
+                int userId = cursor.getInt(1);
+                int dishId = cursor.getInt(2);
+                int countOfDish = cursor.getInt(3);
+                CartItem cartItem = new CartItem(cartItemId, userId, dishId, countOfDish);
+                cartItems.add(cartItem);
+            } while (cursor.moveToNext());
+        } else
+        {
 
+        }
+
+        return cartItems;
+    }
     //usuwanie produktów z koszyka za pomocą obiektu
     public boolean deleteCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
