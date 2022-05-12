@@ -6,93 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.dish.dish">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/dishNameLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/asap"
-            android:text="TextView"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/dishNameLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-        <ImageView
-            android:id="@+id/dishImageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/background" />
+    <TextView
+        android:id="@+id/dishDiscriptionLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dishNameLabel" />
 
-        <TextView
-            android:hint="@string/Quantity"
-            android:id="@+id/dishDiscriptionLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="TextView"
-            android:textAlignment="viewStart"
-            android:textSize="24sp"
-            android:layout_marginStart="20dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:orientation="vertical"></LinearLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="271dp"
-            android:layout_marginRight="10dp">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                >
-
-                <EditText
-
-                    android:id="@+id/dishQuantityET"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:textAlignment="center"/>
-
-                <Button
-                    android:id="@+id/dishAddButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/addTo"
-                    android:textSize="15sp"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginTop="20dp">
-
-                <Button
-                    android:id="@+id/dishGoToBasket"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/goToBasket"
-                    android:textSize="15sp"/>
-            </TableRow>
-
-        </TableLayout>
-
-    </LinearLayout>
-
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/addTo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dishDiscriptionLabel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

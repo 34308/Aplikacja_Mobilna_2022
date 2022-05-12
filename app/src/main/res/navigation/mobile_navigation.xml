@@ -33,20 +33,13 @@
         <action
             android:id="@+id/action_nav_login_to_nav_register"
             app:destination="@id/nav_register" />
-        <action
-            android:id="@+id/action_nav_login_to_nav_restaurants"
-            app:destination="@id/nav_restaurants" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_register"
         android:name="com.example.Szaman.ui.register.RegisterFragment"
         android:label="@string/menu_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_nav_register_to_nav_login"
-            app:destination="@id/nav_login" />
-    </fragment>
+        tools:layout="@layout/fragment_register" />
     <fragment
         android:id="@+id/nav_summary"
         android:name="com.example.Szaman.ui.summary.Summary"
@@ -65,23 +58,13 @@
         <action
             android:id="@+id/action_nav_settings_to_personalData"
             app:destination="@id/personalData" />
-        <action
-            android:id="@+id/action_nav_settings_to_nav_login"
-            app:destination="@id/nav_login" />
     </fragment>
 
     <fragment
         android:id="@+id/dish"
         android:name="com.example.Szaman.ui.dish.dish"
         android:label="@string/menu_dish"
-        tools:layout="@layout/dish_fragment" >
-        <action
-            android:id="@+id/action_dish_to_meal_list"
-            app:destination="@id/meal_list" />
-        <action
-            android:id="@+id/action_dish_to_nav_summary"
-            app:destination="@id/nav_summary" />
-    </fragment>
+        tools:layout="@layout/dish_fragment" />
 
     <fragment
         android:id="@+id/meal_list"
@@ -109,14 +92,7 @@
         android:id="@+id/personalData"
         android:name="com.example.Szaman.ui.personalDataSettings.PersonalDataSetting"
         android:label="@string/menu_PersonalData"
-        tools:layout="@layout/personal_data_setting_fragment">
-        <action
-            android:id="@+id/action_personalData_to_nav_settings"
-            app:destination="@id/nav_settings" />
-        <action
-            android:id="@+id/action_personalData_to_nav_login"
-            app:destination="@id/nav_login" />
-    </fragment>
+        tools:layout="@layout/personal_data_setting_fragment"/>
 
 
 </navigation>
