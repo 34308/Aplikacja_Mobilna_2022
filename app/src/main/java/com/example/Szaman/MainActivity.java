@@ -60,12 +60,16 @@ public class MainActivity extends AppCompatActivity {
         User user1 = new User(1,"login123", "hasło123", "Filip",
                 "Broniek", "Różana 20", "1234567890",
                 "12/25", "111", "filip@pwsz.com");
+        User user2 = new User(1,"twoj stary", "twoja stara", "Filip",
+                "Broniek", "Różana 20", "1234567890",
+                "12/25", "111", "filip@pwsz.com");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
         List<Restaurant> restaurants = databaseConnector.getRestaurants();
         List<Dish> dishes = databaseConnector.getDishes();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
 
         List<User> users = databaseConnector.getUsers();
+        databaseConnector.updateUser(user2);
         //boolean success = databaseConnector.addUser(user1);
 
         CartItem cartItem =new CartItem(5,23);
@@ -74,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //boolean addItemSuccess = databaseConnector.addCartItem(cartItem);
         //boolean updateItemSuccess = databaseConnector.updateCartItem(cartItem3);
         //boolean delItemSuccess = databaseConnector.deleteCartItem(cartItem3);
-        boolean upsertItemSuccess = databaseConnector.upsertCartItem(cartItem);
+        //boolean upsertItemSuccess = databaseConnector.upsertCartItem(cartItem);
         List<CartItem> cartItems = databaseConnector.getCartItems();
         CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
         List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);

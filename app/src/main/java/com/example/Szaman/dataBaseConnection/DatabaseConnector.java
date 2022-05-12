@@ -137,6 +137,50 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
     }
 
+    public boolean updateUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String queryString = "UPDATE Users\n" +
+                "   SET" +
+                "       Login = ?,\n" +
+                "       Password = ?,\n" +
+                "       Name = ?,\n" +
+                "       Surname = ?,\n" +
+                "       Address = ?,\n" +
+                "       DebitCardNumber = ?,\n" +
+                "       ExpireDate = ?,\n" +
+                "       Cvv = ?,\n" +
+                "       Email = ?\n";
+        String[] whereArgs = new String[]{String.valueOf(user.getUserId())};
+        String[] selectionArgs = new String[]{
+                String.valueOf(user.getLogin()),
+                String.valueOf(user.getPassword()),
+                String.valueOf(user.getName()),
+                String.valueOf(user.getSurname()),
+                String.valueOf(user.getAddress()),
+                String.valueOf(user.getDebitCardNumber()),
+                String.valueOf(user.getCvv()),
+                String.valueOf(user.getEmail())
+        };
+        Cursor cursor = db.rawQuery(queryString, selectionArgs);
+        if (cursor.getCount() > 0) {
+            vDatabase.beginTransaction();
+            long result = -1;
+            try {
+                result = db.update(USER_TABLE, cv, COLUMN_USER_ID + " = ?", whereArgs);
+            } finally {
+                db.endTransaction();
+                if (result == -1) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
     public boolean deleteUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + USER_TABLE + " WHERE " + COLUMN_USER_ID + " = " + user.getUserId();
