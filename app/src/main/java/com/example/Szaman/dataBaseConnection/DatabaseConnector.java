@@ -285,19 +285,17 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         vDatabase.beginTransaction();
-        try {
-            cv.put(COLUMN_USER_ID, cartItem.getUserId());
-            cv.put(COLUMN_DISH_ID, cartItem.getDishId());
-            cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
+        long insert = 0;
+        cv.put(COLUMN_USER_ID, cartItem.getUserId());
+        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
 
-            long insert = db.insert(SHOPPING_CART_TABLE, null, cv);
-            if (insert == -1){
-                return false;
-            } else {
-                return true;
-            }
-        } finally {
-            db.endTransaction();
+        insert = db.insert(SHOPPING_CART_TABLE, null, cv);
+
+        if (insert == -1){
+            return false;
+        } else {
+            return true;
         }
     }
 
