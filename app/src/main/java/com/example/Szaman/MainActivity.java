@@ -54,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseConnector databaseConnector = new DatabaseConnector(this);
 
-        User user = new User("login123", "hasło123", "Filip",
+        User user = new User(2,"login123", "haslo123", "Filip",
                  "Broniek", "Różana 20", "1234567890",
                 "12/25", "111", "filip@pwsz.com");
         User user1 = new User(1,"login123", "hasło123", "Filip",
                 "Broniek", "Różana 20", "1234567890",
                 "12/25", "111", "filip@pwsz.com");
-        User user2 = new User(1,"twoj stary", "twoja stara", "Filip",
+        User user2 = new User(2,"twoj stary", "twoja stara", "Filip",
                 "Broniek", "Różana 20", "1234567890",
                 "12/25", "111", "filip@pwsz.com");
         //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
         List<Dish> dishes = databaseConnector.getDishes();
         RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
 
-        List<User> users = databaseConnector.getUsers();
         databaseConnector.updateUser(user2);
+        List<User> users = databaseConnector.getUsers();
+
         //boolean success = databaseConnector.addUser(user1);
 
         CartItem cartItem =new CartItem(5,23);
