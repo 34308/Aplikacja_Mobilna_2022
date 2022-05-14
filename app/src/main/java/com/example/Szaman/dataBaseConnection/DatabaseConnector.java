@@ -50,7 +50,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public static final String COLUMN_RESTAURANT_ID = "RestaurantId";
     public static final String COLUMN_DESCRIPTION = "Description";
     public static final String COLUMN_IMAGE_URL = "ImageUrl";
-
     private static final String COLUMN_CART_ITEM_ID = "CartItemId";
     public static final String COLUMN_COUNT_OF_DISH = "CountOfDish";
 
@@ -137,6 +136,53 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
     }
 
+    public boolean updateUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String queryString = "UPDATE Users\n" +
+                "   SET \n" +
+                "       Login = ?,\n" +
+                "       Password = ?,\n" +
+                "       Name = ?,\n" +
+                "       Surname = ?,\n" +
+                "       Address = ?,\n" +
+                "       DebitCardNumber = ?,\n" +
+                "       ExpireDate = ?,\n" +
+                "       Cvv = ?,\n" +
+                "       Email = ?\n" +
+                "   WHERE " + COLUMN_USER_ID + " = ?;";
+        String[] whereArgs = new String[]{String.valueOf(user.getUserId())};
+        String[] selectionArgs = new String[]{
+                String.valueOf(user.getLogin()),
+                String.valueOf(user.getPassword()),
+                String.valueOf(user.getName()),
+                String.valueOf(user.getSurname()),
+                String.valueOf(user.getAddress()),
+                String.valueOf(user.getDebitCardNumber()),
+                String.valueOf(user.getExpireDate()),
+                String.valueOf(user.getCvv()),
+                String.valueOf(user.getEmail()),
+                String.valueOf(user.getUserId())
+        };
+        Cursor cursor = db.rawQuery(queryString, selectionArgs);
+        if (cursor.getCount() > 0) {
+            vDatabase.beginTransaction();
+            long result = -1;
+            try {
+                result = db.update(USER_TABLE, cv, COLUMN_USER_ID + " = ?", whereArgs);
+            } finally {
+                db.endTransaction();
+                if (result == -1) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } else {
+            return false;
+        }
+    }
+
     public boolean deleteUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + USER_TABLE + " WHERE " + COLUMN_USER_ID + " = " + user.getUserId();
@@ -173,7 +219,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             e.printStackTrace();
         }
     }
-
     public List<Restaurant> getRestaurants(){
         List<Restaurant> restaurants = new ArrayList<>();
         String queryString = "SELECT * FROM " + RESTAURANT_TABLE;
@@ -196,7 +241,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
         return restaurants;
     }
-
     public List<User> getUsers(){
         List<User> users = new ArrayList<>();
         String queryString = "SELECT * FROM " + USER_TABLE;
@@ -311,19 +355,17 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         vDatabase.beginTransaction();
-        try {
-            cv.put(COLUMN_USER_ID, cartItem.getUserId());
-            cv.put(COLUMN_DISH_ID, cartItem.getDishId());
-            cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
+        long insert = 0;
+        cv.put(COLUMN_USER_ID, cartItem.getUserId());
+        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
 
-            long insert = db.insert(SHOPPING_CART_TABLE, null, cv);
-            if (insert == -1){
-                return false;
-            } else {
-                return true;
-            }
-        } finally {
-            db.endTransaction();
+        insert = db.insert(SHOPPING_CART_TABLE, null, cv);
+
+        if (insert == -1){
+            return false;
+        } else {
+            return true;
         }
     }
     public List<CartItem> getCartItems(int usId){
@@ -380,7 +422,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
             vDatabase.beginTransaction();
             long result = -1;
             try {
-            result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
+                result = db.update(SHOPPING_CART_TABLE, cv, COLUMN_CART_ITEM_ID + " = ?", whereArgs);
             } finally {
                 db.endTransaction();
                 if (result == -1) {
