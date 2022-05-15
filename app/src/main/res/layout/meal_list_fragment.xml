@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.mealList.meal_list_fragment">
+    tools:context=".ui.restaurants.RestaurantsFragment">
+
+    <EditText
+        android:id="@+id/mealsSearchBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+
+        android:hint="@string/MealHint"
+        android:inputType="textPersonName"
+
+        app:layout_constraintEnd_toStartOf="@+id/mealsSearchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/mealsSearchButton"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_search"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mealListRecycleViewer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mealsSearchBar" />
+</androidx.constraintlayout.widget.ConstraintLayout>

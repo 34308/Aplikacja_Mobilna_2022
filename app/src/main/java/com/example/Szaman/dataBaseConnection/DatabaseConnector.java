@@ -60,7 +60,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     private static DatabaseConnector sInstance;
 
     public DatabaseConnector(@Nullable Context context) {
-
         super(context, DB_NAME, null, 1);
         this.vContext = context;
         // Copy the DB if need be when instantiating the DataBaseHelper
@@ -238,6 +237,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 cursor.close();
             }
         }
+        db.close();
         return restaurants;
     }
 
@@ -272,7 +272,33 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
         return users;
     }
+    public User getUser(String l ,String p){
+        User user = null;
+        String queryString = "SELECT * FROM " + USER_TABLE + " WHERE Login = '" + l + "';";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+        if (cursor.moveToFirst()){
+            do {
+                int userId = cursor.getInt(0);
+                String login = cursor.getString(1);
+                String password = cursor.getString(2);
+                String name = cursor.getString(3);
+                String surname = cursor.getString(4);
+                String address = cursor.getString(5);
+                String debitCardNumber = cursor.getString(6);
+                String expireDate = cursor.getString(7);
+                String cvv = cursor.getString(8);
+                String email = cursor.getString(9);
+                user = new User(userId, login, password,
+                        name, surname, address, debitCardNumber,
+                        expireDate, cvv, email);
+            } while (cursor.moveToNext());
+        } else
+        {
 
+        }
+        return user;
+    }
     public List<Dish> getDishes(){
         List<Dish> dishes = new ArrayList<>();
         String queryString = "SELECT * FROM " + DISH_TABLE;
@@ -323,51 +349,6 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         }
         return cartItems;
     }
-    public User getUser(String l ,String p){
-        User user = null;
-        String queryString = "SELECT * FROM " + USER_TABLE + " WHERE Login = '" + l + "';";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(queryString, null);
-        if (cursor.moveToFirst()){
-            do {
-                int userId = cursor.getInt(0);
-                String login = cursor.getString(1);
-                String password = cursor.getString(2);
-                String name = cursor.getString(3);
-                String surname = cursor.getString(4);
-                String address = cursor.getString(5);
-                String debitCardNumber = cursor.getString(6);
-                String expireDate = cursor.getString(7);
-                String cvv = cursor.getString(8);
-                String email = cursor.getString(9);
-                user = new User(userId, login, password,
-                        name, surname, address, debitCardNumber,
-                        expireDate, cvv, email);
-            } while (cursor.moveToNext());
-        } else
-        {
-
-        }
-        return user;
-    }
-    // dodawanie produktu do koszyka
-    public boolean addCartItem(CartItem cartItem){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        vDatabase.beginTransaction();
-        long insert = 0;
-        cv.put(COLUMN_USER_ID, cartItem.getUserId());
-        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
-        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
-
-        insert = db.insert(SHOPPING_CART_TABLE, null, cv);
-
-        if (insert == -1){
-            return false;
-        } else {
-            return true;
-        }
-    }
     public List<CartItem> getCartItems(int usId){
         List<CartItem> cartItems = new ArrayList<>();
         String queryString = "SELECT * FROM " + SHOPPING_CART_TABLE+" WHERE UserId="+usId;
@@ -389,6 +370,25 @@ public class DatabaseConnector extends SQLiteOpenHelper {
 
         return cartItems;
     }
+    // dodawanie produktu do koszyka
+    public boolean addCartItem(CartItem cartItem){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        vDatabase.beginTransaction();
+        long insert = 0;
+        cv.put(COLUMN_USER_ID, cartItem.getUserId());
+        cv.put(COLUMN_DISH_ID, cartItem.getDishId());
+        cv.put(COLUMN_COUNT_OF_DISH, cartItem.getCountOfDish());
+
+        insert = db.insert(SHOPPING_CART_TABLE, null, cv);
+
+        if (insert == -1){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     //usuwanie produktów z koszyka za pomocą obiektu
     public boolean deleteCartItem(CartItem cartItem){
         SQLiteDatabase db = this.getWritableDatabase();
