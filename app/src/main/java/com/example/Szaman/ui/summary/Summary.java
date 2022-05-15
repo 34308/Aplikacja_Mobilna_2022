@@ -3,7 +3,9 @@ package com.example.Szaman.ui.summary;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -27,13 +29,17 @@ import android.widget.TextView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
+import com.example.Szaman.Receipt_Writer.PDFWriter;
+import com.example.Szaman.Receipt_Writer.QRCodeWriter;
 import com.example.Szaman.adapters.CasketItemAdapter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.SummaryFragmentBinding;
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.Dish;
+import com.example.Szaman.model.User;
 import com.example.Szaman.service.CartItemService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +50,7 @@ public class Summary extends Fragment {
     private SummaryViewModel mViewModel;
     private int ID;
     private DatabaseConnector databaseConnector ;
-
+    User curremtUser;
     List<CartItem> cartItems;
     private OnClickInterface onClickInterface;
     private ArrayList<CartItem> dataBank;
@@ -63,10 +69,16 @@ public class Summary extends Fragment {
         View root = binding.getRoot();
         ImageButton rBuyButton= root.findViewById(R.id.rBuyButton);
         rBuyButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View v) {
-                //wstawic co po kupieniu
-                //czysczenie koszyka
+                PDFWriter pdf=new PDFWriter(getContext());
+                try {
+                    pdf.generatePDF(curremtUser,dataBank);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //czysczenie koszka
                 for (CartItem item:cartItems) {
                     databaseConnector.deleteCartItem(item);
                 }
@@ -76,25 +88,17 @@ public class Summary extends Fragment {
         });
         CheckBox checkBox= root.findViewById(R.id.rItemcheckBox);
         ElegantNumberButton elegantNumberButton= root.findViewById(R.id.rItemDishQuantityButton);
-        onClickInterface = new OnClickInterface() {
-            @Override
-            public void setClick(int pos) {
+        onClickInterface = pos -> priceRecount(root);
+        checkBox.setOnClickListener(v -> {
+            if(checkBox.isChecked()){
+
+                delivery=true;
                 priceRecount(root);
             }
-        };
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(checkBox.isChecked()){
+            else{
+                delivery=false;
 
-                    delivery=true;
-                    priceRecount(root);
-                }
-                else{
-                    delivery=false;
-
-                    priceRecount(root);
-                }
+                priceRecount(root);
             }
         });
         cartItems=getItems();
@@ -111,12 +115,9 @@ public class Summary extends Fragment {
         mViewModel = new ViewModelProvider(this).get(SummaryViewModel.class);
 
         Button button= (Button) getView().findViewById(R.id.summaryGoBackButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController= Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_nav_summary_to_nav_restaurants);
-            }
+        button.setOnClickListener(v -> {
+            NavController navController= Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            navController.navigate(R.id.action_nav_summary_to_nav_restaurants);
         });
 
     }
@@ -124,6 +125,7 @@ public class Summary extends Fragment {
 
     public List<CartItem> getItems(){
         String[] passes= loadPasses().split("-");
+        curremtUser=databaseConnector.getUser(passes[0],passes[1]);
         List<CartItem> cartItems= databaseConnector.getCartItems(databaseConnector.getUser(passes[0],passes[1]).getUserId());
         CartItemService.connectCartItemsWithDishes(cartItems,databaseConnector.getDishes());
 
@@ -165,9 +167,11 @@ public class Summary extends Fragment {
         adapter =  new CasketItemAdapter(cartItems,onClickInterface);
         recyclerView.setAdapter((CasketItemAdapter) adapter);
         adapter =(CasketItemAdapter) recyclerView.getAdapter();
+        assert adapter != null;
         dataBank= ((CasketItemAdapter) adapter).getData();
         priceRecount(root);
     }
+    @SuppressLint("SetTextI18n")
     public void priceRecount(View root){
         sum=0.0;
         TextView price = root.findViewById(R.id.rItemPrice);

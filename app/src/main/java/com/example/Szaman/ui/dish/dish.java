@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -22,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.Szaman.R;
+import com.example.Szaman.Receipt_Writer.PDFWriter;
+import com.example.Szaman.Receipt_Writer.QRCodeWriter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.DishFragmentBinding;
 import com.example.Szaman.model.CartItem;
@@ -30,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class dish extends Fragment {
     private DishFragmentBinding binding;
@@ -51,7 +55,7 @@ public class dish extends Fragment {
         gotobasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavController navController= Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+                NavController navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
                 navController.navigate(R.id.action_dish_to_nav_summary);
             }
         });
@@ -65,6 +69,9 @@ public class dish extends Fragment {
                 break;
             }
         }
+
+
+
         System.out.println("filename: "+ dishB);
         ImageView dishImage= root.findViewById(R.id.dishImageView);
         Picasso.get().load(dishB.get(4)).into(dishImage);
@@ -101,7 +108,7 @@ public class dish extends Fragment {
         // TODO: Use the ViewModel
     }
     public String loadPasses(){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
+        SharedPreferences sharedPreferences= requireActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
         String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
         return login;
     }

@@ -1,5 +1,7 @@
 package com.example.Szaman;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -10,6 +12,7 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.*;
@@ -18,6 +21,8 @@ import com.example.Szaman.service.*;
 
 import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +35,7 @@ import com.example.Szaman.databinding.ActivityMainBinding;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements DrawerMenuController {
+    private static final int STORAGE_PERMISSION_CODE = 101;
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
@@ -97,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
         List<CartItem> cartItems = databaseConnector.getCartItems();
         CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
         List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);
+        checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
 
     }
 
@@ -123,6 +130,18 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
         binding.appBarMain.toolbar.setTitle("");
     }
 **/
+
+  public void checkPermission(String permission, int requestCode)
+  {
+      if (ContextCompat.checkSelfPermission(MainActivity.this, permission) == PackageManager.PERMISSION_DENIED) {
+
+          // Requesting the permission
+          ActivityCompat.requestPermissions(MainActivity.this, new String[] { permission }, requestCode);
+      }
+      else {
+          Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
+      }
+  }
     @Override
     public void unlockMneu() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
