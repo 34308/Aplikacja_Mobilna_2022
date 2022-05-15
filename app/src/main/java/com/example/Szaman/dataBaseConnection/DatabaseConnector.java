@@ -141,7 +141,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         String queryString = "UPDATE Users\n" +
-                "   SET \n" +
+                "   SET" +
                 "       Login = ?,\n" +
                 "       Password = ?,\n" +
                 "       Name = ?,\n" +
@@ -150,8 +150,7 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 "       DebitCardNumber = ?,\n" +
                 "       ExpireDate = ?,\n" +
                 "       Cvv = ?,\n" +
-                "       Email = ?\n" +
-                "   WHERE " + COLUMN_USER_ID + " = ?;";
+                "       Email = ?\n";
         String[] whereArgs = new String[]{String.valueOf(user.getUserId())};
         String[] selectionArgs = new String[]{
                 String.valueOf(user.getLogin()),
@@ -160,10 +159,8 @@ public class DatabaseConnector extends SQLiteOpenHelper {
                 String.valueOf(user.getSurname()),
                 String.valueOf(user.getAddress()),
                 String.valueOf(user.getDebitCardNumber()),
-                String.valueOf(user.getExpireDate()),
                 String.valueOf(user.getCvv()),
-                String.valueOf(user.getEmail()),
-                String.valueOf(user.getUserId())
+                String.valueOf(user.getEmail())
         };
         Cursor cursor = db.rawQuery(queryString, selectionArgs);
         if (cursor.getCount() > 0) {
