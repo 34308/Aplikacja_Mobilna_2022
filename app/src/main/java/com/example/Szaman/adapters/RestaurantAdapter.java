@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
 import com.example.Szaman.model.Restaurant;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +54,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
         //wyswitlenie tekstu zapisanego w klasie
         Restaurant currentData= mRestaurant.get(position);
         holder.restaurantName.setText(currentData.getName());
+        Picasso.get().load(currentData.getImageUrl()).resize(350,100).centerCrop().into(holder.restaurantImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickInterface.setClick(position);
             }
         });
-
     }
     //funkcja podajaca konkretny item z listy recycler view
     public Restaurant getSpecificData(int position){
@@ -77,13 +78,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Re
     //klasa zawierajaca poszczegolne elementy interfejsu
     public static class RestaurantViewHolder extends RecyclerView.ViewHolder{
         public TextView restaurantName;
-
-        public ImageView RestaurantImage;
+        public ImageView restaurantImage;
         public RestaurantViewHolder(@NonNull View itemView) {
             super(itemView);
             restaurantName =itemView.findViewById(R.id.rItemRestaurantNameLabel);
-
-            RestaurantImage =itemView.findViewById(R.id.restaurantItemImage);
+            restaurantImage =itemView.findViewById(R.id.restaurantItemImage);
         }
 
     }

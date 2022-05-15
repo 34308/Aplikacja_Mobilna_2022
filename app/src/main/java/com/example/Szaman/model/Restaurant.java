@@ -5,11 +5,17 @@ import java.util.List;
 public class Restaurant {
     private int restaurantId;
     private String name;
+    private String imageUrl;
     private List<Dish> dishes;
 
-    public Restaurant(int restaurantId, String name) {
+    public Restaurant(int restaurantId, String name, String imageUrl) {
         this.restaurantId = restaurantId;
         this.name = name;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     @Override
