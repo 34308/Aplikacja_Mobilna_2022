@@ -1,5 +1,7 @@
 package com.example.Szaman.ui.login;
 
+import static com.example.Szaman.CurrentUserService.savePasses;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -94,7 +96,7 @@ public class LoginFragment extends Fragment {
         String passwordText= password.getText().toString();
 
         if(checkLogin(loginText,passwordText)) {
-            savePasses(loginText+"-"+passwordText);
+            savePasses(loginText+"-"+passwordText,getActivity());
             goToRestaurants();
         }
     }
@@ -113,12 +115,7 @@ public class LoginFragment extends Fragment {
         binding = null;
     }
 
-    public void savePasses(String data){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor= sharedPreferences.edit();
-        editor.putString("CurrentUser",data);
-        editor.apply();
-    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean checkLogin(String login,String password) {
         databaseConnector=new DatabaseConnector(getContext());

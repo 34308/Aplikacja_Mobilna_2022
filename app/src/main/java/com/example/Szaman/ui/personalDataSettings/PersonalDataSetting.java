@@ -1,8 +1,12 @@
 package com.example.Szaman.ui.personalDataSettings;
 
+import static com.example.Szaman.CurrentUserService.loadPasses;
+import static com.example.Szaman.CurrentUserService.savePasses;
+
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,22 +31,36 @@ import com.example.Szaman.databinding.SettingsFragmentBinding;
 import com.example.Szaman.model.User;
 
 public class PersonalDataSetting extends Fragment {
-
+    DatabaseConnector databaseConnector;
     private PersonalDataSettingViewModel mViewModel;
     private PersonalDataSettingFragmentBinding binding;
-
+    User currentUser;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         binding = PersonalDataSettingFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        EditText name= root.findViewById(R.id.personalNameWindow);
+        EditText surname= root.findViewById(R.id.personalSurnameWindow);
+        EditText login= root.findViewById(R.id.personalLoginWindow);
+        EditText email= root.findViewById(R.id. personalEmailWindow);
+        EditText password= root.findViewById(R.id.personalPasswordWindow);
+        EditText debitCard= root.findViewById(R.id.personalDebitCardNumberWindow);
+        EditText cvv= root.findViewById(R.id.personalDebitCardCVVWindow);
+        EditText exDebitCard= root.findViewById(R.id.personalDebitCardExpiresWindow);
+        EditText address= root.findViewById(R.id.personalAdressWindow);
         Button save= root.findViewById(R.id.personalDataSavingbutton);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                databaseConnector=new DatabaseConnector(getContext());
+                User upUser=new User(currentUser.getUserId(),login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),address.getText().toString(),debitCard.getText().toString(),exDebitCard.getText().toString(),cvv.getText().toString(),email.getText().toString());
+                databaseConnector.updateUser(upUser);
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
                 navController.navigate(R.id.action_personalData_to_nav_settings);
+                savePasses(upUser.getLogin()+"-"+upUser.getPassword(),getActivity());
             }
         });
         return root;
@@ -57,10 +75,10 @@ public class PersonalDataSetting extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setUser() {
-        DatabaseConnector databaseConnector=new DatabaseConnector(getContext());
-        String[] passes= loadPasses().split("-");
-        User user=databaseConnector.getUser(passes[0],passes[1]);
-        Log.w("USER",user.getEmail());
+        databaseConnector=new DatabaseConnector(getContext());
+        String[] passes= loadPasses(getActivity(),getContext()).split("-");
+        currentUser=databaseConnector.getUser(passes[0]);
+
         EditText name= getView().findViewById(R.id.personalNameWindow);
         EditText surname= getView().findViewById(R.id.personalSurnameWindow);
         EditText login= getView().findViewById(R.id.personalLoginWindow);
@@ -71,21 +89,16 @@ public class PersonalDataSetting extends Fragment {
         EditText exDebitCard= getView().findViewById(R.id.personalDebitCardExpiresWindow);
         EditText address= getView().findViewById(R.id.personalAdressWindow);
 
-        name.setText(user.getName());
-        surname.setText(user.getSurname());
-        login.setText(user.getLogin());
-        email.setText(user.getEmail());
-        password.setText(user.getPassword());
-        debitCard.setText(user.getDebitCardNumber());
-        cvv.setText(user.getCvv());
-        exDebitCard.setText(user.getExpireDate());
-        address.setText(user.getAddress());
+        name.setText(currentUser.getName());
+        surname.setText(currentUser.getSurname());
+        login.setText(currentUser.getLogin());
+        email.setText(currentUser.getEmail());
+        password.setText(currentUser.getPassword());
+        debitCard.setText(currentUser.getDebitCardNumber());
+        cvv.setText(currentUser.getCvv());
+        exDebitCard.setText(currentUser.getExpireDate());
+        address.setText(currentUser.getAddress());
 
-    }
-    public String loadPasses(){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
-        String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
-        return login;
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

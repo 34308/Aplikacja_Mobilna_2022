@@ -95,7 +95,7 @@ public class dish extends Fragment {
             int q=Integer.parseInt(String.valueOf(editText.getText()));
             if(q!=0){
                 String[] pases= loadPasses().split("-");
-                CartItem cartItem=new CartItem(databaseConnector.getUser(pases[0],pases[1]).getUserId(),dish.getDishId(),q);
+                CartItem cartItem=new CartItem(databaseConnector.getUser(pases[0]).getUserId(),dish.getDishId(),q);
                 databaseConnector.upsertCartItem(cartItem);
             }
         }

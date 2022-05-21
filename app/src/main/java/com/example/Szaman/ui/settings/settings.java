@@ -1,5 +1,7 @@
 package com.example.Szaman.ui.settings;
 
+import static com.example.Szaman.CurrentUserService.loadPasses;
+
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -66,17 +68,13 @@ public class settings extends Fragment {
     }
 
 
-    public String loadPasses(){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
-        String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
-        return login;
-    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void deleteAccount(){
         logOut();
         DatabaseConnector databaseConnector=new DatabaseConnector(getContext());
-        String[] passes=loadPasses().split("-");
-        User currentUser= databaseConnector.getUser(passes[0],passes[1]);
+        String[] passes=loadPasses(getActivity(),getContext()).split("-");
+        User currentUser= databaseConnector.getUser(passes[0]);
         databaseConnector.deleteUser(currentUser);
 
     }
@@ -104,7 +102,7 @@ public class settings extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                String passes=loadPasses().split("-")[1];
+                String passes=loadPasses(getActivity(),getContext()).split("-")[1];
                 Log.w("USER",passes);
                 if(password.getText().toString().equals(passes)){
                     popupWindow.dismiss();

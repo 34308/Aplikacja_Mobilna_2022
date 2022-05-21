@@ -1,5 +1,7 @@
 package com.example.Szaman.ui.summary;
 
+import static com.example.Szaman.CurrentUserService.loadPasses;
+
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -124,19 +126,15 @@ public class Summary extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
 
     public List<CartItem> getItems(){
-        String[] passes= loadPasses().split("-");
-        curremtUser=databaseConnector.getUser(passes[0],passes[1]);
-        List<CartItem> cartItems= databaseConnector.getCartItems(databaseConnector.getUser(passes[0],passes[1]).getUserId());
+        String[] passes= loadPasses(getActivity(),getContext()).split("-");
+        curremtUser=databaseConnector.getUser(passes[0]);
+        List<CartItem> cartItems= databaseConnector.getCartItems(curremtUser.getUserId());
         CartItemService.connectCartItemsWithDishes(cartItems,databaseConnector.getDishes());
 
         return cartItems;
     }
 
-    public String loadPasses(){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences",getContext().MODE_PRIVATE);
-        String login=sharedPreferences.getString("CurrentUser", String.valueOf(R.string.default_value));
-        return login;
-    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
 
