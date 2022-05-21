@@ -73,7 +73,7 @@ public class PersonalDataSetting extends Fragment {
                 if(!addressValidator(address.getText().toString())){Snackbar.make(root,R.string.WrongAdress, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
                 databaseConnector=new DatabaseConnector(getContext());
                 User upUser=new User(currentUser.getUserId(),login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),address.getText().toString(),debitCard.getText().toString(),exDebitCard.getText().toString(),cvv.getText().toString(),email.getText().toString());
-                databaseConnector.updateUser(upUser);
+                Log.w("updateUser", ""+databaseConnector.updateUser(upUser));
                 NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
                 navController.navigate(R.id.action_personalData_to_nav_settings);
                 savePasses(upUser.getLogin()+"-"+upUser.getPassword(),getActivity());

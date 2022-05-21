@@ -235,46 +235,31 @@ public class DatabaseConnector extends SQLiteOpenHelper {
     public boolean updateUser(User user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        String queryString = "UPDATE Users\n" +
-                "   SET" +
-                "       Login = ?,\n" +
-                "       Password = ?,\n" +
-                "       Name = ?,\n" +
-                "       Surname = ?,\n" +
-                "       Address = ?,\n" +
-                "       DebitCardNumber = ?,\n" +
-                "       ExpireDate = ?,\n" +
-                "       Cvv = ?,\n" +
-                "       Email = ?\n";
+        Log.w("USER::",user.toString());
         String[] whereArgs = new String[]{String.valueOf(user.getUserId())};
-        String[] selectionArgs = new String[]{
-                String.valueOf(user.getLogin()),
-                String.valueOf(user.getPassword()),
-                String.valueOf(user.getName()),
-                String.valueOf(user.getSurname()),
-                String.valueOf(user.getAddress()),
-                String.valueOf(user.getDebitCardNumber()),
-                String.valueOf(user.getExpireDate()),
-                String.valueOf(user.getCvv()),
-                String.valueOf(user.getEmail())
-        };
-        Cursor cursor = db.rawQuery(queryString, selectionArgs);
-        if (cursor.getCount() > 0) {
+        cv.put(COLUMN_LOGIN,user.getLogin());
+        cv.put(COLUMN_PASSWORD,user.getPassword());
+        cv.put(COLUMN_NAME,user.getName());
+        cv.put(COLUMN_SURNAME,user.getSurname());
+        cv.put(COLUMN_EMAIL,user.getEmail());
+        cv.put(COLUMN_ADDRESS,user.getAddress());
+        cv.put(COLUMN_CVV,user.getCvv());
+        cv.put(COLUMN_EXPIRE_DATE,user.getExpireDate());
+        cv.put(COLUMN_DEBIT_CARD_NUMBER,user.getDebitCardNumber());
+
             vDatabase.beginTransaction();
             long result = -1;
-
             result = db.update(USER_TABLE, cv, COLUMN_USER_ID + " = ?", whereArgs);
-
+            db.setTransactionSuccessful();
             db.endTransaction();
-            if (result == -1) {
-                    return false;
-            } else {
-                    return true;
-            }
-            }
-            return false;
 
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
     }
+
 
     public List<Dish> getDishes(){
         List<Dish> dishes = new ArrayList<>();
