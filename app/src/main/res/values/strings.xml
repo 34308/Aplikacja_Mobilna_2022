@@ -1,4 +1,10 @@
 <resources>
+    <string name="WrongEmail">Incorrect Email</string>
+    <string name="WrongPassword">Wrong Password: password needs to have at least one big letter, one number, one special sign</string>
+    <string name="WrongPostalCode">Wrong Postal Code: correct format is xx-xxx </string>
+    <string name="WrongCVV">Wrong CVV: correct format is xxx </string>
+    <string name="WrongDebitCard">"Incorrect debit card "</string>
+
     <string name="app_name">Szama(n)</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -63,5 +69,11 @@
     <string name="goBck">Go back to shopping</string>
     <string name="default_value">0000</string>
     <string name="delivery">Delivery</string>
+    <string name="WrongExpireCard">Wrong Expire number correct format : xx/xx</string>
+    <string name="PasswordDontMatch">Passwords are not identical</string>
+    <string name="WrongLogin">This Login already exist</string>
+    <string name="EmptyWindow">All fields must be filled</string>
+    <string name="WrongAdress">Wrong Adres : correct format is town-street, number,postcode</string>
+
     default_value
 </resources>

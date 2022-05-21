@@ -2,6 +2,13 @@ package com.example.Szaman.ui.personalDataSettings;
 
 import static com.example.Szaman.CurrentUserService.loadPasses;
 import static com.example.Szaman.CurrentUserService.savePasses;
+import static com.example.Szaman.Validators.Validators.addressValidator;
+import static com.example.Szaman.Validators.Validators.cvvValidator;
+import static com.example.Szaman.Validators.Validators.debitCardValidator;
+import static com.example.Szaman.Validators.Validators.emailValidator;
+import static com.example.Szaman.Validators.Validators.expireDateValidator;
+import static com.example.Szaman.Validators.Validators.passwordValidator;
+import static com.example.Szaman.Validators.Validators.postCodeValidator;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,6 +36,8 @@ import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.PersonalDataSettingFragmentBinding;
 import com.example.Szaman.databinding.SettingsFragmentBinding;
 import com.example.Szaman.model.User;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class PersonalDataSetting extends Fragment {
     DatabaseConnector databaseConnector;
@@ -55,6 +64,13 @@ public class PersonalDataSetting extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!emailValidator(email.getText().toString())) {
+                    Snackbar.make(root,R.string.WrongEmail, BaseTransientBottomBar.LENGTH_SHORT).show() ;return;}
+                if (!passwordValidator(password.getText().toString())){ Snackbar.make(root,R.string.WrongPassword, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+                if (!debitCardValidator(debitCard.getText().toString())){ Snackbar.make(root,R.string.WrongDebitCard, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+                if(! expireDateValidator(exDebitCard.getText().toString())){ Snackbar.make(root,R.string.WrongExpireCard, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+                if(! cvvValidator(cvv.getText().toString())){ Snackbar.make(root,R.string.WrongCVV, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+                if(!addressValidator(address.getText().toString())){Snackbar.make(root,R.string.WrongAdress, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
                 databaseConnector=new DatabaseConnector(getContext());
                 User upUser=new User(currentUser.getUserId(),login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),address.getText().toString(),debitCard.getText().toString(),exDebitCard.getText().toString(),cvv.getText().toString(),email.getText().toString());
                 databaseConnector.updateUser(upUser);
@@ -88,6 +104,7 @@ public class PersonalDataSetting extends Fragment {
         EditText cvv= getView().findViewById(R.id.personalDebitCardCVVWindow);
         EditText exDebitCard= getView().findViewById(R.id.personalDebitCardExpiresWindow);
         EditText address= getView().findViewById(R.id.personalAdressWindow);
+
 
         name.setText(currentUser.getName());
         surname.setText(currentUser.getSurname());

@@ -1,5 +1,12 @@
 package com.example.Szaman.ui.register;
 
+import static com.example.Szaman.Validators.Validators.cvvValidator;
+import static com.example.Szaman.Validators.Validators.debitCardValidator;
+import static com.example.Szaman.Validators.Validators.emailValidator;
+import static com.example.Szaman.Validators.Validators.expireDateValidator;
+import static com.example.Szaman.Validators.Validators.passwordValidator;
+import static com.example.Szaman.Validators.Validators.postCodeValidator;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +27,8 @@ import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentRegisterBinding;
 import com.example.Szaman.model.User;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -49,7 +58,7 @@ public class RegisterFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addNewUser(View root) {
-        databaseConnector= new DatabaseConnector(getContext());
+
         EditText email= root.getRootView().findViewById(R.id.emailWindow);
         EditText login= root.getRootView().findViewById(R.id.personalLoginWindow);
         EditText name= root.getRootView().findViewById(R.id.personalNameWindow);
@@ -62,8 +71,16 @@ public class RegisterFragment extends Fragment {
         EditText city= root.getRootView().findViewById(R.id.personalCityWindow);
         EditText houseNumber= root.getRootView().findViewById(R.id.personalHauseNumberWindow);
         EditText postalCode= root.getRootView().findViewById(R.id.personalPostCodeWindow);
+        EditText street= root.getRootView().findViewById(R.id.personalStreetWindow);
+        String adress=city.getText().toString()+","+street.getText().toString()+","+houseNumber.getText().toString()+","+postalCode.getText().toString();
 
-        String adress=city.getText().toString()+","+houseNumber.getText().toString()+","+postalCode.getText().toString();
+        if (!emailValidator(email.getText().toString())) {Snackbar.make(root,R.string.WrongEmail, BaseTransientBottomBar.LENGTH_SHORT).show() ;return;}
+        if (!passwordValidator(password.getText().toString())){ Snackbar.make(root,R.string.WrongPassword, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+        if (!postCodeValidator(postalCode.getText().toString())){ Snackbar.make(root,R.string.WrongPostalCode, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+        if (!debitCardValidator(DCNumber.getText().toString())){ Snackbar.make(root,R.string.WrongDebitCard, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+        if(! expireDateValidator(DCExpires.getText().toString())){ Snackbar.make(root,R.string.WrongExpireCard, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+        if(! cvvValidator(DCCVV.getText().toString())){ Snackbar.make(root,R.string.WrongCVV, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
+        if(!password.getText().toString().equals(passwordAgain.getText().toString())){  Snackbar.make(root,R.string.PasswordDontMatch, BaseTransientBottomBar.LENGTH_SHORT).show();return;}
 
         if(!login.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !name.getText().toString().isEmpty() &&
                 !surname.getText().toString().isEmpty() && !passwordAgain.getText().toString().isEmpty() && !DCCVV.getText().toString().isEmpty()
@@ -72,10 +89,17 @@ public class RegisterFragment extends Fragment {
             if(password.getText().toString().equals(passwordAgain.getText().toString())){
                 User user=new User(login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),adress,DCNumber.getText().toString(),DCExpires.getText().toString(),DCCVV.getText().toString(),email.getText().toString());
                 if(checkLogin(user)){
+                    databaseConnector= new DatabaseConnector(getContext());
                     databaseConnector.addUser(user);
                     goTologin();
                 }
+                else{
+                    Snackbar.make(root,R.string.WrongLogin, BaseTransientBottomBar.LENGTH_SHORT).show() ;
+
+                }
             }
+        }else{
+            Snackbar.make(root,R.string.EmptyWindow, BaseTransientBottomBar.LENGTH_SHORT).show() ;
         }
 
     }

@@ -2,6 +2,8 @@ package com.example.Szaman.ui.login;
 
 import static com.example.Szaman.CurrentUserService.savePasses;
 
+import static com.example.Szaman.Validators.Validators.postCodeValidator;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -90,10 +92,16 @@ public class LoginFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Login(View root){
+       Log.w("poprawny czy nie",""+ postCodeValidator("33-150"));
+
+
+
         TextView login=root.getRootView().findViewById(R.id.loginWindow);
         TextView password=root.getRootView().findViewById(R.id.loginPasswordWindow);
         String loginText=  login.getText().toString();
         String passwordText= password.getText().toString();
+
+
 
         if(checkLogin(loginText,passwordText)) {
             savePasses(loginText+"-"+passwordText,getActivity());
