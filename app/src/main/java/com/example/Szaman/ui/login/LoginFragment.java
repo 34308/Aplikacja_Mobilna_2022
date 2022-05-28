@@ -26,6 +26,8 @@ import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentLoginBinding;
 import com.example.Szaman.model.User;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
@@ -79,13 +81,8 @@ public class LoginFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-                else
-                {
-                }
-
+                else Snackbar.make(root,R.string.wrongEmailOrLogin, BaseTransientBottomBar.LENGTH_LONG).show();
             }
-
-
             restoreWindow.setVisibility(View.GONE);
             //sendEmail();
         });
@@ -102,24 +99,20 @@ public class LoginFragment extends Fragment {
     private void restorePassword(View root) {
         View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
         restoreWindow.setVisibility(View.VISIBLE);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Login(View root){
        Log.w("poprawny czy nie",""+ postCodeValidator("33-150"));
-
-
-
         TextView login=root.getRootView().findViewById(R.id.loginWindow);
         TextView password=root.getRootView().findViewById(R.id.loginPasswordWindow);
         String loginText=  login.getText().toString();
         String passwordText= password.getText().toString();
 
-
-
         if(checkLogin(loginText,passwordText)) {
             savePasses(loginText+"-"+passwordText,getActivity());
+            login.setText("");
+            password.setText("");
             goToRestaurants();
         }
     }

@@ -17,9 +17,6 @@
             android:id="@+id/nav_summary"
             android:icon="@drawable/ic_basket"
             android:title="@string/basket" />
-        <item
-            android:id="@+id/nav_login"
-            android:icon="@drawable/ic_login"
-            android:title="@string/menu_logout" />
+
     </group>
 </menu>
