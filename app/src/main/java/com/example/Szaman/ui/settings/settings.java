@@ -3,9 +3,14 @@ package com.example.Szaman.ui.settings;
 import static com.example.Szaman.CurrentUserService.loadPasses;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Activity;
+import android.app.AppComponentFactory;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -25,12 +30,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.ToggleButton;
 
+import com.example.Szaman.MainActivity;
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.SettingsFragmentBinding;
 import com.example.Szaman.databinding.SummaryFragmentBinding;
 import com.example.Szaman.model.User;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 public class settings extends Fragment {
 
@@ -45,25 +54,30 @@ public class settings extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = SettingsFragmentBinding.inflate(inflater, container, false);
+
         View root = binding.getRoot();
+        ToggleButton changeTheme=root.findViewById(R.id.settingsDayNightButton);
+
+        changeTheme.setChecked(!loadStyle().equals("1") && !loadStyle().equals(String.valueOf(R.string.style_value)));
 
         Button delete=root.findViewById(R.id.settingsDeleteAcount);
         Button logOut=root.findViewById(R.id.settingsLogOutButton);
 
+        changeTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(changeTheme.isChecked()){
+                    saveStyle("0",getActivity());
+                }
+                else{
+                    saveStyle("1",getActivity());
+                }
+                Snackbar.make(root,R.string.RestartStyle, BaseTransientBottomBar.LENGTH_SHORT).show() ;
+            }
+        });
         View popupView = inflater.inflate(R.layout.popup_delete_layout, null);
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logOut();
-            }
-        });
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                areYouSure( getView(),popupView);
-
-            }
-        });
+        logOut.setOnClickListener(v -> logOut());
+        delete.setOnClickListener(v -> areYouSure( getView(),popupView));
         return root;
     }
 
@@ -111,6 +125,17 @@ public class settings extends Fragment {
             }
         });
 
+    }
+    public static void saveStyle(String data, Activity activity){
+        SharedPreferences sharedPreferences=activity.getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString("CurrentStyle",data);
+        editor.apply();
+    }
+    public String loadStyle(){
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
+        String style=sharedPreferences.getString("CurrentStyle", String.valueOf(R.string.style_value));
+        return style;
     }
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

@@ -21,6 +21,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sendResetingEmail">Send Email To Reset Password</string>
 
+    <string name="RestartStyle">To change Theme you need to restart application</string>
     <string name="housenumber_text">House number</string>
     <string name="Street_text">Street</string>
     <string name="City_text">City</string>
@@ -68,6 +69,7 @@
     <string name="printReceipt">Print Receipt</string>
     <string name="goBck">Go back to shopping</string>
     <string name="default_value">0000</string>
+    <string name="style_value">0001</string>
     <string name="delivery">Delivery</string>
     <string name="WrongExpireCard">Wrong Expire number correct format : xx/xx</string>
     <string name="PasswordDontMatch">Passwords are not identical</string>

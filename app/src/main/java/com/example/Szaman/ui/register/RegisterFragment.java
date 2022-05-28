@@ -55,7 +55,6 @@ public class RegisterFragment extends Fragment {
         });
         return root;
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void addNewUser(View root) {
 
@@ -101,14 +100,11 @@ public class RegisterFragment extends Fragment {
         }else{
             Snackbar.make(root,R.string.EmptyWindow, BaseTransientBottomBar.LENGTH_SHORT).show() ;
         }
-
     }
-
     private void goTologin() {
         NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
         navController.navigate(R.id.action_nav_register_to_nav_login);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean checkLogin(User user) {
         String login= user.getLogin();

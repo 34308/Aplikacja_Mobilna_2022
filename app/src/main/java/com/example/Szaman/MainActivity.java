@@ -1,26 +1,23 @@
 package com.example.Szaman;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.example.Szaman.model.Dish;
-import com.example.Szaman.model.*;
-import com.example.Szaman.dataBaseConnection.DatabaseConnector;
-import com.example.Szaman.service.*;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
@@ -33,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.Szaman.databinding.ActivityMainBinding;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements DrawerMenuController {
     private static final int STORAGE_PERMISSION_CODE = 101;
@@ -41,28 +39,19 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
     private ActivityMainBinding binding;
     DrawerLayout drawer;
     @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(loadStyle().equals("1")||loadStyle().equals( String.valueOf(R.string.style_value))){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-/**
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-
-        EditText searchBar=new EditText(getApplicationContext());
-        ImageButton searchButton=new ImageButton(getApplicationContext());
-        searchBar.setWidth((int) (width/1.5));
-        ((ImageButton) searchButton).setImageResource(R.drawable.ic_search);
-
-        binding.appBarMain.toolbar.addView(searchBar);
-        binding.appBarMain.toolbar.addView(searchButton);
- **/
         setSupportActionBar(binding.appBarMain.toolbar);
-
         drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -76,36 +65,9 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
         NavigationUI.setupWithNavController(navigationView, navController);
 
         //DataBase Connection Test
-
-        DatabaseConnector databaseConnector = new DatabaseConnector(MainActivity.this);
-
-        User user = new User("login123", "hasło123", "Filip",
-                 "Broniek", "Różana 20", "1234567890",
-                "12/25", "111", "filip@pwsz.com");
-        User user1 = new User(1,"login123", "hasło123", "Filip",
-                "Broniek", "Różana 20", "1234567890",
-                "12/25", "111", "filip@pwsz.com");
-        //listy pobranych obiektów z bazy danych, gotowe do obsługi w porgramie
-        List<Restaurant> restaurants = databaseConnector.getRestaurants();
-        List<Dish> dishes = databaseConnector.getDishes();
-        RestaurantDishConnector.fillRestaurantsWithDishes(restaurants,dishes);
-
-        List<User> users = databaseConnector.getUsers();
-        //boolean success = databaseConnector.addUser(user1);
-
-        CartItem cartItem =new CartItem(2,3);
-        CartItem cartItem2 =new CartItem(11,1,3);
-        CartItem cartItem3 =new CartItem(18,2,3,10);
-        //boolean addItemSuccess = databaseConnector.addCartItem(cartItem);
-        //boolean updateItemSuccess = databaseConnector.updateCartItem(cartItem3);
-        //boolean delItemSuccess = databaseConnector.deleteCartItem(cartItem3);
-        boolean delItemSuccess = databaseConnector.upsertCartItem(cartItem3);
-        List<CartItem> cartItems = databaseConnector.getCartItems();
-        CartItemService.connectCartItemsWithDishesAndUsers(cartItems, dishes, users);
-        List<UserCart> userCarts = UserCartService.makeUserCarts(users, cartItems);
         checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, STORAGE_PERMISSION_CODE);
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -126,10 +88,7 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
         navController.navigate(R.id.nav_register);
     }
 
-  /**  public void setToolbarTitle(){
-        binding.appBarMain.toolbar.setTitle("");
-    }
-**/
+
 
   public void checkPermission(String permission, int requestCode)
   {
@@ -142,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
           Toast.makeText(MainActivity.this, "Permission already granted", Toast.LENGTH_SHORT).show();
       }
   }
+
     @Override
     public void unlockMneu() {
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
@@ -161,5 +121,15 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
     public void showMneu() {
         binding.appBarMain.toolbar.setVisibility(View.VISIBLE);
     }
-
+    public static void saveStyle(String data, Activity activity){
+        SharedPreferences sharedPreferences=activity.getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences.edit();
+        editor.putString("CurrentStyle",data);
+        editor.apply();
+    }
+    public String loadStyle(){
+        SharedPreferences sharedPreferences=getSharedPreferences("shared_preferences", Context.MODE_PRIVATE);
+        String style=sharedPreferences.getString("CurrentStyle", String.valueOf(R.string.style_value));
+        return style;
+    }
 }

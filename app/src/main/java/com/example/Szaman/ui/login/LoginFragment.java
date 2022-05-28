@@ -29,6 +29,7 @@ import com.example.Szaman.model.User;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 public class LoginFragment extends Fragment {
@@ -42,8 +43,7 @@ public class LoginFragment extends Fragment {
         //mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        ((MainActivity) getActivity()).lockMneu();
-        ((MainActivity) getActivity()).hideMneu();
+
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -90,6 +90,13 @@ public class LoginFragment extends Fragment {
             //sendEmail();
         });
         return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) requireActivity()).lockMneu();
+        ((MainActivity) requireActivity()).hideMneu();
     }
 
     private void restorePassword(View root) {
