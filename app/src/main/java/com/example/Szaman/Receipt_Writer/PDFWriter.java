@@ -3,13 +3,12 @@ package com.example.Szaman.Receipt_Writer;
 import static com.itextpdf.kernel.geom.PageSize.A4;
 
 import android.content.Context;
-
 import android.graphics.Bitmap;
-
 import android.os.Build;
 import android.os.Environment;
 
 import androidx.annotation.RequiresApi;
+
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.User;
 import com.itextpdf.io.image.ImageData;
@@ -31,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
+
 
 public class PDFWriter {
     int pageHeight = 1120;

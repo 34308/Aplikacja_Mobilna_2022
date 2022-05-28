@@ -2,24 +2,9 @@ package com.example.Szaman.ui.summary;
 
 import static com.example.Szaman.CurrentUserService.loadPasses;
 
-import androidx.annotation.RequiresApi;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,16 +17,25 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
 import com.example.Szaman.Receipt_Writer.PDFWriter;
-import com.example.Szaman.Receipt_Writer.QRCodeWriter;
 import com.example.Szaman.adapters.CasketItemAdapter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.SummaryFragmentBinding;
 import com.example.Szaman.model.CartItem;
-import com.example.Szaman.model.Dish;
 import com.example.Szaman.model.User;
 import com.example.Szaman.service.CartItemService;
 
@@ -111,26 +105,26 @@ public class Summary extends Fragment {
         });
         cartItems=getItems();
         if(cartItems.isEmpty()) rBuyButton.setEnabled(false);
-        Button noteButton= root.findViewById(R.id.summaryNoteButton);
-       noteButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-               int  height= LinearLayout.LayoutParams.WRAP_CONTENT;
-               final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
-               popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
+        ImageButton noteButton= root.findViewById(R.id.noteButton);
+        noteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int  height= LinearLayout.LayoutParams.WRAP_CONTENT;
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+                popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
 
-               Button add= popupView.findViewById(R.id.summaryPopUpAddNote);
-               EditText note=popupView.findViewById(R.id.summaryNoteWindow);
+                Button add= popupView.findViewById(R.id.summaryPopUpAddNote);
+                EditText note=popupView.findViewById(R.id.summaryNoteWindow);
 
-               add.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       notes=note.getText().toString();
-                   }
-               });
-           }
-       });
+                add.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        notes=note.getText().toString();
+                    }
+                });
+            }
+        });
 
         setItems(root);
         priceRecount(root);

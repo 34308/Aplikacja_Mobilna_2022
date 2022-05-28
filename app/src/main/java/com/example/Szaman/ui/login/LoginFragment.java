@@ -1,10 +1,9 @@
 package com.example.Szaman.ui.login;
 
 import static com.example.Szaman.CurrentUserService.savePasses;
+import static com.example.Szaman.Validators.Validators.postCodeValidator;
 import static com.example.Szaman.javaMail.MailService.sendEmail;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -29,11 +26,10 @@ import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentLoginBinding;
 import com.example.Szaman.model.User;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 
 public class LoginFragment extends Fragment {
@@ -47,8 +43,7 @@ public class LoginFragment extends Fragment {
         //mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        ((MainActivity) getActivity()).lockMneu();
-        ((MainActivity) getActivity()).hideMneu();
+
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -60,9 +55,21 @@ public class LoginFragment extends Fragment {
         EditText refresherLogin=root.getRootView().findViewById(R.id.refresherLogin);
         EditText refresherEmail =root.getRootView().findViewById(R.id.refresherEmail);
         forgotten.setOnClickListener(v -> restorePassword(root));
-        loginButton.setOnClickListener(v -> Login(root));
-        registerButton.setOnClickListener(v -> register(root));
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+                Login(root);
+            }
+        });
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                register(root);
+            }
+        });
         refreshButton.setOnClickListener(v -> {
+            if (databaseConnector == null) databaseConnector=new DatabaseConnector(getContext());
             View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
             for (User user: databaseConnector.getUsers()) {
                 if(user.getLogin().equals(refresherLogin.getText().toString()) && user.getEmail().equals(refresherEmail.getText().toString())) {
@@ -74,7 +81,6 @@ public class LoginFragment extends Fragment {
                 }
                 else
                 {
-                    Snackbar.make()
                 }
 
             }
@@ -86,6 +92,13 @@ public class LoginFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) requireActivity()).lockMneu();
+        ((MainActivity) requireActivity()).hideMneu();
+    }
+
     private void restorePassword(View root) {
         View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
         restoreWindow.setVisibility(View.VISIBLE);
@@ -94,10 +107,16 @@ public class LoginFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void Login(View root){
+       Log.w("poprawny czy nie",""+ postCodeValidator("33-150"));
+
+
+
         TextView login=root.getRootView().findViewById(R.id.loginWindow);
         TextView password=root.getRootView().findViewById(R.id.loginPasswordWindow);
         String loginText=  login.getText().toString();
         String passwordText= password.getText().toString();
+
+
 
         if(checkLogin(loginText,passwordText)) {
             savePasses(loginText+"-"+passwordText,getActivity());
