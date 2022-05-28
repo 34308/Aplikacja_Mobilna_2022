@@ -75,5 +75,6 @@
     <string name="EmptyWindow">All fields must be filled</string>
     <string name="WrongAdress">Wrong Adres : correct format is town-street, number,postcode</string>
 
+    <string name="add_note">Add note</string>
     default_value
 </resources>
