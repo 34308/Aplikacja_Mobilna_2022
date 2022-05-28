@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CommonButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="CommonTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="LogoText">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="LoginLogoText">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="LoginEditText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">50dp</item>
+        <item name="android:layout_marginEnd">50dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:fontFamily">@font/asap</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textColorHint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="LoginButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">50dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginEnd">50dp</item>
+        <item name="android:fontFamily">@font/asap</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="NavTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:paddingTop">@dimen/nav_header_vertical_spacing</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">@font/asap</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginStart">20dp</item>
+    </style>
+
+    <style name="navImageView">
+        <item name="android:padding">2dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:cropToPadding">true</item>
+        <item name="android:background">?attr/colorSecondaryVariant</item>
+    </style>
+
+    <style name="SettingsEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+    </style>
+
+    <style name="SettingsTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="SettingsSpace">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="SettingsButton">
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginEnd">3dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="ThemeToggleButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:backgroundTint">?attr/colorPrimaryVariant</item>
+    </style>
+
+</resources>

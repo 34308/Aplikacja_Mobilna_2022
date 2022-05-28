@@ -26,225 +26,144 @@
 
             <TextView
                 android:id="@+id/personalNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/name_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView" />
 
             <EditText
                 android:id="@+id/personalNameWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                style="@style/SettingsEditText"
+                android:inputType="textPersonName"/>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalSurnameLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/Surname_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalSurnameWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalLoginLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/login_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalLoginWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalPasswordLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/password_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalPasswordWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalCardNumberLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/debit_card_number_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalDebitCardNumberWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalCardEndDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/expiresEnd"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalDebitCardExpiresWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalCardCVVLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/cvv_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalDebitCardCVVWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalAdressLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/adress_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalAdressWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalCityLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/City_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalCityWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalHauseNumberLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/housenumber_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalHauseNumberWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalSteetLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/Street_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalStreetWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"/>
+            <Space style="@style/SettingsSpace" />
 
             <TextView
                 android:id="@+id/personalPostCodeLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/postCode_text"
-                android:textColor="@color/colorPrimary"/>
+                style="@style/SettingsTextView"/>
 
             <EditText
                 android:id="@+id/personalPostCodeWindow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
+                style="@style/SettingsEditText"
                 android:inputType="textPersonName" />
 
         </LinearLayout>
@@ -257,7 +176,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:text="@string/save"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

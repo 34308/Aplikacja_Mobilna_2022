@@ -20,13 +20,11 @@
 
     <Button
         android:id="@+id/settingsDataEditing"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
         android:text="@string/personalDataEditing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settignsMainLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/settignsMainLabel"
+        style="@style/SettingsButton" />
 
     <TextView
         android:id="@+id/settingsDayNightLabel"
@@ -41,37 +39,30 @@
 
     <ToggleButton
         android:id="@+id/settingsDayNightButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
         android:text="@string/aplicationColors"
-        android:backgroundTint="#d2dae2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsDayNightLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsDayNightLabel"
+        style="@style/ThemeToggleButton" />
 
     <Button
         android:id="@+id/settingsLogOutButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:textSize="15sp"
         android:text="@string/logOut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsDayNightButton" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsDayNightButton"
+        style="@style/SettingsButton"/>
 
     <Button
         android:id="@+id/settingsDeleteAcount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:textSize="15sp"
         android:text="@string/deleteAccount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsLogOutButton" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsLogOutButton"
+        style="@style/SettingsButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

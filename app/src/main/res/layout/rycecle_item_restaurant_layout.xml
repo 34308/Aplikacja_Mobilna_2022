@@ -9,7 +9,6 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/restaurant_item"
         android:stretchColumns="0,1"
         android:weightSum="2">
 
@@ -22,7 +21,7 @@
                 android:id="@+id/rItemRestaurantNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Nazwa" />
 
@@ -37,6 +36,7 @@
                 android:id="@+id/restaurantItemImage"
                 android:layout_width="fill_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="10dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -46,6 +46,14 @@
                 android:text="Rating" />
 
         </TableRow>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_space"/>
 
     </TableLayout>
 

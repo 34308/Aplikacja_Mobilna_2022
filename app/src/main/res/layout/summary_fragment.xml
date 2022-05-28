@@ -51,8 +51,7 @@
         android:layout_marginBottom="21dp"
         app:layout_constraintBottom_toTopOf="@+id/summaryGoBackButton"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_checkout"
-        android:backgroundTint="#d2dae2"/>
+        android:src="@drawable/ic_checkout" />
 
     <CheckBox
         android:checked="true"

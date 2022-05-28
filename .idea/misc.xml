@@ -3,6 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/drawable-anydpi/ic_checkout.xml" value="0.2175" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/drawable-anydpi/ic_search.xml" value="0.2175" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/drawable-anydpi/ic_space.xml" value="0.2175" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/drawable/dish_item.xml" value="0.2175" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/drawable/restaurant_item.xml" value="0.2175" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/app_bar_main.xml" value="0.14722222222222223" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/content_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/dish_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/fragment_login.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/fragment_register.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/fragment_restaurants.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/fragment_welcome_screen.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/items_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/meal_list_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/nav_header_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/personal_data_setting_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/rycecle_item_busket_item_layout.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/rycecle_item_dish_layout.xml" value="0.33" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/settings_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/layout/summary_fragment.xml" value="0.358695652173913" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/menu/activity_main_drawer.xml" value="0.3625" />
+        <entry key="..\:/Aplikacja_Mobilna_2022-feature-GUI/app/src/main/res/menu/main.xml" value="0.3625" />
         <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/drawable/side_nav_bar.xml" value="0.2985" />
         <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
         <entry key="..\:/Aplikacja_Mobilna_2022-feature-RecycleViewers/app/src/main/res/layout/app_bar_main.xml" value="0.358695652173913" />

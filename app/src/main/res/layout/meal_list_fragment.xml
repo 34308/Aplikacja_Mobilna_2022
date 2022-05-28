@@ -11,10 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-
         android:hint="@string/MealHint"
         android:inputType="textPersonName"
-
         app:layout_constraintEnd_toStartOf="@+id/mealsSearchButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +20,8 @@
     <ImageButton
         android:id="@+id/mealsSearchButton"
         android:layout_width="70dp"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:src="@drawable/ic_search"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

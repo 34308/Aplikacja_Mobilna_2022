@@ -35,6 +35,8 @@
                 android:id="@+id/itemsWithoutDeliveryButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/withoutDelivery" />
 
             <TextView
@@ -54,12 +56,15 @@
                 android:id="@+id/itemsWithDeliveryButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/withDelivery" />
 
             <Button
                 android:id="@+id/itemOrderButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
                 android:text="@string/order" />
         </TableRow>
 
