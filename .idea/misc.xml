@@ -14,10 +14,19 @@
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable-anydpi/ic_settings.xml" value="0.2225" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable-anydpi/ic_space.xml" value="0.2225" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/dish_item.xml" value="0.2225" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/main_header_selector.xml" value="0.2605" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/restaurant_item.xml" value="0.2225" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/side_nav_bar.xml" value="0.2225" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/app_bar_main.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/dish_fragment.xml" value="0.26875" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/rycecle_item_dish_layout.xml" value="0.26875" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/settings_fragment.xml" value="0.26875" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/summary_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/summary_note_layout.xml" value="0.365625" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/menu/main.xml" value="0.1" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Szaman/app/src/main/res/drawable/ic_menu_camera.xml" value="0.3828125" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Szaman/app/src/main/res/layout/fragment_login.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Szaman/app/src/main/res/layout/fragment_register.xml" value="0.36666666666666664" />

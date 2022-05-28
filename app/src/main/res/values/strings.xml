@@ -63,5 +63,6 @@
     <string name="goBck">Go back to shopping</string>
     <string name="default_value">0000</string>
     <string name="delivery">Delivery</string>
+    <string name="add_note">Add note</string>
     default_value
 </resources>

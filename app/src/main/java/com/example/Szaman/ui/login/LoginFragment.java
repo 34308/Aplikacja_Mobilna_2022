@@ -1,6 +1,7 @@
 package com.example.Szaman.ui.login;
 
 import static com.example.Szaman.CurrentUserService.savePasses;
+import static com.example.Szaman.javaMail.MailService.sendEmail;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +30,9 @@ import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.FragmentLoginBinding;
 import com.example.Szaman.model.User;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -37,6 +41,7 @@ public class LoginFragment extends Fragment {
     private LoginViewModel loginViewModel;
     private FragmentLoginBinding binding;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -52,32 +57,31 @@ public class LoginFragment extends Fragment {
         Button loginButton= root.getRootView().findViewById(R.id.loginButton);
         Button registerButton=root.getRootView().findViewById(R.id.loginRegisterButton);
         TextView forgotten=root.getRootView().findViewById(R.id.loginForgottenPassword);
-        forgotten.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                restorePassword(root);
+        EditText refresherLogin=root.getRootView().findViewById(R.id.refresherLogin);
+        EditText refresherEmail =root.getRootView().findViewById(R.id.refresherEmail);
+        forgotten.setOnClickListener(v -> restorePassword(root));
+        loginButton.setOnClickListener(v -> Login(root));
+        registerButton.setOnClickListener(v -> register(root));
+        refreshButton.setOnClickListener(v -> {
+            View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
+            for (User user: databaseConnector.getUsers()) {
+                if(user.getLogin().equals(refresherLogin.getText().toString()) && user.getEmail().equals(refresherEmail.getText().toString())) {
+                    try {
+                        sendEmail(refresherEmail.getText().toString(),user.getLogin()+" password Recovery","Your password is :"+user.getPassword());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    Snackbar.make()
+                }
+
             }
-        });
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                Login(root);
-            }
-        });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                register(root);
-            }
-        });
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
-                restoreWindow.setVisibility(View.GONE);
-                //sendEmail();
-            }
+
+
+            restoreWindow.setVisibility(View.GONE);
+            //sendEmail();
         });
         return root;
     }

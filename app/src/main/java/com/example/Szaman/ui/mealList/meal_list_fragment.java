@@ -5,7 +5,6 @@ import static com.example.Szaman.CurrentUserService.loadPasses;
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -30,16 +29,13 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.adapters.DishAdapter;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
-import com.example.Szaman.adapters.RestaurantAdapter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.MealListFragmentBinding;
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.Dish;
-import com.example.Szaman.model.Restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class meal_list_fragment extends Fragment {
 
@@ -132,12 +128,12 @@ public class meal_list_fragment extends Fragment {
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 Dish dish= dataBank.get(viewHolder.getAdapterPosition());
                 String[] passes=loadPasses(getActivity(),getContext()).split("-");
-                ElegantNumberButton e=viewHolder.itemView.findViewById(R.id.rItemDishQuantityButton);
+                ElegantNumberButton elegantButton =viewHolder.itemView.findViewById(R.id.rItemDishQuantityButton);
 
-                CartItem cartItem=new CartItem(databaseConnector.getUser(passes[0]).getUserId(),dish.getDishId(),Integer.parseInt(e.getNumber()));
+                CartItem cartItem=new CartItem(databaseConnector.getUser(passes[0]).getUserId(),dish.getDishId(),Integer.parseInt(elegantButton.getNumber()));
                 databaseConnector.upsertCartItem(cartItem);
+                elegantButton.setNumber(String.valueOf(0));
                 adapter.notifyDataSetChanged();
-
             }
         };
         List<Dish> d2= databaseConnector.getDishes();

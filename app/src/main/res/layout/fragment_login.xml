@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".ui.login.LoginFragment">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/app_name"
+        android:textAllCaps="true"
+        android:textColor="#abb5be"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPhoto" />
 
     <ImageView
         android:id="@+id/loginPhoto"
@@ -12,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:src="@drawable/logo_login"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +44,7 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="@color/colorPrimary"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -46,6 +62,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="@color/colorPrimary"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginWindow" />
@@ -58,8 +75,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/asap"
-        android:textSize="15sp"
         android:text="@string/menu_login"
+        android:textSize="15sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPasswordWindow" />
@@ -73,8 +91,9 @@
         android:layout_marginEnd="50dp"
         android:fontFamily="@font/asap"
         android:onClick="registerWindow"
-        android:textSize="15sp"
         android:text="@string/Register"
+        android:textSize="15sp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
@@ -83,28 +102,35 @@
         android:id="@+id/loginForgottenPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/asap"
-        android:textSize="15sp"
         android:text="@string/ForgottenPassword"
         android:textAlignment="center"
+        android:textSize="15sp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/loginRegisterButton" />
+        app:layout_constraintStart_toStartOf="@+id/loginRegisterButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginRegisterButton" />
 
     <ScrollView
         android:id="@+id/loginRefresherWindow"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_width="413dp"
+        android:layout_height="204dp"
+        android:background="@drawable/main_header_selector"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -114,12 +140,11 @@
                 android:text="@string/login_text" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/refresherLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/emailRefresherText"
@@ -128,7 +153,7 @@
                 android:text="@string/email" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/refresherEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -136,24 +161,11 @@
 
             <Button
                 android:id="@+id/refresherButton"
-                android:layout_width="match_parent"
+                android:layout_width="367dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sendResetingEmail" />
 
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/app_name"
-        android:textColor="#abb5be"
-        android:textSize="30dp"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPhoto" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

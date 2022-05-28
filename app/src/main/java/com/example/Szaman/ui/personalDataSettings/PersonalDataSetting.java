@@ -4,10 +4,8 @@ import static com.example.Szaman.CurrentUserService.loadPasses;
 import static com.example.Szaman.CurrentUserService.savePasses;
 
 import androidx.annotation.RequiresApi;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+
 import android.os.Build;
 import android.os.Bundle;
 
@@ -17,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +24,6 @@ import android.widget.EditText;
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.PersonalDataSettingFragmentBinding;
-import com.example.Szaman.databinding.SettingsFragmentBinding;
 import com.example.Szaman.model.User;
 
 public class PersonalDataSetting extends Fragment {
@@ -35,6 +31,7 @@ public class PersonalDataSetting extends Fragment {
     private PersonalDataSettingViewModel mViewModel;
     private PersonalDataSettingFragmentBinding binding;
     User currentUser;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,16 +49,14 @@ public class PersonalDataSetting extends Fragment {
         EditText exDebitCard= root.findViewById(R.id.personalDebitCardExpiresWindow);
         EditText address= root.findViewById(R.id.personalAdressWindow);
         Button save= root.findViewById(R.id.personalDataSavingbutton);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseConnector=new DatabaseConnector(getContext());
-                User upUser=new User(currentUser.getUserId(),login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),address.getText().toString(),debitCard.getText().toString(),exDebitCard.getText().toString(),cvv.getText().toString(),email.getText().toString());
-                databaseConnector.updateUser(upUser);
-                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_personalData_to_nav_settings);
-                savePasses(upUser.getLogin()+"-"+upUser.getPassword(),getActivity());
-            }
+
+        save.setOnClickListener(v -> {
+            databaseConnector=new DatabaseConnector(getContext());
+            User upUser=new User(currentUser.getUserId(),login.getText().toString(),password.getText().toString(),name.getText().toString(),surname.getText().toString(),address.getText().toString(),debitCard.getText().toString(),exDebitCard.getText().toString(),cvv.getText().toString(),email.getText().toString());
+            databaseConnector.updateUser(upUser);
+            NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            navController.navigate(R.id.action_personalData_to_nav_settings);
+            savePasses(upUser.getLogin()+"-"+upUser.getPassword(),getActivity());
         });
         return root;
     }
@@ -99,12 +94,6 @@ public class PersonalDataSetting extends Fragment {
         exDebitCard.setText(currentUser.getExpireDate());
         address.setText(currentUser.getAddress());
 
-    }
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PersonalDataSettingViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

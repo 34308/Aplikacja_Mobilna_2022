@@ -63,11 +63,11 @@
         android:label="@string/menu_settings"
         tools:layout="@layout/settings_fragment" >
         <action
-            android:id="@+id/action_nav_settings_to_personalData"
-            app:destination="@id/personalData" />
-        <action
             android:id="@+id/action_nav_settings_to_nav_login"
             app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_nav_settings_to_personalData"
+            app:destination="@id/personalData" />
     </fragment>
 
     <fragment

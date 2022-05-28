@@ -20,12 +20,16 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
@@ -62,6 +66,7 @@ public class Summary extends Fragment {
         return new Summary();
     }
     public Double sum=0.0;
+    private String notes="";
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -69,6 +74,7 @@ public class Summary extends Fragment {
         databaseConnector=new DatabaseConnector(getContext());
         binding = SummaryFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        View popupView = inflater.inflate(R.layout.summary_note_layout, null);
         ImageButton rBuyButton= root.findViewById(R.id.rBuyButton);
         rBuyButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -76,7 +82,7 @@ public class Summary extends Fragment {
             public void onClick(View v) {
                 PDFWriter pdf=new PDFWriter(getContext());
                 try {
-                    pdf.generatePDF(curremtUser,dataBank);
+                    pdf.generatePDF(curremtUser,dataBank,notes,delivery);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -105,6 +111,26 @@ public class Summary extends Fragment {
         });
         cartItems=getItems();
         if(cartItems.isEmpty()) rBuyButton.setEnabled(false);
+        Button noteButton= root.findViewById(R.id.summaryNoteButton);
+       noteButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+               int  height= LinearLayout.LayoutParams.WRAP_CONTENT;
+               final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+               popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
+
+               Button add= popupView.findViewById(R.id.summaryPopUpAddNote);
+               EditText note=popupView.findViewById(R.id.summaryNoteWindow);
+
+               add.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       notes=note.getText().toString();
+                   }
+               });
+           }
+       });
 
         setItems(root);
         priceRecount(root);
