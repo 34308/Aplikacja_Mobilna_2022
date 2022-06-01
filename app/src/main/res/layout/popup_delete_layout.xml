@@ -13,6 +13,7 @@
         android:layout_marginTop="50dp"
         android:background="@color/white"
         android:text="@string/deleteAccountM"
+        android:textColor="@color/black"
         android:textSize="24sp" />
 
     <TableRow
@@ -38,6 +39,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/password_text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:inputType="textPassword"
             android:textSize="24sp" />
 

@@ -13,6 +13,7 @@
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable-anydpi/ic_search.xml" value="0.2225" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable-anydpi/ic_settings.xml" value="0.2225" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable-anydpi/ic_space.xml" value="0.2225" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/border2.xml" value="0.2175" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/dish_item.xml" value="0.2225" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/main_header_selector.xml" value="0.2605" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/drawable/restaurant_item.xml" value="0.2225" />
@@ -26,10 +27,12 @@
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/fragment_restaurants.xml" value="0.32608695652173914" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/fragment_welcome_screen.xml" value="0.32608695652173914" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/items_fragment.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/meal_list_fragment.xml" value="0.1" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/nav_header_main.xml" value="0.32608695652173914" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/popup_delete_layout.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/rycecle_item_busket_item_layout.xml" value="0.32608695652173914" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/rycecle_item_dish_layout.xml" value="0.40803108808290156" />
-        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.33559782608695654" />
+        <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/rycecle_item_restaurant_layout.xml" value="0.33" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/settings_fragment.xml" value="0.26875" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/summary_fragment.xml" value="0.5" />
         <entry key="..\:/Users/Kamil/AndroidStudioProjects/Aplikacja_Mobilna_20222/app/src/main/res/layout/summary_note_layout.xml" value="0.365625" />

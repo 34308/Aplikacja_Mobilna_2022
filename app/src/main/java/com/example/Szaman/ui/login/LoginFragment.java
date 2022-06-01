@@ -4,6 +4,7 @@ import static com.example.Szaman.CurrentUserService.savePasses;
 import static com.example.Szaman.Validators.Validators.postCodeValidator;
 import static com.example.Szaman.javaMail.MailService.sendEmail;
 
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,7 +51,6 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
         Button refreshButton=root.getRootView().findViewById(R.id.refresherButton);
         Button loginButton= root.getRootView().findViewById(R.id.loginButton);
         Button registerButton=root.getRootView().findViewById(R.id.loginRegisterButton);
@@ -64,11 +65,11 @@ public class LoginFragment extends Fragment {
                 Login(root);
             }
         });
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                register(root);
-            }
+        registerButton.setOnClickListener(v -> register(root));
+        Button closeButton=root.getRootView().findViewById(R.id.loginCloseButton);
+        closeButton.setOnClickListener(v -> {
+            View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
+            restoreWindow.setVisibility(View.GONE);
         });
         refreshButton.setOnClickListener(v -> {
             if (databaseConnector == null) databaseConnector=new DatabaseConnector(getContext());

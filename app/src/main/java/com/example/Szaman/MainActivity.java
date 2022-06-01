@@ -3,11 +3,8 @@ package com.example.Szaman;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -26,11 +23,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.Szaman.databinding.ActivityMainBinding;
-
-import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements DrawerMenuController {
     private static final int STORAGE_PERMISSION_CODE = 101;

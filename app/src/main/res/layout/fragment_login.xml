@@ -11,7 +11,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:text="@string/app_name"
         android:textAllCaps="true"
         android:textColor="#abb5be"
@@ -22,14 +22,14 @@
 
     <ImageView
         android:id="@+id/loginPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/logo_login"
+        android:layout_width="316dp"
+        android:layout_height="316dp"
+        android:scaleType="centerCrop"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/skull_icon_background" />
 
     <EditText
         android:id="@+id/loginWindow"
@@ -113,8 +113,8 @@
 
     <ScrollView
         android:id="@+id/loginRefresherWindow"
-        android:layout_width="413dp"
-        android:layout_height="204dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/main_header_selector"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,7 +135,8 @@
                 android:id="@+id/loginRefresherText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_text" />
+                android:text="@string/login_text"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/refresherLogin"
@@ -148,7 +149,8 @@
                 android:id="@+id/emailRefresherText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:text="@string/email"
+                android:textColor="@color/black" />
 
             <EditText
                 android:id="@+id/refresherEmail"
@@ -162,6 +164,12 @@
                 android:layout_width="367dp"
                 android:layout_height="wrap_content"
                 android:text="@string/sendResetingEmail" />
+
+            <Button
+                android:id="@+id/loginCloseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Close" />
 
         </LinearLayout>
     </ScrollView>

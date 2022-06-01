@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/busketItem"
     android:layout_width="match_parent"
+    app:cardCornerRadius="10dp"
     android:layout_height="wrap_content">
-
     <TableLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/restaurant_item"
         android:stretchColumns="0,1"
         android:weightSum="2">
 
@@ -19,6 +19,8 @@
             android:layout_weight="1">
 
             <ImageView
+
+                android:layout_marginTop="10dp"
                 android:id="@+id/restaurantItemImage"
                 android:layout_width="match_parent"
                 android:layout_height="111dp"
@@ -32,6 +34,8 @@
             android:layout_weight="1">
 
             <TextView
+                android:textAlignment="center"
+                android:textSize="24dp"
                 android:id="@+id/rItemRestaurantNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -40,7 +44,18 @@
                 android:text="Nazwa" />
 
         </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
+
+            <LinearLayout
+                android:background="#DCDCDC"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="vertical"></LinearLayout>
+        </TableRow>
     </TableLayout>
 
 </androidx.cardview.widget.CardView>

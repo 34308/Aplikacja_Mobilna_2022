@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/teal_200"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border2">
 
     <Button
         android:id="@+id/summaryPopUpAddNote"
@@ -21,8 +21,11 @@
         android:layout_width="261dp"
         android:layout_height="149dp"
         android:layout_marginTop="150dp"
+        android:background="@drawable/border2"
         android:ems="10"
         android:inputType="textMultiLine"
+        android:textColor="@color/black"
+        android:textColorHint="@color/teal_200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

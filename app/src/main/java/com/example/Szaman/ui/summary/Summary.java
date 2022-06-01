@@ -38,6 +38,8 @@ import com.example.Szaman.databinding.SummaryFragmentBinding;
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.User;
 import com.example.Szaman.service.CartItemService;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -74,6 +76,7 @@ public class Summary extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View v) {
+                Snackbar.make(root,"Thank You for Purchase\nYour receipt is located in your download's folder", BaseTransientBottomBar.LENGTH_LONG).show() ;
                 PDFWriter pdf=new PDFWriter(getContext());
                 try {
                     pdf.generatePDF(curremtUser,dataBank,notes,delivery);
@@ -106,24 +109,16 @@ public class Summary extends Fragment {
         cartItems=getItems();
         if(cartItems.isEmpty()) rBuyButton.setEnabled(false);
         ImageButton noteButton= root.findViewById(R.id.noteButton);
-        noteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int  height= LinearLayout.LayoutParams.WRAP_CONTENT;
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
-                popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
+        noteButton.setOnClickListener(v -> {
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int  height= LinearLayout.LayoutParams.WRAP_CONTENT;
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+            popupWindow.showAtLocation(getView(), Gravity.CENTER, 0, 0);
 
-                Button add= popupView.findViewById(R.id.summaryPopUpAddNote);
-                EditText note=popupView.findViewById(R.id.summaryNoteWindow);
+            Button add= popupView.findViewById(R.id.summaryPopUpAddNote);
+            EditText note=popupView.findViewById(R.id.summaryNoteWindow);
 
-                add.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        notes=note.getText().toString();
-                    }
-                });
-            }
+            add.setOnClickListener(v1 -> notes=note.getText().toString());
         });
 
         setItems(root);

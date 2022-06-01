@@ -98,6 +98,7 @@ public class settings extends Fragment {
         navController.navigate(R.id.action_nav_settings_to_nav_login);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void areYouSure(View view, View popupView){
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int  height= LinearLayout.LayoutParams.MATCH_PARENT;
@@ -106,22 +107,13 @@ public class settings extends Fragment {
         Button delete= popupView.findViewById(R.id.popupDeleteAccount);
         EditText password= popupView.findViewById(R.id.popupPassword);
         Button cancel= popupView.findViewById(R.id.popupCancelButton);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        cancel.setOnClickListener(v -> popupWindow.dismiss());
+        delete.setOnClickListener(v -> {
+            String passes=loadPasses(getActivity(),getContext()).split("-")[1];
+            Log.w("USER",passes);
+            if(password.getText().toString().equals(passes)){
                 popupWindow.dismiss();
-            }
-        });
-        delete.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                String passes=loadPasses(getActivity(),getContext()).split("-")[1];
-                Log.w("USER",passes);
-                if(password.getText().toString().equals(passes)){
-                    popupWindow.dismiss();
-                    deleteAccount();
-                }
+                deleteAccount();
             }
         });
 
