@@ -61,8 +61,6 @@ public class dish extends Fragment {
             }
         }
 
-
-
         System.out.println("filename: "+ dishB);
         ImageView dishImage= root.findViewById(R.id.dishImageView);
         Picasso.get().load(dishB.get(4)).into(dishImage);

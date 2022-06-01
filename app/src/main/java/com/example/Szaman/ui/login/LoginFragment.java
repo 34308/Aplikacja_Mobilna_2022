@@ -82,7 +82,7 @@ public class LoginFragment extends Fragment {
                     }
                 }
             }
-            if(!sendMailSuccess[0]) Snackbar.make(root,R.string.WrongEmail, BaseTransientBottomBar.LENGTH_SHORT).show() ;
+            if(!sendMailSuccess[0]) Snackbar.make(root,R.string.wrongEmailOrLogin, BaseTransientBottomBar.LENGTH_SHORT).show() ;
             restoreWindow.setVisibility(View.GONE);
             //sendEmail();
         });
