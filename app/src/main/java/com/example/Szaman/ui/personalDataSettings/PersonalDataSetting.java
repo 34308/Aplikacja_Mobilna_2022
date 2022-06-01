@@ -2,19 +2,16 @@ package com.example.Szaman.ui.personalDataSettings;
 
 import static com.example.Szaman.CurrentUserService.loadPasses;
 import static com.example.Szaman.CurrentUserService.savePasses;
-import static com.example.Szaman.Validators.Validators.addressValidator;
-import static com.example.Szaman.Validators.Validators.cvvValidator;
-import static com.example.Szaman.Validators.Validators.debitCardValidator;
-import static com.example.Szaman.Validators.Validators.emailValidator;
-import static com.example.Szaman.Validators.Validators.expireDateValidator;
-import static com.example.Szaman.Validators.Validators.passwordValidator;
-import static com.example.Szaman.Validators.Validators.postCodeValidator;
+import static com.example.Szaman.validators.Validators.addressValidator;
+import static com.example.Szaman.validators.Validators.cvvValidator;
+import static com.example.Szaman.validators.Validators.debitCardValidator;
+import static com.example.Szaman.validators.Validators.emailValidator;
+import static com.example.Szaman.validators.Validators.expireDateValidator;
+import static com.example.Szaman.validators.Validators.passwordValidator;
 
 import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -34,7 +31,6 @@ import android.widget.EditText;
 import com.example.Szaman.R;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.PersonalDataSettingFragmentBinding;
-import com.example.Szaman.databinding.SettingsFragmentBinding;
 import com.example.Szaman.model.User;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;

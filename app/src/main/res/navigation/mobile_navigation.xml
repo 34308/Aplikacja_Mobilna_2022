@@ -84,18 +84,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/items"
-        android:name="com.example.Szaman.ui.items.items"
-        android:label="@string/menu_item"
-        tools:layout="@layout/items_fragment" >
-        <action
-            android:id="@+id/action_items_to_dish"
-            app:destination="@id/dish" />
-        <action
-            android:id="@+id/action_items_to_nav_summary"
-            app:destination="@id/nav_summary" />
-    </fragment>
-    <fragment
         android:id="@+id/personalData"
         android:name="com.example.Szaman.ui.personalDataSettings.PersonalDataSetting"
         android:label="@string/menu_PersonalData"

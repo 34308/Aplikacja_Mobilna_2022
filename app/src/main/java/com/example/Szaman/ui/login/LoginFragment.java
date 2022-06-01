@@ -1,10 +1,9 @@
 package com.example.Szaman.ui.login;
 
 import static com.example.Szaman.CurrentUserService.savePasses;
-import static com.example.Szaman.Validators.Validators.postCodeValidator;
-import static com.example.Szaman.javaMail.MailService.sendEmail;
+import static com.example.Szaman.validators.Validators.postCodeValidator;
+import static com.example.Szaman.service.MailService.sendEmail;
 
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +31,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 
 public class LoginFragment extends Fragment {
@@ -71,6 +68,7 @@ public class LoginFragment extends Fragment {
             View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
             restoreWindow.setVisibility(View.GONE);
         });
+        final boolean[] sendMailSuccess = {false};
         refreshButton.setOnClickListener(v -> {
             if (databaseConnector == null) databaseConnector=new DatabaseConnector(getContext());
             View restoreWindow=root.getRootView().findViewById(R.id.loginRefresherWindow);
@@ -78,12 +76,13 @@ public class LoginFragment extends Fragment {
                 if(user.getLogin().equals(refresherLogin.getText().toString()) && user.getEmail().equals(refresherEmail.getText().toString())) {
                     try {
                         sendEmail(refresherEmail.getText().toString(),user.getLogin()+" password Recovery","Your password is :"+user.getPassword());
+                         sendMailSuccess[0] =true;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
-                else Snackbar.make(root,R.string.wrongEmailOrLogin, BaseTransientBottomBar.LENGTH_LONG).show();
             }
+            if(!sendMailSuccess[0]) Snackbar.make(root,R.string.WrongEmail, BaseTransientBottomBar.LENGTH_SHORT).show() ;
             restoreWindow.setVisibility(View.GONE);
             //sendEmail();
         });

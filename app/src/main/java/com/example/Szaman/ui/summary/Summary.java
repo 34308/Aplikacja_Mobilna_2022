@@ -31,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.Szaman.OnClickInterface;
 import com.example.Szaman.R;
-import com.example.Szaman.Receipt_Writer.PDFWriter;
+import com.example.Szaman.receiptWriter.PDFWriter;
 import com.example.Szaman.adapters.CasketItemAdapter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.SummaryFragmentBinding;
@@ -96,13 +96,11 @@ public class Summary extends Fragment {
         onClickInterface = pos -> priceRecount(root);
         checkBox.setOnClickListener(v -> {
             if(checkBox.isChecked()){
-
                 delivery=true;
                 priceRecount(root);
             }
             else{
                 delivery=false;
-
                 priceRecount(root);
             }
         });
@@ -118,7 +116,11 @@ public class Summary extends Fragment {
             Button add= popupView.findViewById(R.id.summaryPopUpAddNote);
             EditText note=popupView.findViewById(R.id.summaryNoteWindow);
 
-            add.setOnClickListener(v1 -> notes=note.getText().toString());
+            add.setOnClickListener(v1->{
+                notes=note.getText().toString();
+                popupWindow.dismiss();
+            });
+
         });
 
         setItems(root);
@@ -167,6 +169,7 @@ public class Summary extends Fragment {
                 cartItems.remove(cartItem);
                 setItems(root);
             }
+
         };
         DatabaseConnector databaseConnector =new DatabaseConnector(getContext());
 

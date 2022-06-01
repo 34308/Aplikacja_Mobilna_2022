@@ -1,4 +1,4 @@
-package com.example.Szaman.Receipt_Writer;
+package com.example.Szaman.receiptWriter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;

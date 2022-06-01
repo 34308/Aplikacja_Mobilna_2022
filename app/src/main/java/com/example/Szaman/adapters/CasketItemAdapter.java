@@ -65,7 +65,8 @@ public class CasketItemAdapter extends RecyclerView.Adapter<CasketItemAdapter.Ca
             @Override
             public void onValueChange(ElegantNumberButton view, int oldValue, int newValue) {
                 DatabaseConnector databaseConnector=new DatabaseConnector(view.getContext());
-                currentData.setCountOfDish(newValue);
+                if(newValue==0){currentData.setCountOfDish(1);view.setNumber(String.valueOf(1));}
+                else currentData.setCountOfDish(newValue);
                 databaseConnector.updateCartItem(currentData);
                 onClickInterface.setClick(position);
             }

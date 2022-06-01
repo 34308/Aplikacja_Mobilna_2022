@@ -77,20 +77,6 @@
                     android:textSize="15sp"/>
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginTop="20dp">
-
-                <Button
-                    android:id="@+id/dishGoToBasket"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/goToBasket"
-                    android:textSize="15sp"/>
-            </TableRow>
-
         </TableLayout>
 
     </LinearLayout>

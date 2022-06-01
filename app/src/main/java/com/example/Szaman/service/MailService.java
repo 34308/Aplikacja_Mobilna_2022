@@ -1,4 +1,4 @@
-package com.example.Szaman.javaMail;
+package com.example.Szaman.service;
 
 import android.os.StrictMode;
 

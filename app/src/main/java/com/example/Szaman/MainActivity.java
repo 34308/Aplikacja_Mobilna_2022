@@ -50,9 +50,10 @@ public class MainActivity extends AppCompatActivity implements DrawerMenuControl
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_restaurants, R.id.nav_login,R.id.nav_settings,R.id.dish,R.id.items,R.id.nav_summary)
+                R.id.nav_restaurants, R.id.nav_login,R.id.nav_settings,R.id.nav_summary)
                 .setOpenableLayout(drawer)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);

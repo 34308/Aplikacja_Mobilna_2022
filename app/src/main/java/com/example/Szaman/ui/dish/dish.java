@@ -4,7 +4,6 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -23,17 +22,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.Szaman.R;
-import com.example.Szaman.Receipt_Writer.PDFWriter;
-import com.example.Szaman.Receipt_Writer.QRCodeWriter;
 import com.example.Szaman.dataBaseConnection.DatabaseConnector;
 import com.example.Szaman.databinding.DishFragmentBinding;
 import com.example.Szaman.model.CartItem;
 import com.example.Szaman.model.Dish;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class dish extends Fragment {
     private DishFragmentBinding binding;
@@ -51,14 +49,7 @@ public class dish extends Fragment {
         binding = DishFragmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         databaseConnector=new DatabaseConnector(getContext());
-        Button gotobasket=root.findViewById(R.id.dishGoToBasket);
-        gotobasket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController= Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.action_dish_to_nav_summary);
-            }
-        });
+
 
         ArrayList<String> dishB;
         dishB = getArguments().getStringArrayList("Dish");
@@ -97,6 +88,7 @@ public class dish extends Fragment {
                 String[] pases= loadPasses().split("-");
                 CartItem cartItem=new CartItem(databaseConnector.getUser(pases[0]).getUserId(),dish.getDishId(),q);
                 databaseConnector.upsertCartItem(cartItem);
+                    Snackbar.make(root, dish.getName()+" x"+q+" was added to basket", BaseTransientBottomBar.LENGTH_LONG).show() ;
             }
         }
 

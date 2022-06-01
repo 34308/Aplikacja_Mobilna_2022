@@ -1,11 +1,11 @@
 package com.example.Szaman.ui.register;
 
-import static com.example.Szaman.Validators.Validators.cvvValidator;
-import static com.example.Szaman.Validators.Validators.debitCardValidator;
-import static com.example.Szaman.Validators.Validators.emailValidator;
-import static com.example.Szaman.Validators.Validators.expireDateValidator;
-import static com.example.Szaman.Validators.Validators.passwordValidator;
-import static com.example.Szaman.Validators.Validators.postCodeValidator;
+import static com.example.Szaman.validators.Validators.cvvValidator;
+import static com.example.Szaman.validators.Validators.debitCardValidator;
+import static com.example.Szaman.validators.Validators.emailValidator;
+import static com.example.Szaman.validators.Validators.expireDateValidator;
+import static com.example.Szaman.validators.Validators.passwordValidator;
+import static com.example.Szaman.validators.Validators.postCodeValidator;
 
 import android.os.Build;
 import android.os.Bundle;

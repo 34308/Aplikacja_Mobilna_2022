@@ -1,4 +1,4 @@
-package com.example.Szaman.Receipt_Writer;
+package com.example.Szaman.receiptWriter;
 
 import static com.itextpdf.kernel.geom.PageSize.A4;
 

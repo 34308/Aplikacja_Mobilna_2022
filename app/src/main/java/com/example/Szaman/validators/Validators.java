@@ -1,4 +1,4 @@
-package com.example.Szaman.Validators;
+package com.example.Szaman.validators;
 
 import android.os.Build;
 import android.text.TextUtils;
@@ -56,12 +56,10 @@ public class Validators {
     }
     @NonNull
     public static Boolean cvvValidator(String cvv){
-
         return cvv.length() == 3;
     }
     public static Boolean passwordValidator(String password){
         Pattern PASSWORD_PATTERN=Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[@#$%^&*()_+~`=]).{8,}$");
-
         return  PASSWORD_PATTERN.matcher(password).matches();
     }
 
